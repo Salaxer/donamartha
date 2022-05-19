@@ -1,3 +1,6 @@
+html{
+  font-size: 62.5%; /* to convert 1 rem == 10px */
+}
 html,
 body {
   padding: 0;
@@ -13,4 +16,11 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+:root{
+  --maincolorblue:#0096C1;
+  --maincolorgreen: #00984C; 
+  --fillingcolor: #0B3247;
+  --background-0: #e8eaed;
 }
