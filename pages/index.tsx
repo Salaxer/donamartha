@@ -11,18 +11,18 @@ const Home: NextPage = () => {
       <Head>
         <title>Doña Martha</title>
         <meta name="description" content="Restaurante de mariscos, micheladas y venta de bebidas alcoholicas" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon .ico" />
       </Head>
 
-      <section id="main" className="main">
-        <Greeting/>
+      <main id="main" className="main">
+        <Greeting />
         {/* <!-- Slide food --> */}
         {/* <Discover></Discover> */}
         {/* <!-- Facebook --> */}
         {/* <Fb_opinions/> */}
         {/* <!-- little Menu --> */}
         {/* <MenuFood/> */}
-      </section>
+      </main>
 
     </div>
   )
