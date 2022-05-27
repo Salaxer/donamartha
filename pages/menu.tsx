@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 
 import Slide from '../containers/slide/Slide'
+import ListProducts from '../containers/listProducts/ListProducts'
 
 const Menu: NextPage = () => {
   return (
@@ -13,6 +14,7 @@ const Menu: NextPage = () => {
       </Head>
       <main>
         <Slide></Slide>
+        <ListProducts></ListProducts>
       </main>
     </div>
   )

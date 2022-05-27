@@ -1,0 +1,26 @@
+.imageSlide{
+    height: 135px;
+}
+.imageSlide img{
+    min-height: 135px !important;
+}
+
+@media screen and (min-width:538px) and (  max-width: 768px ) {
+    .imageSlide{
+        height: 270px;
+    }
+    .imageSlide img{
+        min-height: 270px !important;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .imageSlide{
+        height: 400px;
+    }
+    .imageSlide img{
+        min-height: 400px !important;
+        min-width: fit-content !important;
+        max-width: 1250px !important;
+    }
+}
