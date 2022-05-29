@@ -14,20 +14,22 @@
     width: 100%;
     background-color: white;
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "a"
+    "b";
     padding: 0 5px;
     margin-bottom: 30px;
+    max-width: 1500px;
 }
 .searchFood{
-    grid-area: 1 / 1 / 2 / 2;
-    display: flex;
+    grid-area: a;
     padding: 10px;
-    flex-direction: column;
-    text-align: center;
+    display: grid;
+    align-content: center;
 }
 .searchFood .titleFood{
     font-size: 2.5rem;
-    flex-basis: 20%;
     text-decoration: none;
     color: black;
 }
@@ -36,10 +38,6 @@
     width: 100%;
     margin: 10px 0px;
     justify-content: space-around;
-}
-.FoodDetails{
-    width: 50%;
-    text-align: center;
 }
 .inputfoodSearch, .sortFood, .selectFood{
     padding: 3px;
@@ -54,95 +52,44 @@
     border-radius: 10px;
     border: 1px solid #c0c0c0;
 }
-.containSlide{
+.loader{
     width: 100%;
-    height: 300px;
-    padding: 10px 30px;
-}
-.slideFood{
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-    box-shadow: 0 7px 16px 0 rgb(0, 0, 0, 20%), 0 1px 3px 0 rgb(0, 0, 0, 10%);
-    /* box-shadow: 0px 0px 3px 1px rgb(207, 207, 207, .5); */
+    height: 15rem;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-}
-.slideFood__img{
-    height: 100%;
-    width: 100%;
-    border-radius: 2px;
-}
-.slideFood__a{
-    height: 60%;
-    width: 100%;
-}
-@supports(object-fit: cover){
-    .slideFood__img{
-      object-fit: cover;
-      object-position: center center;
-    }
-}
-
-.slideFood .titleFood{
-    flex-basis: 20%;
-    font-size: 2.1rem;
-}
-.notAvailable{
-    grid-area: 2 / 1 / 3 / 4;
-    padding: 20px;
-    border-radius: 15px;
-    margin: 15px;
-    height: 300px;
-    width: calc(100% - 30px);
-    box-shadow: 0px 0px 1.5px 0px rgba(31, 31, 31, 0.501);
-    text-align: center;
-}
-.notAvailable p{
-    font-size: 1.5rem;
+    align-items: center;
+    grid-area: b;
 }
 
 @media screen and (min-width:538px) and (  max-width: 768px ) {
     .ContainerAllFood{
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+        "a a"
+        "b b";
         border-radius: 25px;
         width: 95%;
     }
     .searchFood{
-        grid-area: 1 / 1 / 2 / 3;
+        grid-area: a;
     }
-    .slideFood{
-        border: 0.0625rem solid #dadce0;
-        box-shadow: none;
-    }
-    .slideFood:hover{
-        box-shadow: 0 1px 2px 0 rgb(60, 64, 67, 30%), 0 2px 6px 2px rgb(60, 64, 67, 15%);
-        border: none;
-    }
-    .containSlide{
-        padding: 10px 5px;
+    .loader{
+        grid-area: b;
     }
 }
 @media screen and (min-width: 769px) {
     .ContainerAllFood{
-        grid-template-columns: 33.333% 33.333% 33.333%;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+        "a a a"
+        "b b b";
         border-radius: 15px;
         width: 80%;
     }
     .searchFood{
-        grid-area: 1 / 1 / 2 / 4;
+        grid-area: a;
     }
-    .slideFood{
-        border: 0.0625rem solid #dadce0;
-        box-shadow: none;
-    }
-    .slideFood:hover{
-        box-shadow: 0 1px 2px 0 rgb(60, 64, 67, 30%), 0 2px 6px 2px rgb(60, 64, 67, 15%);
-        border: none;
-    }
-    .containSlide{
-        padding: 10px 5px;
+    .loader{
+        grid-area: b;
     }
 }

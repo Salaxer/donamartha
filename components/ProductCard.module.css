@@ -1,0 +1,102 @@
+.containCard{
+    width: 100%;
+    height: fit-content;
+    padding: 1rem 3rem;
+}
+.cardFood{
+    overflow: hidden;
+    width: 100%;
+    height: 38rem;
+    border-radius: 5px;
+    box-shadow: 0 7px 16px 0 rgb(0, 0, 0, 20%), 0 1px 3px 0 rgb(0, 0, 0, 10%);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all ease-in 0.2s;
+}
+.discount{
+    position: absolute;
+    z-index: 7;
+    background-color: #00984C;
+    height: 100px;
+    width: 100px;
+    top: -50px;
+    right: -50px;
+    transform: rotate(-45deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow:0 7px 16px 0 rgb(0, 0, 0, 20%), 0 1px 3px 0 rgb(0, 0, 0, 10%);
+}
+.discount span{
+    position: relative;
+    top: 0px;
+    left: -25px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #dadce0;
+}
+.cardFood__img{
+    height: 100%;
+    width: 100%;
+    border-radius: 2px;
+}
+.cardFood__a{
+    max-height: 28rem;
+    width: 100%;
+    overflow: hidden;
+}
+.FoodDetails{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.lastPrice{
+    color: rgb(119, 119, 119);
+    font-size: 1.3rem;
+    text-decoration: line-through;
+}
+.priceFood{
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+@supports(object-fit: cover){
+    .cardFood__img{
+      object-fit: cover;
+      object-position: center center;
+    }
+}
+
+.cardFood
+.titleFood{
+    font-size: 1.5rem;
+}
+
+
+@media screen and (min-width:538px) and (  max-width: 768px ) {
+    .cardFood{
+        border: 0.0625rem solid #dadce0;
+        box-shadow: none;
+    }
+    .cardFood:hover{
+        box-shadow: 0 1px 2px 0 rgb(60, 64, 67, 30%), 0 2px 6px 2px rgb(60, 64, 67, 15%);
+        border: none;
+    }
+    .containcard{
+        padding: 10px 5px;
+    }
+}
+@media screen and (min-width: 769px) {
+    .cardFood{
+        border: 0.0625rem solid #dadce0;
+        box-shadow: none;
+    }
+    .cardFood:hover{
+        box-shadow: 0 1px 2px 0 rgb(60, 64, 67, 30%), 0 2px 6px 2px rgb(60, 64, 67, 15%);
+        border: none;
+    }
+    .containcard{
+        padding: 10px 5px;
+    }
+}

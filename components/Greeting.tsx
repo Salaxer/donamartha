@@ -1,10 +1,8 @@
 import type { NextPage, NextPageContext } from 'next'
 
-interface PropsGreeting{
-    select: String,
-}
 
-const Greeting: NextPageContext = (props:PropsGreeting) =>{
+
+const Greeting = () =>{
     return (
         <>
             <div id="greeting" className="Greeting" style={{backgroundImage: `url('ss')`,backgroundPosition: 'center' ,backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}>

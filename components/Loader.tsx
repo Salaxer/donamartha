@@ -8,8 +8,7 @@ interface PropsLoader{
     background: string
 }
 
-const Loader = (props:PropsLoader) =>{
-    const {color, position, size, background} = props;
+const Loader = ({background, color, position, size}:PropsLoader) =>{
     return (
         <div className={styles.containerLoad} id="preloader" style={{position: `${position ? position : 'absolute' }`, background: `${background ? background : 'rgba(255,255,255,.87)'}`}}>
             <div id="matSpinner" role="progressbar" className={styles.matProgressSpinner} 
