@@ -1,7 +1,5 @@
 import type { NextPage, NextPageContext } from 'next'
 
-
-
 const Greeting = () =>{
     return (
         <>

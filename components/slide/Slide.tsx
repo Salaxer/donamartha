@@ -1,4 +1,3 @@
-import type { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link';
 
@@ -11,34 +10,18 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import styles from './Slide.module.css'
+import { TypeSlide } from 'utils/interfaces/Slide';
 
-interface ItemCarousel {
-    id: number,
-    src: string,
-    title: string,
-    description: string,
-    url: string,
+
+interface PropSlide{
+    value: TypeSlide[],
 }
 
-const Slide: NextPage = () => {
-    let dataCarousel : ItemCarousel[] = [{
-        id: 1,
-        description: 'Something',
-        src: 'http://react-responsive-carousel.js.org/assets/1.jpeg',
-        title: 'Mejor',
-        url: 'SAD21',
-    },
-    {
-        id: 2,
-        description: 'more',
-        src: '/Slides/1.png',
-        title: 'Las mejores ofertas',
-        url: 'OFF10',
-    }]; 
+const Slide = ({ value }:PropSlide) => {
     return (
         <>
             <Swiper pagination={true} autoHeight={true} navigation={true} autoplay={true} modules={[Pagination, Navigation]} className="mySwiper">
-                {dataCarousel.map((item) =>{
+                {value.map((item) =>{
                     return (
                     <SwiperSlide key={item.id}>
                         <Link href={`offers/${item.url}`}>

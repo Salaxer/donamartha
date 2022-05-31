@@ -16,10 +16,10 @@
 
 @media screen and (min-width: 769px) {
     .imageSlide{
-        height: 400px;
+        height: 300px;
     }
     .imageSlide img{
-        min-height: 400px !important;
+        min-height: 300px !important;
         min-width: fit-content !important;
         max-width: 1250px !important;
     }
