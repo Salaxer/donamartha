@@ -1,11 +1,24 @@
-import React, { MutableRefObject, ReactNode, useEffect, useRef } from "react";
+import React, { MutableRefObject, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 import styles from './AutoScroll.module.css';
 
 interface AutoScrollProps{
+    /**
+     * You can activate or desactivate the animation of the scroll
+     */
     autoScroll: boolean,
+    /**
+     * your personal styles
+     */
     className: string,
+    /**
+     * AllScreen is recomendable to use
+     */
     children: ReactNode,
+    /**
+     * return the index of the current visible screen
+     */
+    onChangeScreen: (e: number) => void,
 }
 
 const moveToElement = (itemsRef: MutableRefObject<HTMLDivElement[] | null[]>, currentSection:number ,documentHeight: number) =>{
@@ -15,7 +28,7 @@ const moveToElement = (itemsRef: MutableRefObject<HTMLDivElement[] | null[]>, cu
     return topSection;
 }
 
-const automaticScroll = (itemsRef: MutableRefObject<HTMLDivElement[] | null[]>) =>{
+const automaticScroll = (itemsRef: MutableRefObject<HTMLDivElement[] | null[]>, setCurrentScreen: React.Dispatch<React.SetStateAction<number>>) =>{
     let lastScroll = window.scrollY;
     let stopListen = false;
     let currentSection = 0
@@ -41,6 +54,7 @@ const automaticScroll = (itemsRef: MutableRefObject<HTMLDivElement[] | null[]>) 
                     newSroll = moveToElement(itemsRef, currentSection, documentHeight)
                 }
             }
+            setCurrentScreen(currentSection);
             lastScroll = (newSroll > 0 ? newSroll : 0);
 
             // console.log('end -------------------------------------- end');
@@ -55,10 +69,16 @@ const automaticScroll = (itemsRef: MutableRefObject<HTMLDivElement[] | null[]>) 
 }
 
 
-// 
-const AutoScroll:React.FunctionComponent<AutoScrollProps> = ({autoScroll, className ,children}) =>{
+/**
+ * AutoScroll: here you can show diferents screens in all viewport to animate when the user scroll
+ * @children AllScreen, with this component you can be sure the component AutoScroll will work
+ * although you can use your personal components. 
+ */
+const AutoScroll:React.FunctionComponent<AutoScrollProps> = ({autoScroll, className ,children, onChangeScreen}) =>{
     const elementChildrens = React.Children.toArray((children));
     const itemsRef = useRef([]) as MutableRefObject<HTMLDivElement[] | null[]>;
+
+    const [currentScreen, setCurrentScreen] = useState(0);
 
     useEffect(() => {
         itemsRef.current = itemsRef.current.slice(0, elementChildrens.length);
@@ -67,10 +87,14 @@ const AutoScroll:React.FunctionComponent<AutoScrollProps> = ({autoScroll, classN
     useEffect(() => {
         // it supossed run only once;
         if (autoScroll) {
-            window.addEventListener("scroll", automaticScroll(itemsRef));
-            return () => window.removeEventListener("scroll", automaticScroll(itemsRef), { capture: true});
+            window.addEventListener("scroll", automaticScroll(itemsRef, setCurrentScreen));
+            return () => window.removeEventListener("scroll", automaticScroll(itemsRef, setCurrentScreen));
         }
     }, [autoScroll]);
+
+    useEffect(()=>{
+        onChangeScreen(currentScreen);
+    },[currentScreen, onChangeScreen])
     
     return(
         <div className={styles.autoScroll}>

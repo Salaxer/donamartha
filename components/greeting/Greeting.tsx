@@ -2,7 +2,6 @@ import styles from './Greeting.module.css';
 import plants from 'public/images/plants.jpg'
 
 import Image from 'next/image';
-import Loader from 'components/loader/Loader';
 
 const Greeting = () =>{
     return (

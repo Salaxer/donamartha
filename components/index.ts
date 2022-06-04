@@ -6,7 +6,6 @@ import DropDown from "./dropdown/Dropdown";
 import Slide from "./slide/Slide";
 import AllScreen from "./allScreen/AllScreen";
 import AutoScroll from "./AutoScroll/AutoScroll";
-import SectionScroll from "./AutoScroll/SectionScroll";
 
 export { 
     Greeting,
@@ -17,5 +16,4 @@ export {
     Slide,
     AllScreen,
     AutoScroll,
-    SectionScroll,
 }
