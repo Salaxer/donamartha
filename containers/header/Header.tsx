@@ -52,7 +52,7 @@ const Header: NextPage = () =>{
                         </Link>
                     </li>
                     <li>
-                        <Link href="/reserve" aria-label="Reservaciones">
+                        <Link href="/reservation" aria-label="Reservaciones">
                             <a>
                                 <i className="pi pi-bookmark-fill"></i>
                                 <span className={styles.information}>Reservaciones</span>

@@ -1,5 +1,6 @@
 .imageSlide{
     height: 135px;
+    position: relative;
 }
 .imageSlide img{
     min-height: 135px !important;

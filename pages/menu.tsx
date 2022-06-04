@@ -32,7 +32,7 @@ const Menu = ({products, dataCarousel}:PropsMenu) => {
             <div className={style.ContainerAllFood}>
               <div className={style.searchFood}> 
                 <h1 className={style.titleFood}>Carta</h1>
-                <div className={style.formFood}>
+                <div className={`${style.formFood} text-2xl`}>
                   <div className={style.sortFood}>
                     <DropDown onChangeSelected={(e)=>{setSortByCategory(e)}} selected={sortByCategory} options={['Todo','Favoritos' , 'Comida', 'Bebidas', 'Botanas']}></DropDown>
                   </div>
