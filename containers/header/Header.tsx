@@ -7,6 +7,8 @@ import Link from 'next/link';
 import styles from './Header.module.css';
 import 'primeicons/primeicons.css'
 
+import { Ripple } from '@Components';
+
 const Header: NextPage = () =>{
     // Create a ref that we add to the element for which we want to detect outside clicks
     const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -19,10 +21,12 @@ const Header: NextPage = () =>{
             <div className={styles.header__mobile} >
                 {!bar ? <div onClick={()=>setBar(true)} className={styles.header__mobile__open}>
                     <i className='pi pi-align-justify'></i>
+                    <Ripple color='success'></Ripple>
                 </div>
                 :
                 <div onClick={()=>setBar(false)} className={styles.header__mobile__close}>
                     <i className='pi pi-times'></i>
+                    <Ripple color='success'></Ripple>
                 </div>}
             </div>
             <nav className={styles.header__nav} style={{left: (!bar?'-470px':'0px')}}>
@@ -32,6 +36,7 @@ const Header: NextPage = () =>{
                             <a>
                                 <i className="pi pi-home"></i>
                                 <span className={styles.information}>Inicio</span>
+                                <Ripple color='blue'></Ripple>
                             </a>
                         </Link>
                     </li>
@@ -40,6 +45,7 @@ const Header: NextPage = () =>{
                             <a>
                                 <i className="pi pi-table"></i>
                                 <span className={styles.information}>Menu</span>
+                                <Ripple color='blue'></Ripple>
                             </a>
                         </Link>
                     </li>
@@ -48,6 +54,7 @@ const Header: NextPage = () =>{
                             <a>
                                 <i className="pi pi-car"></i>
                                 <span className={styles.information}>Pedidos</span>
+                                <Ripple color='blue'></Ripple>
                             </a>
                         </Link>
                     </li>
@@ -56,6 +63,7 @@ const Header: NextPage = () =>{
                             <a>
                                 <i className="pi pi-bookmark-fill"></i>
                                 <span className={styles.information}>Reservaciones</span>
+                                <Ripple color='blue'></Ripple>
                             </a>
                         </Link>
                     </li>

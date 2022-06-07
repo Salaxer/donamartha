@@ -24,9 +24,19 @@ a {
 }
 
 :root{
-  --maincolorblue:#0096C1;
-  --maincolorgreen: #00984C; 
+  --maincolorblue-100: #0096c133;
+  --maincolorblue-200: #0096c166;
+  --maincolorblue-300: #0096c199;
+  --maincolorblue-400: #0096c1cc;
+  --maincolorblue:#0096c1;
+  --fillingcolor-100: #0b324733;
+  --fillingcolor-200: #0b324766;
+  --fillingcolor-300: #0b324799;
+  --fillingcolor-400: #0b3247cc;
   --fillingcolor: #0B3247;
+  --maincolorgreen: #00984C; 
+  --maincolorgreen-300: #00984c99; 
   --background-0: #e8eaed;
+  --text-color-w: #e8eaed;
   --fire-spinner-margin : #1a73e8;
 }

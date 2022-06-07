@@ -1,0 +1,49 @@
+.button{
+    outline: none;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    border-radius: 0.3rem;
+    transition: all 0.1s ease-out;
+    position: relative;
+    outline-offset: 0.2rem;
+}
+.sm{
+    padding: 0.2rem;
+    font-size: smaller;
+}
+.md{
+    padding: 0.4rem;
+    font-size: small;
+}
+.lg{
+    padding: 0.6rem;
+    font-size: large;
+}
+.xl{
+    padding: 0.8rem;
+    font-size: x-large;
+}
+.xxl{
+    padding: 1rem;
+    font-size: xx-large;
+}
+.basic{
+    background-color: var(--maincolorblue);
+}
+.basic:focus{
+    outline: 2px solid var(--maincolorblue);
+}
+.basic:hover{
+    background-color: var(--maincolorblue-400);
+}
+.blue{
+    background-color: var(--fillingcolor);
+    color: var(--text-color-w);
+}
+.blue:focus{
+    outline: 2px solid var(--fillingcolor);
+}
+.blue:hover{
+    background-color: var(--fillingcolor-400);
+}

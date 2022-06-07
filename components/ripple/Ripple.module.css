@@ -1,0 +1,30 @@
+.container{
+    position: absolute; /* The absolute position we mentioned earlier */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+.ripple{
+    position: absolute; /* The absolute position we mentioned earlier */
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 1;
+    animation: rippleAnimation 600ms linear;
+}
+.basic{
+    background-color: var(--maincolorblue-300);
+}
+.blue{
+    background-color: var(--fillingcolor-300);
+}
+.success{
+    background-color: var(--maincolorgreen-300);
+}
+@keyframes rippleAnimation {
+    to {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }

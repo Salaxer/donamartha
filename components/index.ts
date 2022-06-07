@@ -6,6 +6,8 @@ import DropDown from "./dropdown/Dropdown";
 import Slide from "./slide/Slide";
 import AllScreen from "./allScreen/AllScreen";
 import AutoScroll from "./AutoScroll/AutoScroll";
+import Button from "./button/Button";
+import Ripple from "./ripple/Ripple";
 
 export { 
     Greeting,
@@ -16,4 +18,6 @@ export {
     Slide,
     AllScreen,
     AutoScroll,
+    Button,
+    Ripple,
 }
