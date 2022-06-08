@@ -21,12 +21,10 @@ const Header: NextPage = () =>{
             <div className={styles.header__mobile} >
                 {!bar ? <div onClick={()=>setBar(true)} className={styles.header__mobile__open}>
                     <i className='pi pi-align-justify'></i>
-                    <Ripple color='success'></Ripple>
                 </div>
                 :
                 <div onClick={()=>setBar(false)} className={styles.header__mobile__close}>
                     <i className='pi pi-times'></i>
-                    <Ripple color='success'></Ripple>
                 </div>}
             </div>
             <nav className={styles.header__nav} style={{left: (!bar?'-470px':'0px')}}>

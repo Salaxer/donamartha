@@ -16,15 +16,15 @@ const Ripple = ({color}:PropsRipple) =>{
     const refContainer = useRef<HTMLSpanElement>(null);
 
     const createRipple = (e:any) =>{
-        // it has a error when there are a lot of click :(
         if (refContainer.current) {
-            if (refContainer.current.childNodes.length>0) {
+            if (refContainer.current.childNodes.length>1) {
                 refContainer.current.removeChild(refContainer.current.childNodes[0]);
             }
             var circle = document.createElement('span')
             circle.style.width = circle.style.height = `${radius*2}px`;
-            circle.style.top = `${e.nativeEvent.layerY- radius}px`
-            circle.style.left = `${e.nativeEvent.layerX- radius}px`
+            circle.style.top = `${e.clientY - refContainer.current.getBoundingClientRect().top - radius}px`;
+            circle.style.left = `${e.clientX - refContainer.current.getBoundingClientRect().left - radius}px`;
+            // tanks to https://stackoverflow.com/a/58210855/9939795, i solved this error :)
             circle.classList.add(styles.ripple);
             circle.classList.add(styles[color]);
             refContainer.current.appendChild(circle);

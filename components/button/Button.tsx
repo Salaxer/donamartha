@@ -6,7 +6,7 @@ interface PropsButton{
      * value in the middle of the button
      */
     value: string,
-    severity?: 'basic' | 'blue' | 'success' | 'clasic' | 'danger' | 'warning',
+    styleButton?: 'basic' | 'blue' | 'success' | 'clasic' | 'danger' | 'warning',
     className?: string,
     size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl',
     icon?: string,
@@ -14,12 +14,12 @@ interface PropsButton{
     onClick: () => void,
 }
 
-const Button = ({className, value, severity = 'basic', size = 'md', icon, onClick , ripple}:PropsButton) =>{
+const Button = ({className, value, styleButton = 'basic', size = 'md', icon, onClick , ripple}:PropsButton) =>{
     return(
-        <button onClick={() => onClick()} className={`${className} ${styles.button} ${styles[severity]} ${styles[size]}`}>
+        <button onClick={() => onClick()} className={`${className} ${styles.button} ${styles[styleButton]} ${styles[size]}`}>
             {icon && <i className={icon}></i>}
             {value}
-            {ripple && <Ripple color={severity}/>}
+            {ripple && <Ripple color={styleButton}/>}
         </button>
     )
 }

@@ -40,7 +40,7 @@ const Home: NextPage = () => {
                 <h3 className='text-5xl text-center'>Restaurante Doña Martha</h3>
                 <h5 className='text-3xl text-center'>Antes Micheladas Doña Martha</h5>
                 <p className='text-lg text-center'>Podras</p>
-                <Button ripple onClick={()=>goToMenu()} value='Hola como Estas' size='xl' severity='blue'/>
+                <Button ripple onClick={()=>goToMenu()} value='Hola como Estas' size='xl' styleButton='clasic'/>
               </div>
             </div>
           </AllScreen>

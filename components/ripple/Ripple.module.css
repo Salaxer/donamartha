@@ -19,6 +19,9 @@
 .blue{
     background-color: var(--fillingcolor-300);
 }
+.clasic{
+    background-color: var(--background-b-300);
+}
 .success{
     background-color: var(--maincolorgreen-300);
 }

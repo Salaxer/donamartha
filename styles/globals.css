@@ -34,9 +34,19 @@ a {
   --fillingcolor-300: #0b324799;
   --fillingcolor-400: #0b3247cc;
   --fillingcolor: #0B3247;
-  --maincolorgreen: #00984C; 
-  --maincolorgreen-300: #00984c99; 
+  --maincolorgreen: #00984C;
+  --maincolorgreen-300: #00984c99;
   --background-0: #e8eaed;
-  --text-color-w: #e8eaed;
+  --background-w-100: #e8eaed33;
+  --background-w-200: #e8eaed66;
+  --background-w-300: #e8eaed99;
+  --background-w-400: #e8eaedcc;
+  --background-w: #e8eaed;
+  --background-b-100: #24242433;
+  --background-b-200: #24242466;
+  --background-b-300: #24242499;
+  --background-b-400: #242424cc;
+  --background-b: #242424;
   --fire-spinner-margin : #1a73e8;
+  --text-color-w: #e8eaed;
 }
