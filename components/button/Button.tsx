@@ -9,16 +9,18 @@ interface PropsButton{
     styleButton?: 'basic' | 'blue' | 'success' | 'clasic' | 'danger' | 'warning',
     className?: string,
     size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl',
-    icon?: string,
+    iconR?: string,
+    iconL?: string,
     ripple?: boolean,
     onClick: () => void,
 }
 
-const Button = ({className, value, styleButton = 'basic', size = 'md', icon, onClick , ripple}:PropsButton) =>{
+const Button = ({className, value, styleButton = 'basic', size = 'md', iconR, iconL, onClick , ripple}:PropsButton) =>{
     return(
-        <button onClick={() => onClick()} className={`${className} ${styles.button} ${styles[styleButton]} ${styles[size]}`}>
-            {icon && <i className={icon}></i>}
+        <button type='button' onClick={() => onClick()} className={`${className} ${styles.button} ${styles[styleButton]} ${styles[size]}`}>
+            {iconL && <i className={iconL}></i>}
             {value}
+            {iconR && <i className={iconR}></i>}
             {ripple && <Ripple color={styleButton}/>}
         </button>
     )

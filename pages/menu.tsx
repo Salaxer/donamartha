@@ -3,9 +3,9 @@ import Head from 'next/head'
 import { useState } from 'react';
 
 import { Loader, ProductCard, DropDown, Slide } from '@Components';
-import { Product } from '../utils/interfaces/Product';
+import { Product } from 'utils/interfaces/Product';
 
-import style from 'styles/Menu.module.css';
+import styles from 'styles/Menu.module.css';
 import { TypeSlide } from 'utils/interfaces/Slide';
 
 interface PropsMenu{
@@ -28,23 +28,23 @@ const Menu = ({products, dataCarousel}:PropsMenu) => {
       <main>
         <Slide value={dataCarousel}></Slide>
         <div>
-          <div className={style.MenuFoodMain} id="MenuFoodMain">
-            <div className={style.ContainerAllFood}>
-              <div className={style.searchFood}> 
-                <h1 className={style.titleFood}>Carta</h1>
-                <div className={`${style.formFood} text-2xl`}>
-                  <div className={style.sortFood}>
+          <div className={styles.MenuFoodMain} id="MenuFoodMain">
+            <div className={styles.ContainerAllFood}>
+              <div className={styles.searchFood}> 
+                <h1 className={styles.titleFood}>Carta</h1>
+                <div className={`${styles.formFood} text-2xl`}>
+                  <div className={styles.sortFood}>
                     <DropDown onChangeSelected={(e)=>{setSortByCategory(e)}} selected={sortByCategory} options={['Todo','Favoritos' , 'Comida', 'Bebidas', 'Botanas']}></DropDown>
                   </div>
-                  <input type="search" name="inputfoodSearch" placeholder="Buscar" className={style.inputfoodSearch} id="" />
-                  <div className={style.selectFood}>
+                  <input type="search" name="inputfoodSearch" placeholder="Buscar" className={styles.inputfoodSearch} id="" />
+                  <div className={styles.selectFood}>
                     <DropDown onChangeSelected={(e)=>{setSortByType(e)}} selected={sortByType} options={['Recomendados', 'Mejor Valorado', 'Menor a Mayor Precio', 'Mayor a Menor Precio']}></DropDown>
                   </div>
                 </div>
               </div>
               {
                 products.length === 0 ?
-                <div className={style.loader} >
+                <div className={styles.loader} >
                   <Loader color='' position='relative' background='' size=''></Loader>
                 </div> :
                 products.map((product, index) => <ProductCard products={product} key={index}></ProductCard>)

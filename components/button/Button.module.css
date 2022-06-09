@@ -30,6 +30,7 @@
 }
 .basic{
     background-color: var(--maincolorblue);
+    color: var(--text-color-b);
 }
 .basic:focus{
     outline: 2px solid var(--maincolorblue);

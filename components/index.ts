@@ -1,4 +1,3 @@
-import Greeting from "./greeting/Greeting";
 import Loader from "./loader/Loader";
 import ProductCard from "./productCard/ProductCard";
 import Tag from "./tag/Tag";
@@ -8,9 +7,9 @@ import AllScreen from "./allScreen/AllScreen";
 import AutoScroll from "./AutoScroll/AutoScroll";
 import Button from "./button/Button";
 import Ripple from "./ripple/Ripple";
+import Emerge from "./emerge/Emerge";
 
 export { 
-    Greeting,
     Loader,
     ProductCard,
     Tag,
@@ -20,4 +19,5 @@ export {
     AutoScroll,
     Button,
     Ripple,
+    Emerge,
 }

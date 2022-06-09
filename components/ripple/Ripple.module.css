@@ -25,6 +25,9 @@
 .success{
     background-color: var(--maincolorgreen-300);
 }
+.danger{
+    background-color: var(--danger-color-300);
+}
 @keyframes rippleAnimation {
     to {
       transform: scale(4);

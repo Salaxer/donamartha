@@ -47,6 +47,11 @@ a {
   --background-b-300: #24242499;
   --background-b-400: #242424cc;
   --background-b: #242424;
+  --danger-color-100: #f7150433;
+  --danger-color-200: #f7150466;
+  --danger-color-300: #f7150499;
+  --danger-color-400: #f71504cc;
+  --danger-color: #f71504;
   --fire-spinner-margin : #1a73e8;
   --text-color-w: #e8eaed;
 }

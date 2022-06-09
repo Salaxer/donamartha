@@ -7,7 +7,7 @@ const Greeting = () =>{
     return (
         <>
             <div id="greeting" className={styles.Greeting}>
-                <Image src={plants} alt='restaurante de fondo' layout='fill' objectFit='cover' className={styles.imageBlur}></Image>
+                <Image priority src={plants} alt='restaurante de fondo' layout='fill' objectFit='cover' className={styles.imageBlur}></Image>
             </div>
             <div className={`${styles.text} flex justify-center flex-col`}>
                 <h1 >Bienvenidos</h1>
