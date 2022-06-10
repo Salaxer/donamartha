@@ -10,7 +10,6 @@ import { Greeting, Presentation, SeaFood } from '@Containers';
 const Home: NextPage = () => {
 
   const [currentScreen , setCurrentScreen] = useState<number>(0);
-
   return (
     <div>
       <Head>
@@ -22,17 +21,15 @@ const Home: NextPage = () => {
       <main id="main">
         <AutoScroll className='' autoScroll={true} onChangeScreen={(e)=>setCurrentScreen(e)}>
           <AllScreen> {/* index: 0*/}
-            <Emerge animation='dispel' className=''>
               <Greeting />
-            </Emerge>
           </AllScreen>
           <AllScreen className='bg-blue-100 overflow-hidden'>
             <Presentation/>
           </AllScreen>
-          <AllScreen className='bg-black-100'>
+          <AllScreen className='bg-blue-100 overflow-hidden'>
             <SeaFood/>
           </AllScreen>
-          <AllScreen className='bg-blue-300'>
+          <AllScreen className='bg-blue-100 overflow-hidden'>
             <p className='text-5xl text-red-400'>Soy Pantalla 4</p>
           </AllScreen>
         </AutoScroll>
