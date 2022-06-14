@@ -17,17 +17,38 @@
 .containerBubbles{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "a1 a"
+    "b b1"
+    "c1 c"
+    "d d1"
+    "e1 e";
     position: relative;
     justify-items: center;
     height: max-content;
+    transition: all ease 0.5s;
 }
 .spaceBubble{
-    width: 10rem;
-    height: 10rem;
+    width: 12rem;
+    height: 12rem;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.spaceBubble p{
+    text-align: center;
+    position: relative;
+    font-size: medium;
+    left: -5rem;
+    padding: 0.3rem;
+    background-color: var(--fillingcolor-400);
+    border-radius: 0.5rem;
+    color: var(--background-w);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+}
+.spaceBubble:nth-child(2n+0) p{
+    left: 5rem;
 }
 .bubble{
     background: #0b3247;
@@ -46,4 +67,46 @@
 .imgBubble{
     padding: 1rem !important;
     border-radius: 50%;
+}
+
+@media screen and (min-width:538px) and (  max-width: 768px ) {
+    .containerBubbles{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        "a1 a"
+        "b b1"
+        "c1 c"
+        "d d1"
+        "e1 e";
+        position: relative;
+        justify-items: center;
+        height: max-content;
+        gap: 3rem;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .container h2{
+        padding: 3rem 0;
+    }
+    .containerBubbles{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-areas: 
+        "a b c d e"
+        "a1 b1 c1 d1 e1";
+        position: relative;
+        justify-items: center;
+        height: max-content;
+        gap: 7rem;
+    }
+    .spaceBubble p{
+        padding: 0.8rem;
+        font-size: 1.8rem;
+        left: 0;
+    }
+    .spaceBubble:nth-child(2n+0) p{
+        left: 0;
+    }
 }

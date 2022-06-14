@@ -5,9 +5,9 @@ import camarones from 'public/images/tilapia.jpg'
 const SeaFood = () =>{
     return (
         <div className={styles.container}>
-            <h2>Conoce el catalogo de mariscos</h2>
+            <h2>CONOCE EL CATALOGO DE MARISCOS</h2>
             <div className={styles.containerBubbles}>
-                <div className={styles.spaceBubble}></div>
+                <div className={styles.spaceBubble} style={{gridArea: 'a1'}}><p>Mojarra frita</p></div>
                 <div className={styles.spaceBubble}>
                     <div style={{zIndex: 1}} className={styles.bubble}>
                         <Image className={styles.imgBubble} src={camarones} alt='tilapia'  layout='fill' objectFit='cover'></Image>
@@ -22,11 +22,11 @@ const SeaFood = () =>{
                         <Image className={styles.imgBubble} src={camarones} alt='tilapia'  layout='fill' objectFit='cover'></Image>
                     </div>
                 </div>
-                <div className={styles.spaceBubble}></div>
-                <div className={styles.spaceBubble}></div>
+                <div className={styles.spaceBubble} style={{gridArea: 'b1'}}><p>Mojarra al mojo</p></div>
+                <div className={styles.spaceBubble} style={{gridArea: 'c1'}}><p>Mojarra Empapelada</p></div>
                 <div className={styles.spaceBubble}>
                     <div style={{
-                        height: '200px',
+                        height: '20rem',
                         width: '20rem',
                         zIndex: 3
                         }} className={styles.bubble}>
@@ -42,8 +42,8 @@ const SeaFood = () =>{
                         <Image className={styles.imgBubble} src={camarones} alt='tilapia'  layout='fill' objectFit='cover'></Image>
                     </div>
                 </div>
-                <div className={styles.spaceBubble}></div>
-                <div className={styles.spaceBubble}></div>
+                <div className={styles.spaceBubble} style={{gridArea: 'd1'}}><p>Camarones al mojo</p></div>
+                <div className={styles.spaceBubble} style={{gridArea: 'e1'}}><p>Camarones a la diabla</p></div>
                 <div className={styles.spaceBubble}>
                     <div style={{
                         height: '12rem',
