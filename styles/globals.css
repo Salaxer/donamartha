@@ -35,7 +35,10 @@ a {
   --fillingcolor-400: #0b3247cc;
   --fillingcolor: #0B3247;
   --maincolorgreen: #00984C;
-  --maincolorgreen-300: #00984c99;
+  --maincolorgreen-100: #00984c33;
+  --maincolorgreen-200: #00984c66;
+  --maincolorgreen-300: #00994d99;
+  --maincolorgreen-400: #00984ccc;
   --background-0: #e8eaed;
   --background-w-100: #e8eaed33;
   --background-w-200: #e8eaed66;

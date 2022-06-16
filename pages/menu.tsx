@@ -19,7 +19,7 @@ const Menu = ({products, dataCarousel}:PropsMenu) => {
   const [sortByType, setSortByType] = useState<String>('Ordenar por');
 
   return (
-    <div >
+    <>
       <Head>
         <title>Doña Martha | Menu</title>
         <meta name="description" content="Menu del restaurante doña martha, aqui podras encontrar todos nuestros productos" />
@@ -53,7 +53,7 @@ const Menu = ({products, dataCarousel}:PropsMenu) => {
           </div>
         </div>
       </main>
-    </div>
+    </>
   )
 }
 

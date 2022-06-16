@@ -1,6 +1,7 @@
 import styles from './SeaFood.module.css';
 import Image from 'next/image';
 import camarones from 'public/images/tilapia.jpg'
+import { PreviewImage } from '@Components';
 
 const SeaFood = () =>{
     return (
@@ -30,7 +31,9 @@ const SeaFood = () =>{
                         width: '20rem',
                         zIndex: 3
                         }} className={styles.bubble}>
-                        <Image className={styles.imgBubble} src={camarones} alt='tilapia'  layout='fill' objectFit='cover'></Image>
+                        <PreviewImage style={{borderRadius: '50%'}} classToModal={styles.imgBubbleOpen}>
+                            <Image className={styles.imgBubble} src={camarones} alt='tilapia'  layout='fill' objectFit='cover'></Image>
+                        </PreviewImage>
                     </div>
                 </div>
                 <div className={styles.spaceBubble}>

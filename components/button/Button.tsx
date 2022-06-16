@@ -1,6 +1,6 @@
 import styles from './Button.module.css';
 import { Ripple } from '@Components'
-import { LegacyRef, useRef } from 'react';
+import { CSSProperties } from 'react';
 interface PropsButton{
     /**
      * value in the middle of the button
@@ -9,15 +9,16 @@ interface PropsButton{
     styleButton?: 'basic' | 'blue' | 'success' | 'clasic' | 'danger' | 'warning',
     className?: string,
     size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl',
+    style?: CSSProperties;
     iconR?: string,
     iconL?: string,
     ripple?: boolean,
     onClick: () => void,
 }
 
-const Button = ({className, value, styleButton = 'basic', size = 'md', iconR, iconL, onClick , ripple}:PropsButton) =>{
+const Button = ({className, value, styleButton = 'basic', size = 'md', iconR, iconL, onClick , ripple, style}:PropsButton) =>{
     return(
-        <button type='button' onClick={() => onClick()} className={`${className} ${styles.button} ${styles[styleButton]} ${styles[size]}`}>
+        <button style={style} type='button' onClick={() => onClick()} className={`${className} ${styles.button} ${styles[styleButton]} ${styles[size]}`}>
             {iconL && <i className={iconL}></i>}
             {value}
             {iconR && <i className={iconR}></i>}

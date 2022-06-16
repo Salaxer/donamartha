@@ -58,7 +58,6 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0b3247",endColorstr="#00984c",GradientType=1);
     border-radius: 50%;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-    padding: 1.5rem;
     overflow: hidden;
     position: absolute;
     width: 14rem;
@@ -67,6 +66,9 @@
 .imgBubble{
     padding: 1rem !important;
     border-radius: 50%;
+}
+.imgBubbleOpen img{
+    border-radius: 1px;
 }
 
 @media screen and (min-width:538px) and (  max-width: 768px ) {

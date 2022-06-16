@@ -10,21 +10,31 @@
 }
 .sm{
     padding: 0.2rem;
+    min-height: 0.4rem;
+    min-width: 0.4rem;
     font-size: smaller;
 }
 .md{
     padding: 0.4rem;
+    min-height: 0.8rem;
+    min-width: 0.8rem;
     font-size: small;
 }
 .lg{
     padding: 0.6rem;
+    min-height: 1.2rem;
+    min-width: 1.2rem;
     font-size: large;
 }
 .xl{
     padding: 0.8rem;
+    min-height: 1.6rem;
+    min-width: 1.6rem;
     font-size: x-large;
 }
 .xxl{
+    min-height: 2rem;
+    min-width: 2rem;
     padding: 1rem;
     font-size: xx-large;
 }
@@ -58,4 +68,26 @@
 }
 .clasic:hover{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.success{
+    background-color: var(--maincolorgreen);
+    color: var(--background-w-300);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.success:focus{
+    outline: 2px solid var(--maincolorgreen);
+}
+.success:hover{
+    background-color: var(--maincolorgreen-400);
+}
+.danger{
+    background-color: var(--danger-color);
+    color: var(--background-w);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.danger:focus{
+    outline: 2px solid var(--danger-color);
+}
+.danger:hover{
+    background-color: var(--danger-color-300);
 }
