@@ -4,24 +4,28 @@ import { useState } from 'react';
 
 import { Loader, ProductCard, DropDown, Slide } from '@Components';
 import { Product } from 'utils/interfaces/Product';
-
 import styles from 'styles/Menu.module.css';
 import { TypeSlide } from 'utils/interfaces/Slide';
 
+import { getMenu } from '../firebase/menu';
+import { DocumentData, QueryDocumentSnapshot } from 'firebase/firestore';
+
 interface PropsMenu{
   products: Product[],
-  dataCarousel: TypeSlide[]
+  dataCarousel: TypeSlide[],
+  MenuProducts: Product[];
 }
 
-const Menu = ({products, dataCarousel}:PropsMenu) => {
 
+const Menu = ({products, dataCarousel, MenuProducts}:PropsMenu) => {
+  console.log(MenuProducts);
   const [sortByCategory, setSortByCategory] = useState<String>('Ordenar la categoria');
   const [sortByType, setSortByType] = useState<String>('Ordenar por');
 
   return (
     <>
       <Head>
-        <title>Doña Martha | Menu</title>
+        <title> Menu | Doña Martha </title>
         <meta name="description" content="Menu del restaurante doña martha, aqui podras encontrar todos nuestros productos" />
         <link rel="icon" href="/favicon .ico" />
       </Head>
@@ -43,11 +47,11 @@ const Menu = ({products, dataCarousel}:PropsMenu) => {
                 </div>
               </div>
               {
-                products.length === 0 ?
+                MenuProducts.length === 0 ?
                 <div className={styles.loader} >
                   <Loader color='' position='relative' background='' size=''></Loader>
                 </div> :
-                products.map((product, index) => <ProductCard products={product} key={index}></ProductCard>)
+                MenuProducts.map((product, index) => <ProductCard products={product} key={index}></ProductCard>)
               }
             </div> 
           </div>
@@ -60,16 +64,17 @@ const Menu = ({products, dataCarousel}:PropsMenu) => {
 export const getStaticProps:GetStaticProps = async (contex) => {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-
   let products = [];
+  let MenuProducts:Product[] = [];
   try {
-
+    const resFirebase = await getMenu();
     const res = await fetch('https://fakestoreapi.com/products/')
-    products = await res.json()
-
+    products = await res.json();
+    resFirebase.forEach((item)=>{
+      MenuProducts.push(item.data() as Product)
+    })
   } catch (e) {
-    console.log(e);
-    
+    console.log(e); 
   }
   let dataCarousel : TypeSlide[] = [{
     id: 1,
@@ -91,6 +96,7 @@ export const getStaticProps:GetStaticProps = async (contex) => {
     props: {
       products,
       dataCarousel,
+      MenuProducts,
     },
   }
 }

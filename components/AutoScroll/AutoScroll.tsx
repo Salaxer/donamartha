@@ -1,3 +1,4 @@
+import { useIsMobile } from "hooks/mediaQuery";
 import React, { MutableRefObject, ReactNode, useEffect, useRef, useState } from "react";
 
 import styles from './AutoScroll.module.css';
@@ -33,16 +34,21 @@ const AutoScroll:React.FunctionComponent<AutoScrollProps> = ({autoScroll, classN
     const itemsRef = useRef([]) as MutableRefObject<HTMLDivElement[] | null[]>;
     const [currentScreen, setCurrentScreen] = useState(0);
     const nextTop = useRef(0);
-    // const tsClientY = useRef<boolean>(false);
+    // temportar ultil i solve this error
+    const isMobile = useIsMobile();
 
     useEffect(()=>{
         window.scroll({top: 0, left: 0, behavior: "smooth"});
         nextTop.current = 0;
-        document.body.style.overflow = "hidden";
+        if (isMobile) {
+            document.body.style.overflow = "overlay";
+        }else{
+            document.body.style.overflow = "hidden";
+        }
         return ()=> {
             document.body.style.overflow = "overlay";
         };
-    },[])
+    },[isMobile])
 
     useEffect(() => {
         itemsRef.current = itemsRef.current.slice(0, elementChildrens.length);
