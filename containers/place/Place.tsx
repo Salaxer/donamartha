@@ -16,32 +16,32 @@ const Place = () =>{
             </div>
             <div className={styles.swiper}>
                 <div className={styles.swiperItem}>
-                    <PreviewImage style={{borderRadius: '3rem'}}>
+                    <PreviewImage id="sasd" style={{borderRadius: '3rem'}}>
                         <Image layout='fill' objectFit='cover' alt='My tree' src={sunset} />
                     </PreviewImage>
                 </div>
                 <div className={styles.swiperItem}>
-                    <PreviewImage style={{borderRadius: '3rem'}}>
+                    <PreviewImage id="fdsfsd" style={{borderRadius: '3rem'}}>
                         <Image layout='fill' objectFit='cover' alt='My tree' src={yellowTree} />
                     </PreviewImage>
                 </div>
                 <div className={styles.swiperItem}>
-                    <PreviewImage style={{borderRadius: '3rem'}}>
+                    <PreviewImage id="fdsf" style={{borderRadius: '3rem'}}>
                         <Image layout='fill' objectFit='cover' alt='My tree' src={plants2} />
                     </PreviewImage>
                 </div>
                 <div className={styles.swiperItem}>
-                    <PreviewImage style={{borderRadius: '3rem'}}>
+                    <PreviewImage id="asdqqq" style={{borderRadius: '3rem'}}>
                         <Image layout='fill' objectFit='cover' alt='My tree' src={flor} />
                     </PreviewImage>
                 </div>
                 <div className={styles.swiperItem}>
-                    <PreviewImage style={{borderRadius: '3rem'}}>
+                    <PreviewImage id="asdddd" style={{borderRadius: '3rem'}}>
                         <Image layout='fill' objectFit='cover' alt='My tree' src={flor} />
                     </PreviewImage>
                 </div>
                 <div className={styles.swiperItem}>
-                    <PreviewImage style={{borderRadius: '3rem'}}>
+                    <PreviewImage id="asdcc" style={{borderRadius: '3rem'}}>
                         <Image layout='fill' objectFit='cover' alt='My tree' src={flor} />
                     </PreviewImage>
                 </div>

@@ -49,7 +49,37 @@
     width: 80%;
     overflow: hidden;
     border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
 }
-/* .modalImg img{
-    
-} */
+.spanIMG {
+    display: inline-block;
+    position: relative ;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: initial;
+    height: initial;
+    background: none;
+    opacity: 1;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    max-width: initial !important;
+}
+.spanIMG span{
+    display: block !important;
+    position: static !important;
+}
+.spanIMG img{
+    width: max-content !important;
+    height: max-content !important;
+    position: relative !important;
+}
+
+@media screen and (max-width:538px) {
+    .spanIMG{
+        max-width: 100% !important;
+    }
+}

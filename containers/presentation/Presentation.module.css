@@ -12,7 +12,6 @@
     top: -120px;
     left: -100px;
     border-radius: 50%;
-    transition: all ease-in 0.5s;
     background: rgb(0,150,193);
     background: -moz-linear-gradient(45deg, rgba(0,150,193,1) 0%, rgba(0,152,76,1) 100%);
     background: -webkit-linear-gradient(45deg, rgba(0,150,193,1) 0%, rgba(0,152,76,1) 100%);

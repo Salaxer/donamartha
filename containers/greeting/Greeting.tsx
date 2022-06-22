@@ -1,9 +1,11 @@
+import Image from 'next/image';
 import styles from './Greeting.module.css';
 import plants from 'public/images/plants.jpg'
 
-import Image from 'next/image';
-
-const Greeting = () =>{
+interface GreetingProps{
+    animate?: boolean;
+}
+const Greeting = ({animate}:GreetingProps) =>{
     return (
         <>
             <div id="greeting" className={styles.Greeting}>

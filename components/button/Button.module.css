@@ -48,6 +48,9 @@
 .basic:hover{
     background-color: var(--maincolorblue-400);
 }
+.basic:disabled{
+    background-color: var(--maincolorblue-200);
+}
 .blue{
     background-color: var(--fillingcolor);
     color: var(--text-color-w);
@@ -57,6 +60,9 @@
 }
 .blue:hover{
     background-color: var(--fillingcolor-400);
+}
+.blue:disabled{
+    background-color: var(--fillingcolor-200);
 }
 .clasic{
     background-color: var(--background-0);
@@ -69,6 +75,9 @@
 .clasic:hover{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+.clasic:disabled{
+    background-color: var(--background-0-200);
+}
 .success{
     background-color: var(--maincolorgreen);
     color: var(--background-w-300);
@@ -79,6 +88,9 @@
 }
 .success:hover{
     background-color: var(--maincolorgreen-400);
+}
+.success:disabled{
+    background-color: var(--maincolorgreen-200);
 }
 .danger{
     background-color: var(--danger-color);

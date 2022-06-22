@@ -3,17 +3,97 @@ import { useState, useEffect, useRef } from 'react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+import 'primeicons/primeicons.css'
+import { motion, useCycle, useAnimation, Variants } from 'framer-motion';
 
 import styles from './Header.module.css';
-import 'primeicons/primeicons.css'
-
 import { Ripple } from '@Components';
+import { useIsMobile } from 'hooks/mediaQuery';
+import { useOnClickOutside } from 'hooks/outsideClick';
+
+const variants: Variants = {
+    navInitial:{
+        scale: 0.4,
+        opacity: 0,
+        y: 0,
+        transition: {
+            duration: 0.3,
+        }
+    },
+    navHover: {
+        scale: 1,
+        opacity: 1,
+        y: 50,
+        transition: {
+            duration: 0.8,
+            type: 'spring',
+            bounce: 0.5 ,
+        }
+    },
+    navMobile:{
+        scale: 1,
+        opacity: 1,
+        y: 0,
+    },
+    navNoMobile:{
+        scale: 0.4,
+        opacity: 0,
+        y: 0,
+        transition: {
+            duration: 0.3,
+        }
+    },
+}
+interface NavBar {
+    id: number,
+    icon: string,
+    href: string,
+    title: string
+}
+const navbar: NavBar[] = [
+    {
+        href: "/",
+        icon: "pi pi-home",
+        id: 0,
+        title: "Inicio"
+    },{
+        href: "/menu",
+        icon: "pi pi-table",
+        id: 1,
+        title: "Menu"
+    },{
+        href: "/delivery",
+        icon: "pi pi-car",
+        id: 3,
+        title: "Pedidos"
+    },{
+        href: "/reservation",
+        icon: "pi pi-bookmark-fill",
+        id: 4,
+        title: "Reservaciones"
+    }
+];
 
 const Header: NextPage = () =>{
     // Create a ref that we add to the element for which we want to detect outside clicks
-    const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
+    const ref = useRef<HTMLInputElement>(null);
     const [bar, setBar] = useState<boolean>(false);
+    const isMobile = useIsMobile();
+    const control = useAnimation();
     useOnClickOutside(ref, () => setBar(false));
+    const router = useRouter();
+
+    useEffect(()=>{
+        isMobile ? control.set("navMobile") : control.set("navNoMobile");
+    },[control, isMobile])
+
+
+    const isRoute = (path: string): string =>{
+        return router.pathname === path ? '0.3rem solid white' : 'none';
+    }
+
     return (
         <>
         <header ref={ref} id="header" className={styles.header}>
@@ -27,44 +107,23 @@ const Header: NextPage = () =>{
                     <i className='pi pi-times'></i>
                 </div>}
             </div>
-            <nav className={styles.header__nav} style={{left: (!bar?'-470px':'0px')}}>
-                <ul onClick={()=>setBar(false)}> 
-                    <li>
-                        <Link href="/" aria-label="Inicio">
-                            <a>
-                                <i className="pi pi-home"></i>
-                                <span className={styles.information}>Inicio</span>
-                                <Ripple color='blue'></Ripple>
-                            </a>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/menu" aria-label="Menu">
-                            <a>
-                                <i className="pi pi-table"></i>
-                                <span className={styles.information}>Menu</span>
-                                <Ripple color='blue'></Ripple>
-                            </a>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/delivery" aria-label="Pedidos a domicilio">
-                            <a>
-                                <i className="pi pi-car"></i>
-                                <span className={styles.information}>Pedidos</span>
-                                <Ripple color='blue'></Ripple>
-                            </a>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/reservation" aria-label="Reservaciones">
-                            <a>
-                                <i className="pi pi-bookmark-fill"></i>
-                                <span className={styles.information}>Reservaciones</span>
-                                <Ripple color='blue'></Ripple>
-                            </a>
-                        </Link>
-                    </li>
+            <nav className={styles.header__nav} style={{left: (!bar?'-60%':'0')}}>
+                <ul onClick={()=>setBar(false)}>
+                    {navbar.map((item, index)=>{
+                        return (<motion.li
+                        key={`navbar_item${index}`}
+                        whileHover="navHover"
+                        initial="navInitial"
+                        animate={control}>
+                            <Link href={item.href}>
+                                <a aria-label={`enter para ir a ${item.title}`} style={{borderBottom: isRoute(item.href)}}>
+                                    <i className={item.icon}></i>
+                                    <motion.span variants={variants} className={styles.information}>{item.title}</motion.span>
+                                    <Ripple color='blue'></Ripple>
+                                </a>
+                            </Link>
+                        </motion.li>
+                    )})}
                     {/* {user === null ?
                     <li><Link href="/signup" aria-label="Unete a nosotros"><i className="fas fa-sign-in-alt"></i><span className="information">Unete</span></Link></li>:
                     user.photoURL === undefined ? <li> <LoaderCircle color="#0096C1" background="transparent" position="static" size="30"/> </li>:
@@ -79,32 +138,4 @@ const Header: NextPage = () =>{
     </>
     )
 }
-// Hook
-function useOnClickOutside(ref: any, handler: any) {
-    useEffect(
-      () => {
-        const listener = (event: any) => {
-          // Do nothing if clicking ref's element or descendent elements
-            if (!ref.current || ref.current.contains(event.target)) {
-                return;
-            }
-            handler(event);
-        };
-        document.addEventListener("mousedown", listener);
-        document.addEventListener("touchstart", listener);
-        return () => {
-          document.removeEventListener("mousedown", listener);
-          document.removeEventListener("touchstart", listener);
-        };
-      },
-      // Add ref and handler to effect dependencies
-      // It's worth noting that because passed in handler is a new ...
-      // ... function on every render that will cause this effect ...
-      // ... callback/cleanup to run every render. It's not a big deal ...
-      // ... but to optimize you can wrap handler in useCallback before ...
-      // ... passing it into this hook.
-      [ref, handler]
-    );
-  }
-
 export default Header;

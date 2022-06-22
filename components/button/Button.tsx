@@ -13,12 +13,13 @@ interface PropsButton{
     iconR?: string,
     iconL?: string,
     ripple?: boolean,
+    disabled?: boolean,
     onClick: () => void,
 }
 
-const Button = ({className, value, styleButton = 'basic', size = 'md', iconR, iconL, onClick , ripple, style}:PropsButton) =>{
+const Button = ({className, value, styleButton = 'basic', size = 'md', iconR, iconL, onClick, disabled, ripple, style}:PropsButton) =>{
     return(
-        <button style={style} type='button' onClick={() => onClick()} className={`${className} ${styles.button} ${styles[styleButton]} ${styles[size]}`}>
+        <button disabled={disabled} style={style} type='button' onClick={() => onClick()} className={`${className} ${styles.button} ${styles[styleButton]} ${styles[size]}`}>
             {iconL && <i className={iconL}></i>}
             {value}
             {iconR && <i className={iconR}></i>}

@@ -31,7 +31,7 @@ const SeaFood = () =>{
                         width: '20rem',
                         zIndex: 3
                         }} className={styles.bubble}>
-                        <PreviewImage style={{borderRadius: '50%'}} classToModal={styles.imgBubbleOpen}>
+                        <PreviewImage id="tilapia1" style={{borderRadius: '50%'}} classToModal={styles.imgBubbleOpen}>
                             <Image className={styles.imgBubble} src={camarones} alt='tilapia'  layout='fill' objectFit='cover'></Image>
                         </PreviewImage>
                     </div>
