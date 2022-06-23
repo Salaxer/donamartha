@@ -18,6 +18,8 @@
     "paths": {
       "@Components": ["components/index.ts"],
       "@Containers": ["containers/index.ts"],
+      "@ServerAPI/*": ["lib/firebase/*"],
+      "@ClientAPI/*": ["lib/axios/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -1,26 +1,51 @@
+// Packages
 import type { GetStaticProps } from 'next'
 import Head from 'next/head'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Loader, ProductCard, DropDown, Slide } from '@Components';
-import { Product } from 'utils/interfaces/Product';
+// Styles
 import styles from 'styles/Menu.module.css';
-import { TypeSlide } from 'utils/interfaces/Slide';
 
-import { getMenu } from '../firebase/menu';
-import { DocumentData, QueryDocumentSnapshot } from 'firebase/firestore';
+// Personal
+import { Loader, ProductCard, DropDown, Slide } from '@Components';
+import { Product } from 'lib/types/Product';
+import { TypeSlide } from 'lib/types/Slide';
+
+// API to getStaticProps and render the page before giving it to the client side using Firebase.
+import { getMenu } from '@ServerAPI/menu';
+// API For clients that perform communication between the client side and the Next server using Axios.
+import { getNewMenu, Category, ByType } from '@ClientAPI/menu';
+import { SocketReadyState } from 'net';
+
 
 interface PropsMenu{
-  products: Product[],
   dataCarousel: TypeSlide[],
   MenuProducts: Product[];
 }
 
+const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
 
-const Menu = ({products, dataCarousel, MenuProducts}:PropsMenu) => {
-  console.log(MenuProducts);
-  const [sortByCategory, setSortByCategory] = useState<String>('Ordenar la categoria');
-  const [sortByType, setSortByType] = useState<String>('Ordenar por');
+  const [orderProducts, setOrderProducts] = useState<Product[]>([]);
+  const [sortByCategory, setSortByCategory] = useState<Category>("Todo");
+  const [sortByType, setSortByType] = useState<ByType>("Recomendados");
+
+  useEffect(()=>{
+
+    const reorderMenu = async () =>{
+      const res = await getNewMenu(sortByCategory, sortByType);
+      console.log(res.error);
+      console.log(res.response?.data);
+    }
+
+    if (sortByCategory !== "Todo" || sortByType !== "Recomendados"){
+      reorderMenu();
+      setOrderProducts([])
+    }else{
+      setOrderProducts(MenuProducts)
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[sortByCategory, sortByType])
 
   return (
     <>
@@ -47,11 +72,11 @@ const Menu = ({products, dataCarousel, MenuProducts}:PropsMenu) => {
                 </div>
               </div>
               {
-                MenuProducts.length === 0 ?
+                orderProducts.length === 0 ?
                 <div className={styles.loader} >
                   <Loader color='' position='relative' background='' size=''></Loader>
                 </div> :
-                MenuProducts.map((product, index) => <ProductCard products={product} key={index}></ProductCard>)
+                orderProducts.map((product, index) => <ProductCard index={index} products={product} key={index}></ProductCard>)
               }
             </div> 
           </div>
@@ -64,14 +89,11 @@ const Menu = ({products, dataCarousel, MenuProducts}:PropsMenu) => {
 export const getStaticProps:GetStaticProps = async (contex) => {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  let products = [];
   let MenuProducts:Product[] = [];
   try {
     const resFirebase = await getMenu();
-    const res = await fetch('https://fakestoreapi.com/products/')
-    products = await res.json();
     resFirebase.forEach((item)=>{
-      MenuProducts.push(item.data() as Product)
+      MenuProducts.push({...item.data() as Product, id: item.id});
     })
   } catch (e) {
     console.log(e); 
@@ -94,10 +116,10 @@ export const getStaticProps:GetStaticProps = async (contex) => {
   // will receive `posts` as a prop at build time
   return {
     props: {
-      products,
       dataCarousel,
       MenuProducts,
     },
+    revalidate: 3600
   }
 }
 

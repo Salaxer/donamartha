@@ -3,18 +3,36 @@ import Image from 'next/image'
 
 import styles from './ProductCard.module.css';
 
-import {Product} from '../../utils/interfaces/Product'
+import {Product} from '../../lib/types/Product'
 
 import { Rating } from 'primereact/rating';
 import { Tag } from '@Components'
+import { motion, Variants } from 'framer-motion';
 
 interface CardItem{
     products: Product,
+    index: number,
 }
-
-const ProductCard = ({products}:CardItem ) =>{
+const variants:Variants = {
+    initial: {
+        opacity: 0,
+        y: 30,
+    },
+    animate: (index) =>{
+        const delay = index * 0.2 + 1;
     return (
-        <div className={styles.containCard}>
+        {
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay,
+            }
+        }
+    )}
+  }
+const ProductCard = ({products, index}:CardItem ) =>{
+    return (
+        <motion.div variants={variants} initial="initial" animate="animate" custom={index} className={styles.containCard}>
             <div className={styles.cardFood} >
                 <div className={styles.discount}> <span>-10%</span></div>
                 <div className={styles.cardFood__a}>
@@ -43,7 +61,7 @@ const ProductCard = ({products}:CardItem ) =>{
                     <h6 className={styles.titleFood}>{products.title}</h6>
                 </div>
             </div>
-        </div>
+        </motion.div>
     )
 }
 export default ProductCard;

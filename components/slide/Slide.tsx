@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 
 import styles from './Slide.module.css'
-import { TypeSlide } from 'utils/interfaces/Slide';
+import { TypeSlide } from 'lib/types/Slide';
 
 
 interface PropSlide{

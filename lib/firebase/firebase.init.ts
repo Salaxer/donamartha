@@ -27,7 +27,5 @@ export default function initFirebase(){
                 getAnalytics(app);
             }
         }
-        console.log('firebase was successfully init');
-        
     }
 };

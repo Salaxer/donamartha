@@ -1,4 +1,4 @@
-import { useIsMobile } from "hooks/mediaQuery";
+import { useIsMobile } from "utils/hooks/mediaQuery";
 import React, { MutableRefObject, ReactNode, useEffect, useRef, useState } from "react";
 
 import styles from './AutoScroll.module.css';

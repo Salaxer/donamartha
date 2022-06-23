@@ -2,7 +2,7 @@ import type { NextComponentType, NextPage } from 'next'
 
 /* This DropDown requires Tailwind CSS v2.0+ */
 
-import { Fragment, PropsWithChildren, useState } from 'react';
+import { FC, Fragment, PropsWithChildren, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { Ripple } from '@Components'
@@ -20,8 +20,7 @@ interface PropsA {
   onChangeSelected: (e: any) => void;
 }
 
-const DropDown = (props:PropsA) => {
-  const {selected, onChangeSelected, options } = props;
+const DropDown:FC<PropsA> = ({selected, onChangeSelected, options }) => {
   return (
     <Menu as="div" className="relative inline-block w-full">
       <div>

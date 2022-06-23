@@ -10,8 +10,8 @@ import { motion, useCycle, useAnimation, Variants } from 'framer-motion';
 
 import styles from './Header.module.css';
 import { Ripple } from '@Components';
-import { useIsMobile } from 'hooks/mediaQuery';
-import { useOnClickOutside } from 'hooks/outsideClick';
+import { useIsMobile } from 'utils/hooks/mediaQuery';
+import { useOnClickOutside } from 'utils/hooks/outsideClick';
 
 const variants: Variants = {
     navInitial:{
