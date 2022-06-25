@@ -1,8 +1,17 @@
+import { AllScreen, NotFound } from '@Components'
+import { Product } from '@MyTypes/menu'
+import { getItemMenu } from '@ServerAPI/menu'
+import { FirebaseError } from 'firebase/app'
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
 
+interface PropsProduct{
+  product: Product
+  err: Error
+}
 
-const Product = () => {
+const MenuItem = ({ product, err }:PropsProduct) => {
+  console.log(product);
   return (
     <div >
       <Head>
@@ -10,17 +19,21 @@ const Product = () => {
         <meta name="description" content="Product del restaurante doña martha, aqui podras encontrar todos nuestros productos" />
         <link rel="icon" href="/favicon .ico" />
       </Head>
-      <main>
-      </main>
+      {(!err && product) ?
+        <main>
+          <AllScreen>
+            <p className='font-sans text-xl font-bold'>Hola</p>
+          </AllScreen>
+        </main>
+        :
+      <NotFound/>
+      }
     </div>
   )
 }
 
 // Obtain the statics phats from the file on posts/***.md and assign to the props
-export const getStaticPaths:GetStaticPaths = async ()=>{
-
-  console.log('im in getStaticPaths');
-
+export const getStaticPaths:GetStaticPaths = async ( ada )=>{
   return {
       paths: [],
       fallback: true
@@ -29,14 +42,21 @@ export const getStaticPaths:GetStaticPaths = async ()=>{
 
 // obtian the static props and return anoter one
 export const getStaticProps:GetStaticProps = async ({ params }) => {
-  console.log('im in getStaticProps');
-  // console.log('Here the id received:: ',params.id);
-  // const postData = await getCharacterData(params.id);
+  let product;
+  let err = null;
+  if (params) {
+    if (typeof params.id == "string") {
+      const { response, error } = await getItemMenu(params.id)
+      product = response?.exists() ? {...response.data(), id: response.id } : null;
+      err = error ? (typeof error == "string" ? { message: error } : error )  : null;
+    }
+  }
   return {
       props: {
-          // postData
-      }
+        product,
+        err,
+      },
   }
 }
 
-export default Product
+export default MenuItem

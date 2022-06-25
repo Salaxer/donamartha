@@ -19,7 +19,8 @@
       "@Components": ["components/index.ts"],
       "@Containers": ["containers/index.ts"],
       "@ServerAPI/*": ["lib/firebase/*"],
-      "@ClientAPI/*": ["lib/axios/*"]
+      "@ClientAPI/*": ["lib/axios/*"],
+      "@MyTypes/*": ["lib/types/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

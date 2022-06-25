@@ -3,16 +3,16 @@ import Image from 'next/image'
 
 import styles from './ProductCard.module.css';
 
-import {Product} from '../../lib/types/Product'
+import { Product } from '@MyTypes/menu'
 
-import { Rating } from 'primereact/rating';
 import { Tag } from '@Components'
 import { motion, Variants } from 'framer-motion';
 
-interface CardItem{
+interface PropsProductCard{
     products: Product,
     index: number,
 }
+
 const variants:Variants = {
     initial: {
         opacity: 0,
@@ -29,8 +29,9 @@ const variants:Variants = {
             }
         }
     )}
-  }
-const ProductCard = ({products, index}:CardItem ) =>{
+}
+
+const ProductCard = ({products, index}:PropsProductCard ) =>{
     return (
         <motion.div variants={variants} initial="initial" animate="animate" custom={index} className={styles.containCard}>
             <div className={styles.cardFood} >
@@ -52,7 +53,7 @@ const ProductCard = ({products, index}:CardItem ) =>{
                             <Tag severity='success' size='lg' value='Disponible'></Tag>
                             <div className='flex mt-3 '>
                                 <div className='text-2xl text-blue-400 mr-5 cursor-default'>
-                                    <Rating className='flex gap-1' cancel={false} readOnly value={products.rating.rate} stars={5} />
+                                    {/* <Rating className='flex gap-1' cancel={false} readOnly value={products.rating.rate} stars={5} /> */}
                                 </div>
                                 <i className='pi pi-heart text-red-600 cursor-pointer text-3xl'></i>
                             </div>

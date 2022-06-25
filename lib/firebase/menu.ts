@@ -1,21 +1,49 @@
-import { getApp } from "firebase/app";
-import { DocumentData, getFirestore, QueryDocumentSnapshot, QuerySnapshot } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore"; 
+import { FirebaseError, getApp } from "firebase/app";
+import {
+    collection,
+    getDocs,
+    doc,
+    DocumentData,
+    DocumentSnapshot,
+    getDoc, getFirestore, 
+    QueryDocumentSnapshot 
+} from "firebase/firestore";
+
 import initFirebase from "./firebase.init";
 
+import { RequestFirebase } from "@MyTypes/firebase";
 
 initFirebase();
 const db = getFirestore(getApp());
+const menuRef = collection(db, "Menu");
 
-
-export const getMenu = async ():Promise<QueryDocumentSnapshot<DocumentData>[]> =>{
-    let menu: QueryDocumentSnapshot<DocumentData>[] = [];
+export const getMenu:RequestFirebase["getMenu"] = async () =>{
+    let response: QueryDocumentSnapshot<DocumentData>[] = [];
+    let error;
     try {
-        const querySnapshot = await getDocs(collection(db, "Menu"));
-        menu =  querySnapshot.docs;
-    } catch (error) {
-        console.log('algo salio mal :(');
-        console.log(error);
+        const querySnapshot = await getDocs(menuRef);
+        response =  querySnapshot.docs;
+    } catch (e) {
+        e instanceof FirebaseError ? error = e : error = "Error desconocido";
     }
-    return menu;
+    return {
+        response,
+        error,
+    };;
+}
+
+export const getItemMenu:RequestFirebase["getItemMenu"] = async (id) =>{
+    let response;
+    let error; 
+    const docRef = doc(db, "Menu", id);
+    try {
+        const docSnap = await getDoc(docRef);
+        response =  docSnap;
+    } catch (e) {
+        e instanceof FirebaseError ? error = e : error = "Error desconocido";
+    }
+    return {
+        response,
+        error,
+    };
 }

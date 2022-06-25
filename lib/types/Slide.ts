@@ -1,7 +1,6 @@
 export interface TypeSlide {
-    id: number,
-    src: string,
+    id: string;
+    image: string,
     title: string,
     description: string,
-    url: string,
 }

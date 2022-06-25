@@ -10,6 +10,7 @@ import Ripple from "./ripple/Ripple";
 import Emerge from "./emerge/Emerge";
 import PreviewImage from "./previewImage/PreviewImage";
 import Modal from "./modal/Modal";
+import NotFound from "./notFound/NotFound";
 export { 
     Loader,
     ProductCard,
@@ -23,4 +24,5 @@ export {
     Emerge,
     PreviewImage,
     Modal,
+    NotFound,
 }

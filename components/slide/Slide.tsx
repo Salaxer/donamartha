@@ -20,17 +20,17 @@ interface PropSlide{
 const Slide = ({ value }:PropSlide) => {
     return (
         <>
-            <Swiper pagination={true} autoHeight={true} navigation={true} autoplay={true} modules={[Pagination, Navigation]} className="mySwiper">
-                {value.map((item) =>{
+            <Swiper pagination={true} navigation={true} autoplay={true} modules={[Pagination, Navigation]} className="mySwiper">
+                {value.map((item, index) =>{
                     return (
                     <SwiperSlide key={item.id}>
-                        <Link href={`offers/${item.url}`}>
+                        <Link href={`/offers/${item.id}`}>
                             <a>
                                 <div className={styles.imageSlide}>
                                     <Image layout='fill'
                                     objectFit='cover'
                                     alt={item.title}
-                                    src={item.src} />
+                                    src={item.image} />
                                 </div>
                             </a>
                         </Link>

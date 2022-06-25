@@ -90,7 +90,7 @@ const Footer: NextPage = () =>{
                 rel="noopener noreferrer"
                 className={styles.footerPoweredLink}
                 >
-                    <p>Powered by</p>
+                    <p>Made with ❤ by</p>
                     <h4> SALAXER</h4>
                     <span className={styles.footerPoweredLinkLogo}>
                         <Image src="/salaxer.svg" alt="Vercel Logo" width={40} height={40} />
