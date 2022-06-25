@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosResponse, AxiosResponseHeaders} from "axios";
+import axios, { AxiosError } from "axios";
 
-const url = "http://localhost:3000/api/menu/get"
+const url = `/api/menu/get`
 
 import { RequestAxios } from "@MyTypes/axios";
 import { DataDocsResponse } from "@MyTypes/api";
