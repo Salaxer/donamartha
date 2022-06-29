@@ -1,0 +1,71 @@
+.fillContainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.position{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.position::after{
+    content: '';
+    width: 14px;
+    height: 14px;
+    background-color: var(--background-b);
+    z-index: 0;
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+}
+.toolTip{
+    position: absolute;
+    text-align: center;
+    font-size: medium;
+    background-color: #dbeafe;
+    border-radius: 0.5rem;
+    border: 0.001rem solid var(--background-b);
+    z-index: 1;
+    min-width: 50px;
+    max-width: 400px;
+    width: max-content;
+    font-size: medium;
+    padding: 1rem;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+.position-top{
+    left: 50%;
+    top: -10px;
+}
+.position-top .toolTip{
+    bottom: 0;
+}
+
+
+.position-bottom{
+    left: 50%;
+    bottom: -10px;
+}
+.position-bottom .toolTip{
+    top: 0;
+}
+
+.position-left{
+    top: 50%;
+    left: -10px;
+}
+.position-left .toolTip{
+    right: 0;
+}
+
+.position-right{
+    top: 50%;
+    right: -10px;
+}
+.position-right .toolTip{
+    left: 0;
+}

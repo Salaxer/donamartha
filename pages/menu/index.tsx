@@ -40,9 +40,6 @@ const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
         return a.rating.rate - b.rating.rate
       })])
     }
-    if (sortByType == "Recomendados") {
-      setOrderProducts(MenuProducts)
-    }
     setLoader(false)
   }
 
@@ -50,6 +47,8 @@ const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
     if (sortByType !== "Recomendados") {
       setLoader(true);
       orderBy()
+    }else{
+      setOrderProducts(MenuProducts)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[sortByType])

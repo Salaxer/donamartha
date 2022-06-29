@@ -48,14 +48,12 @@ img.header__picture__img{
     position: fixed;
     display: flex;
     height: 100%;
-    width: 60%;
+    width: 70%;
     align-items: flex-start;
     justify-content: center;
-    /*  */
     top: 65px;
     background-color: var(--fillingcolor);
     z-index: 150;
-    transition: all ease-in .5s;
 }
 .header__nav ul{
     list-style-type: none;
@@ -123,7 +121,7 @@ img.header__picture__img{
         background-color: var(--fillingcolor);
     }
 }
-  
+
   
   /* Desktop */
 @media screen and (min-width: 769px) {

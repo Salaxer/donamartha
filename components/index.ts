@@ -11,6 +11,7 @@ import Emerge from "./emerge/Emerge";
 import PreviewImage from "./previewImage/PreviewImage";
 import Modal from "./modal/Modal";
 import NotFound from "./notFound/NotFound";
+import ToolTip from "./toolTip/ToolTip";
 export { 
     Loader,
     ProductCard,
@@ -25,4 +26,5 @@ export {
     PreviewImage,
     Modal,
     NotFound,
+    ToolTip,
 }

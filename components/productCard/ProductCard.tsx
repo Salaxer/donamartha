@@ -7,6 +7,7 @@ import { Product } from '@MyTypes/menu'
 
 import { Tag } from '@Components'
 import { motion, Variants } from 'framer-motion';
+import { discount } from 'utils/dicount';
 
 interface PropsProductCard{
     products: Product,
@@ -35,7 +36,7 @@ const ProductCard = ({products, index}:PropsProductCard ) =>{
     return (
         <motion.div variants={variants} initial="initial" animate="animate" custom={index} className={styles.containCard}>
             <div className={styles.cardFood} >
-                <div className={styles.discount}> <span>-10%</span></div>
+                {products.discount > 0 && <div className={styles.discount}> <span>-{products.discount}%</span></div>}
                 <div className={styles.cardFood__a}>
                     <Link href={`/menu/${products.id}`} >
                         <a>
@@ -46,11 +47,17 @@ const ProductCard = ({products, index}:PropsProductCard ) =>{
                 <div className={styles.FoodDetails}>
                     <div className='w-full flex justify-between'>
                         <div>
+                        { products.discount > 0 ? 
+                        <>
                             <p className={styles.lastPrice}>${products.price}</p>
+                            <p className={styles.priceFood}>${discount(products.price, products.discount)}</p>
+                        </>
+                            :
                             <p className={styles.priceFood}>${products.price}</p>
+                        }
                         </div>
                         <div className='flex items-center flex-col'>
-                            <Tag severity='success' size='lg' value='Disponible'></Tag>
+                            { products.available ? <Tag severity='success' shadow='lg' size='lg' value="Disponible"></Tag> : <Tag shadow='lg' severity='danger' size='lg' value="Agotado"></Tag>}
                             <div className='flex mt-3 '>
                                 <div className='text-2xl text-blue-400 mr-5 cursor-default'>
                                     {/* <Rating className='flex gap-1' cancel={false} readOnly value={products.rating.rate} stars={5} /> */}

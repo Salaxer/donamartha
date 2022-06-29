@@ -10,9 +10,18 @@ interface PreviewImageProp{
     id?: string,
 }
 
-const variants:Variants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 },
+const childVariants:Variants = {
+    initial:{
+        opacity: 0,
+    },
+    visible: {
+        opacity: 1,
+        scale: 1,
+    },
+    hidden: { 
+        opacity: 0,
+        scale: 1.2,
+    },
 }
 
 
@@ -45,12 +54,13 @@ const PreviewImage: React.FC<PreviewImageProp> = ({ children, className, classTo
     return (
         <div className={`${styles.preview} ${className}`} style={style}>
             <div className={styles.background} onClick={handleModal}><i className='pi pi-eye text-4xl text-white'></i></div>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence exitBeforeEnter initial={false}>
                 {modal ? 
                 <Modal key='previeImage' id='previeImage' className={`${classToModal ? classToModal : ''}`}>
-                    <motion.div initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        exit={{ opacity: 0, transition: { duration: 0.2 }}}
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
                         className={styles.containterModal}>
                         <div className={styles.buttons}>
                             <Button ripple value='' styleButton='success' size='lg' iconR='pi pi-plus' onClick={zoomPlus}></Button>
@@ -59,10 +69,9 @@ const PreviewImage: React.FC<PreviewImageProp> = ({ children, className, classTo
                         </div>
                         <div ref={refIMG} className={styles.modalImg}>
                             <motion.span 
-                                initial={{scale: 0.9, opacity: 0}}
+                                initial={{scale: 0.7, opacity: 0}}
                                 animate={{scale: 1, opacity: 1}}
-                                exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
-                                transition={{duration: 0.8, type: 'spring'}}
+                                exit={{ opacity: 0, scale: 0.7,}}
                                 drag
                                 dragConstraints={refIMG}
                                 className={styles.spanIMG}
@@ -72,7 +81,19 @@ const PreviewImage: React.FC<PreviewImageProp> = ({ children, className, classTo
                         </div>
                     </motion.div>
                 </Modal>
-                : children }
+                : 
+                <motion.div 
+                initial={{ scale: 1.2, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1}}
+                exit={{  scale: 1.2, opacity: 0}}
+                key={children?.toString()}
+                style={{
+                    height: "100%",
+                    width: "100%"
+                }}
+                >
+                        {children}
+                </motion.div>}
             </AnimatePresence>
         </div>
     )

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import 'primeicons/primeicons.css'
-import { motion, useCycle, useAnimation, Variants } from 'framer-motion';
+import { motion, useAnimation, Variants } from 'framer-motion';
 
 import styles from './Header.module.css';
 import { Ripple } from '@Components';
@@ -45,6 +45,15 @@ const variants: Variants = {
             duration: 0.3,
         }
     },
+}
+
+const NavVariants: Variants = {
+    open: {
+        left: '-5%'
+    },
+    close:{
+        left: '-75%'
+    }
 }
 interface NavBar {
     id: number,
@@ -107,7 +116,7 @@ const Header: NextPage = () =>{
                     <i className='pi pi-times'></i>
                 </div>}
             </div>
-            <nav className={styles.header__nav} style={{left: (!bar?'-60%':'0')}}>
+            <motion.nav className={styles.header__nav} variants={NavVariants} animate={bar?'open':'close'}>
                 <ul onClick={()=>setBar(false)}>
                     {navbar.map((item, index)=>{
                         return (<motion.li
@@ -130,7 +139,7 @@ const Header: NextPage = () =>{
                     <li><Link href="/profile" aria-label="Perfil de usuario"><Image src={user.photoURL} alt={`foto de ${user.displayName}`} /><span className="information">Perfil</span></Link></li>
                     } */}
                 </ul>
-            </nav>
+            </motion.nav>
         </header>
         <div className={styles.falseHeader}>
             Aqui no hay nada

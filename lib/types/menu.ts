@@ -16,12 +16,18 @@ export interface PropsMenu{
     MenuProducts: Product[];
 }
 export interface Product{
-    id: string,
+    available: boolean,
+    category: string,
     details: string,
-    image: string,
-    title: string,
+    discount: number
+    id: string,
+    image: string,  
+    ingredients?: string,
     price: number,
-    rating: Rating
+    rating: Rating;
+    size: string,
+    time: number,
+    title: string,
 }
 export interface Rating{
     rate: number,
