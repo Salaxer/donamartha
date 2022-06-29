@@ -29,7 +29,7 @@ export const getMenu:RequestFirebase["getMenu"] = async () =>{
     return {
         response,
         error,
-    };;
+    };
 }
 
 export const getItemMenu:RequestFirebase["getItemMenu"] = async (id) =>{
@@ -46,4 +46,23 @@ export const getItemMenu:RequestFirebase["getItemMenu"] = async (id) =>{
         response,
         error,
     };
+}
+
+export async function getAllItemsIds() {
+    let response: QueryDocumentSnapshot<DocumentData>[] = [];
+    let error;
+    try {
+        const querySnapshot = await getDocs(menuRef);
+        response =  querySnapshot.docs;
+    } catch (e) {
+        e instanceof FirebaseError ? error = e : error = "Error desconocido";
+    }
+    return response.map(post => {
+        return {
+            params: {
+                id: post.id,
+                length: response.length,
+            }
+        }
+    })
 }

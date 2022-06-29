@@ -8,7 +8,7 @@ import styles from '../../styles/Menu[id].module.css';
 import { AllScreen, ToolTip, NotFound, PreviewImage, Tag } from '@Components'
 import { Product } from '@MyTypes/menu'
 import { discount } from 'utils/dicount';
-import { getItemMenu } from '@ServerAPI/menu'
+import { getAllItemsIds, getItemMenu } from '@ServerAPI/menu'
 
 
 interface ProductProps{
@@ -88,9 +88,10 @@ const MenuItem = ({ product, err }:ProductProps) => {
 }
 
 // Obtain the statics phats from the file on posts/***.md and assign to the props
-export const getStaticPaths:GetStaticPaths = async ( ada )=>{
+export const getStaticPaths:GetStaticPaths<{id: string}> = async ( )=>{
+  const paths = await getAllItemsIds();
   return {
-      paths: [],
+      paths: paths,
       fallback: true
   }
 }
