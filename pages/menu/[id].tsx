@@ -6,10 +6,11 @@ import { motion } from 'framer-motion';
 import styles from '../../styles/Menu[id].module.css';
 import { AllScreen, ToolTip, NotFound, PreviewImage, Tag, MetaTags } from '@Components'
 import { Product } from '@MyTypes/menu'
-import { discount } from 'utils/dicount';
 import { getAllItemsIds, getItemMenu } from '@ServerAPI/menu'
 
 import { useIsMobile } from 'utils/hooks/mediaQuery';
+import { discount } from 'utils/dicount';
+import { deleteTypeValues } from 'utils/object';
 
 interface ProductProps{
   product: Product
@@ -19,7 +20,7 @@ interface ProductProps{
 const MenuItem = ({ product, err }:ProductProps) => {
   const isMobile = useIsMobile();
   if (err || !product) {
-      return <NotFound/>
+    return <NotFound/>
   }
   return (
     <div >
@@ -30,16 +31,16 @@ const MenuItem = ({ product, err }:ProductProps) => {
         keyWorks={["Restaurante","Mojarra","Comida","Cerveza","Micheladas","Mariscos"]}
       />
       <main className='bg-blue-100'>
-        <AllScreen minHeight={isMobile}>
+        <AllScreen className='relative' minHeight={isMobile}>
           <section className={styles.screenShowMenu}>
-            <motion.div initial={{x: -250}} animate={{x: 0}} className='relative'>
+            <motion.div initial={{x: -400, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{delay: 0.5}} className='relative'>
               <div className={styles.containerIMG}>
-                <PreviewImage style={{borderRadius: '50%', overflow: 'hidden'}}>
+                <PreviewImage style={{borderRadius: '50%'}}>
                   <Image src={product.image} priority alt='restaurant' layout='fill' objectFit='cover' className={styles.imageDish}></Image>
                 </PreviewImage>
               </div>
             </motion.div>
-            <motion.div initial={{x: 250}} animate={{x: 0}} className={styles.descriptionShowMenu}>
+            <motion.div initial={{x: 400, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{delay: 1}} className={styles.descriptionShowMenu}>
               <span className={styles.availability}>
                 { product.available ? <Tag severity='success' shadow='lg' size={ isMobile ? 'lg' :'3xl' } value="Disponible"></Tag> : <Tag shadow='lg' severity='danger' size='4xl' value="Agotado"></Tag>}
                 { product.discount > 0 && <Tag shadow='lg' severity='warning' size={ isMobile ? 'lg' :'3xl' } value={`-${product.discount}% OFF`}></Tag>}
@@ -63,6 +64,7 @@ const MenuItem = ({ product, err }:ProductProps) => {
               <ol style={{listStyle: "outside"}}>
                 {product.time > 0 && <li className='text-2xl mt-3'>Preparacion en {product.time} minutos <i style={{color: 'var(--maincolorgreen)'}} className='pi pi-check-circle'></i></li>}
                 <li className='text-2xl mt-3'>con un tamaño de {product.size}   <i style={{color: 'var(--maincolorgreen)'}} className='pi pi-check-circle'></i></li>
+                {product.ingredients && <li className='text-2xl mt-3'>Ingredientes: {product.ingredients}<i style={{color: 'var(--maincolorgreen)'}} className='pi pi-check-circle'></i></li>}
               </ol>
             </motion.div>
           </section>
@@ -89,7 +91,7 @@ export const getStaticProps:GetStaticProps = async ({ params }) => {
     if (typeof params.id == "string") {
       const { response, error } = await getItemMenu(params.id)
       product = response?.exists() ? {...response.data(), id: response.id } : null;
-      err = error ? (typeof error == "string" ? { message: error } : error )  : null;
+      err = error ? deleteTypeValues(error, "undefined", "function") : null;
     }
   }
   return {

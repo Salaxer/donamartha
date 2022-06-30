@@ -90,6 +90,7 @@ const PreviewImage: React.FC<PreviewImageProp> = ({ children, className, classTo
                 style={{
                     height: "100%",
                     width: "100%",
+                    position: 'relative',
                 }}
                 >
                         {children}

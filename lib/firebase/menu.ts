@@ -24,7 +24,7 @@ export const getMenu:RequestFirebase["getMenu"] = async () =>{
         const querySnapshot = await getDocs(menuRef);
         response =  querySnapshot.docs;
     } catch (e) {
-        e instanceof FirebaseError ? error = e : error = "Error desconocido";
+        e instanceof FirebaseError ? error = e : error = {code: "Error desconocido"};
     }
     return {
         response,
@@ -40,7 +40,7 @@ export const getItemMenu:RequestFirebase["getItemMenu"] = async (id) =>{
         const docSnap = await getDoc(docRef);
         response =  docSnap;
     } catch (e) {
-        e instanceof FirebaseError ? error = e : error = "Error desconocido";
+        e instanceof FirebaseError ? error = e : error = {code: "Error desconocido"};
     }
     return {
         response,
@@ -55,7 +55,7 @@ export async function getAllItemsIds() {
         const querySnapshot = await getDocs(menuRef);
         response =  querySnapshot.docs;
     } catch (e) {
-        e instanceof FirebaseError ? error = e : error = "Error desconocido";
+        e instanceof FirebaseError ? error = e : error = {code: "Error desconocido"};
     }
     return response.map(post => {
         return {

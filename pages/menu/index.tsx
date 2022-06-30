@@ -37,7 +37,7 @@ const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
     }
     if (sortByType == "Mejor Valorado") {
       setOrderProducts([...orderProducts.sort((a, b) => {
-        return a.rating.rate - b.rating.rate
+        return b.rating.rate - a.rating.rate
       })])
     }
     setLoader(false)
