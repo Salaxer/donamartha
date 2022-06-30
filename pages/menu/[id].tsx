@@ -1,15 +1,15 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next'
-import Head from 'next/head';
 import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
 import styles from '../../styles/Menu[id].module.css';
-import { AllScreen, ToolTip, NotFound, PreviewImage, Tag } from '@Components'
+import { AllScreen, ToolTip, NotFound, PreviewImage, Tag, MetaTags } from '@Components'
 import { Product } from '@MyTypes/menu'
 import { discount } from 'utils/dicount';
 import { getAllItemsIds, getItemMenu } from '@ServerAPI/menu'
 
+import { useIsMobile } from 'utils/hooks/mediaQuery';
 
 interface ProductProps{
   product: Product
@@ -17,45 +17,32 @@ interface ProductProps{
 }
 
 const MenuItem = ({ product, err }:ProductProps) => {
+  const isMobile = useIsMobile();
   if (err || !product) {
       return <NotFound/>
   }
   return (
     <div >
-      <Head>
-        <title>{product.title} | Do&ntilde;a Martha</title>
-        <meta name="description" content={product.details} />
-        <link rel="icon" href="/favicon .ico" />
-        <meta charSet="utf-8" />
-        <meta name="theme-color" content="#1A1A1B" />
-        <meta name="twitter:image:src" content={product.image}/>
-        <meta name="twitter:site" content="@salaxer1"/>
-        <meta name="twitter:card" content="product"/>
-        <meta name="twitter:title" content= {`${product.title} | Do&ntilde;a Martha`}/>
-        <meta name="twitter:description" content={product.details}/>
-        <meta property="og:type" content="Producto"/>
-        <meta property="og:description" content={product.details}/>
-        <meta property="og:image" content={product.image}/>
-        <meta property="og:image:alt" content={`${product.title} | Do&ntilde;a Martha`}/>
-        <meta property="og:site_name" content="Do&ntilde;a Martha"/>
-        <meta property="og:url" content="donamartha.com.mx"/>
-        <link rel="apple-touch-icon" href={product.image}/>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-      </Head>
+      <MetaTags 
+        description={product.details}
+        image={product.image}
+        title={product.title}
+        keyWorks={["Restaurante","Mojarra","Comida","Cerveza","Micheladas","Mariscos"]}
+      />
       <main className='bg-blue-100'>
-        <AllScreen>
+        <AllScreen minHeight={isMobile}>
           <section className={styles.screenShowMenu}>
-            <div className='relative'>
+            <motion.div initial={{x: -250}} animate={{x: 0}} className='relative'>
               <div className={styles.containerIMG}>
-                <PreviewImage>
-                  <Image src={product.image} alt='restaurant' layout='fill' objectFit='cover' className={styles.imageDish}></Image>
+                <PreviewImage style={{borderRadius: '50%', overflow: 'hidden'}}>
+                  <Image src={product.image} priority alt='restaurant' layout='fill' objectFit='cover' className={styles.imageDish}></Image>
                 </PreviewImage>
               </div>
-            </div>
-            <div className={styles.descriptionShowMenu}>
+            </motion.div>
+            <motion.div initial={{x: 250}} animate={{x: 0}} className={styles.descriptionShowMenu}>
               <span className={styles.availability}>
-                { product.available ? <Tag severity='success' shadow='lg' size='4xl' value="Disponible"></Tag> : <Tag shadow='lg' severity='danger' size='4xl' value="Agotado"></Tag>}
-                { product.discount > 0 && <Tag className='mt-5' shadow='lg' severity='warning' size='3xl' value={`-${product.discount}% OFF`}></Tag>}
+                { product.available ? <Tag severity='success' shadow='lg' size={ isMobile ? 'lg' :'3xl' } value="Disponible"></Tag> : <Tag shadow='lg' severity='danger' size='4xl' value="Agotado"></Tag>}
+                { product.discount > 0 && <Tag shadow='lg' severity='warning' size={ isMobile ? 'lg' :'3xl' } value={`-${product.discount}% OFF`}></Tag>}
               </span>
               <h1 className='text-center'>{product.title}</h1>
               <div className='flex gap-5'>
@@ -77,7 +64,7 @@ const MenuItem = ({ product, err }:ProductProps) => {
                 {product.time > 0 && <li className='text-2xl mt-3'>Preparacion en {product.time} minutos <i style={{color: 'var(--maincolorgreen)'}} className='pi pi-check-circle'></i></li>}
                 <li className='text-2xl mt-3'>con un tamaño de {product.size}   <i style={{color: 'var(--maincolorgreen)'}} className='pi pi-check-circle'></i></li>
               </ol>
-            </div>
+            </motion.div>
           </section>
         </AllScreen>
       </main>

@@ -12,6 +12,7 @@ import PreviewImage from "./previewImage/PreviewImage";
 import Modal from "./modal/Modal";
 import NotFound from "./notFound/NotFound";
 import ToolTip from "./toolTip/ToolTip";
+import MetaTags from "./metaTags/MetaTags";
 export { 
     Loader,
     ProductCard,
@@ -27,4 +28,5 @@ export {
     Modal,
     NotFound,
     ToolTip,
+    MetaTags,
 }

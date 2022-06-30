@@ -48,6 +48,9 @@ const variants: Variants = {
 }
 
 const NavVariants: Variants = {
+    initial:{
+        left: '-75%'
+    },
     open: {
         left: '-5%'
     },
@@ -116,7 +119,7 @@ const Header: NextPage = () =>{
                     <i className='pi pi-times'></i>
                 </div>}
             </div>
-            <motion.nav className={styles.header__nav} variants={NavVariants} animate={bar?'open':'close'}>
+            <motion.nav className={styles.header__nav} variants={NavVariants} initial="initial" animate={bar?'open':'close'}>
                 <ul onClick={()=>setBar(false)}>
                     {navbar.map((item, index)=>{
                         return (<motion.li

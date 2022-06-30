@@ -48,13 +48,13 @@
     height: 80%;
     width: 80%;
     overflow: hidden;
-    border-radius: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s;
 }
 .spanIMG {
+    border-radius: 2rem;
     display: inline-block;
     position: relative ;
     box-sizing: border-box;
@@ -70,7 +70,7 @@
 }
 .spanIMG span{
     display: block !important;
-    position: static !important;
+    position: relative !important;
 }
 .spanIMG img{
     width: max-content !important;
@@ -79,7 +79,12 @@
 }
 
 @media screen and (max-width:538px) {
+    .modalImg{
+        height: 95%;
+        width: 95%;
+    }
     .spanIMG{
         max-width: 100% !important;
+        width: 100%;
     }
 }

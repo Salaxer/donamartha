@@ -52,11 +52,11 @@ const PreviewImage: React.FC<PreviewImageProp> = ({ children, className, classTo
         return n;
     }
     return (
-        <div className={`${styles.preview} ${className}`} style={style}>
+        <div className={`${styles.preview} ${className && className}`} style={style}>
             <div className={styles.background} onClick={handleModal}><i className='pi pi-eye text-4xl text-white'></i></div>
             <AnimatePresence exitBeforeEnter initial={false}>
                 {modal ? 
-                <Modal key='previeImage' id='previeImage' className={`${classToModal ? classToModal : ''}`}>
+                <Modal key='previeImage' id='previeImage' className={`${classToModal && classToModal}`}>
                     <motion.div 
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -89,7 +89,7 @@ const PreviewImage: React.FC<PreviewImageProp> = ({ children, className, classTo
                 key={children?.toString()}
                 style={{
                     height: "100%",
-                    width: "100%"
+                    width: "100%",
                 }}
                 >
                         {children}

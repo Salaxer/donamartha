@@ -3,12 +3,13 @@
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-rows: 300px 1fr;
+    grid-template-rows: 230px 1fr;
 }
 .containerIMG{
-    width: 400px;
-    height: 400px;
+    width: 320px;
+    height: 320px;
     position: absolute;
+    padding: 2rem;
     top: -60px;
     left: -60px;
     border-radius: 50%;
@@ -21,12 +22,6 @@
     z-index: 5;
     overflow: hidden;
 }
-.imageDish{
-    border-radius: 50%;
-    padding: 2rem !important;
-    position: absolute;
-    top: 100px;
-}
 .heart{
     color: var(--danger-color);
     font-size: x-large;
@@ -35,7 +30,7 @@
 }
 .descriptionShowMenu{
     width: 100%;
-    padding: 3rem;
+    padding: 3rem 0.75rem;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -45,13 +40,19 @@
     position: relative;
 }
 .descriptionShowMenu h1{
-    font-weight: 900;
-    font-size: 4.3rem;
+    font-weight: 700;
+    font-size: 4rem;
 }
 .availability{
+    z-index: 6;
     position: absolute;
-    top: 3rem;
-    right: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    gap: 2rem;
+    top: -21rem;
+    right: 1rem;
 }
 .lastPrice{
     color: rgb(119, 119, 119);
@@ -60,18 +61,36 @@
 }
   
 @media screen and (min-width:425px) and (  max-width: 768px ) {
+    .descriptionShowMenu{
+        padding: 3rem 2rem;
+    }
+    .descriptionShowMenu h1{
+        font-weight: 800;
+        font-size: 4.1rem;
+    }
     .containerIMG{
-      width: 450px;
-      height: 450px;
+      width: 425px;
+      height: 425px;
       top: -110px;
       left: -100px;
     }
     .screenShowMenu{
-      grid-template-rows: 350px 1fr;
+      grid-template-rows: 310px 1fr;
       grid-template-columns: 1fr;
     }
 }
 @media screen and (min-width: 769px) {
+    .availability{
+        flex-direction: column;
+        top: 1rem;
+    }
+    .descriptionShowMenu{
+        padding: 3rem;
+    }
+    .descriptionShowMenu h1{
+        font-weight: 900;
+        font-size: 4.3rem;
+    }
     .containerIMG{
       width: 600px;
       height: 600px;
