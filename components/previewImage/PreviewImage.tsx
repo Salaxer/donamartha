@@ -73,7 +73,8 @@ const PreviewImage: React.FC<PreviewImageProp> = ({ children, className, classTo
                                 animate={{scale: 1, opacity: 1}}
                                 exit={{ opacity: 0, scale: 0.7,}}
                                 drag
-                                dragConstraints={refIMG}
+                                dragConstraints={{left: 10, bottom: 10, right: 10, top: 10}}
+                                dragElastic
                                 className={styles.spanIMG}
                             >
                                 {children}

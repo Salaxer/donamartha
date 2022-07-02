@@ -56,19 +56,10 @@
     background: -webkit-linear-gradient(20deg, rgba(11,50,71,1) 0%, rgba(64,174,231,1) 48%, rgba(0,152,76,1) 100%);
     background: linear-gradient(20deg, rgba(11,50,71,1) 0%, rgba(64,174,231,1) 48%, rgba(0,152,76,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0b3247",endColorstr="#00984c",GradientType=1);
-    border-radius: 50%;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
-    overflow: hidden;
     position: absolute;
+    padding: 1rem;
     width: 14rem;
     height: 14rem;
-}
-.imgBubble{
-    padding: 1rem !important;
-    border-radius: 50%;
-}
-.imgBubbleOpen img{
-    border-radius: 1px;
 }
 
 @media screen and (min-width:538px) and (  max-width: 768px ) {

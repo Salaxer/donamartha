@@ -3,14 +3,15 @@ import Image from 'next/image';
 
 import { motion } from 'framer-motion';
 
-import styles from '../../styles/Menu[id].module.css';
-import { AllScreen, ToolTip, NotFound, PreviewImage, Tag, MetaTags } from '@Components'
+import { AllScreen, ToolTip, NotFound, PreviewImage, Tag, MetaTags, BubbleImg } from '@Components'
 import { Product } from '@MyTypes/menu'
 import { getAllItemsIds, getItemMenu } from '@ServerAPI/menu'
 
 import { useIsMobile } from 'utils/hooks/mediaQuery';
 import { discount } from 'utils/dicount';
 import { deleteTypeValues } from 'utils/object';
+
+import styles from '../../styles/Menu[id].module.css';
 
 interface ProductProps{
   product: Product
@@ -23,7 +24,7 @@ const MenuItem = ({ product, err }:ProductProps) => {
     return <NotFound/>
   }
   return (
-    <div >
+    <>
       <MetaTags 
         description={product.details}
         image={product.image}
@@ -34,11 +35,7 @@ const MenuItem = ({ product, err }:ProductProps) => {
         <AllScreen className='relative overflow-hidden' minHeight={isMobile}>
           <section className={styles.screenShowMenu}>
             <motion.div initial={{x: -400, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{delay: 0.5}} className='relative'>
-              <div className={styles.containerIMG}>
-                <PreviewImage style={{borderRadius: '50%'}}>
-                  <Image src={product.image} priority alt='restaurant' layout='fill' objectFit='cover' className={styles.imageDish}></Image>
-                </PreviewImage>
-              </div>
+              <BubbleImg preview alt={product.title} image={product.image} priority className={styles.containerIMG}/>
             </motion.div>
             <motion.div initial={{x: 400, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{delay: 1}} className={styles.descriptionShowMenu}>
               <span className={styles.availability}>
@@ -70,7 +67,7 @@ const MenuItem = ({ product, err }:ProductProps) => {
           </section>
         </AllScreen>
       </main>
-    </div>
+    </>
   )
 }
 

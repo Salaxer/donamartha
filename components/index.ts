@@ -13,6 +13,7 @@ import Modal from "./modal/Modal";
 import NotFound from "./notFound/NotFound";
 import ToolTip from "./toolTip/ToolTip";
 import MetaTags from "./metaTags/MetaTags";
+import BubbleImg from "./bubbleImg/BubbleImg";
 export { 
     Loader,
     ProductCard,
@@ -29,4 +30,5 @@ export {
     NotFound,
     ToolTip,
     MetaTags,
+    BubbleImg,
 }

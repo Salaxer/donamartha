@@ -21,7 +21,7 @@ const Tag = ({ value, severity, size, className, shadow}:TagProp) =>{
     return (
         <div style={{
             padding: '0.5rem'
-        }} className={`${severities[severity]} ${shadow && styles[`shadow-${shadow}`]} rounded-lg text-center text-${size} ${className && className}`}>
+        }} className={`${severities[severity]} ${shadow && styles[`shadow-${shadow}`]} rounded-lg text-center text-${size} ${className ? className : ""}`}>
             {value}
         </div>
     )

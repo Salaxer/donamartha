@@ -1,6 +1,5 @@
 // Packages
 import type { GetStaticProps } from 'next'
-import Head from 'next/head'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -79,7 +78,7 @@ const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
     <>
       <MetaTags 
         description='Menu del restaurante doña martha, aqui podras encontrar todos nuestros productos'
-        image=''
+        image={'/preview_page_menuasf12e4wfdasd.png'}
         keyWorks={['Mariscos', "Relajante", "Carta de doña martha", "Restaurante", "Comida", "Bebidas", "Micheladas", "mojitos"]}
         title='Menu del restaurante'></MetaTags>
       <main className={styles.MenuFoodMain}>

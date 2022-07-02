@@ -1,0 +1,22 @@
+.containerBubble{
+    width: 100%;
+    position: relative;
+    height: 100%;
+    padding: 2rem;
+    border-radius: 50%;
+    background: rgb(0,150,193);
+    background: -moz-linear-gradient(45deg, rgba(0,150,193,1) 0%, rgba(0,152,76,1) 100%);
+    background: -webkit-linear-gradient(45deg, rgba(0,150,193,1) 0%, rgba(0,152,76,1) 100%);
+    background: linear-gradient(45deg, rgba(0,150,193,1) 0%, rgba(0,152,76,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0096c1",endColorstr="#00984c",GradientType=1);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+    z-index: 5;
+    overflow: hidden;
+}
+.withoutPreview{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 50%;
+}

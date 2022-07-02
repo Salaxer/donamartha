@@ -60,8 +60,7 @@ const AutoScroll:React.FunctionComponent<AutoScrollProps> = ({autoScroll, classN
         let stopListeners: boolean = true;
 
         const eventScroll = (e:any) =>{         
-            console.log(e);
-               
+
             if (nextTop.current === window.scrollY) {
                 stopListeners = false;
             }
@@ -119,7 +118,8 @@ const AutoScroll:React.FunctionComponent<AutoScrollProps> = ({autoScroll, classN
             } else if (swipe > swipeConfidenceThreshold) {
                 nextTop.current = moveToElement(false, itemsRef, currentScreen, setCurrentScreen);
             }
-          }}>
+          }}
+          >
             {elementChildrens.map((element, index) =>{
                 return(
                     <div ref={el => itemsRef.current[index] = el} className={className}  key={index} id={`screen ${index}`}>

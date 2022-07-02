@@ -1,7 +1,7 @@
 import styles from './Presentation.module.css';
 import Image from 'next/image';
 import DishRounded from 'public/images/dish-rounded.jpg';
-import { Button } from '@Components';
+import { Button, BubbleImg } from '@Components';
 import { useRouter } from 'next/router'
 
 import { motion, useAnimation, Variants } from 'framer-motion';
@@ -44,8 +44,8 @@ const Presentation: React.FC<PresentationProps> = ({animate}) =>{
         <div className={styles.screenShowMenu}>
             <div>
                 <motion.div ref={ref}
-                     animate={animation} transition={{delay: 0.2}} initial="greetHidden" variants={Variants} className={styles.containerIMG}>
-                  <Image src={DishRounded} alt='restaurant' layout='fill' objectFit='cover' className={styles.imageDish}></Image>
+                     animate={animation} transition={{delay: 0.2}} initial="greetHidden" variants={Variants}>
+                    <BubbleImg preview={false} image={DishRounded} alt='restaurant' priority={false} className={styles.containerIMG}></BubbleImg>
                 </motion.div>
             </div>
             <div className={styles.descriptionShowMenu}>

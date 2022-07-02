@@ -47,14 +47,14 @@ const ProductCard = ({products, index}:PropsProductCard ) =>{
                 <div className={styles.FoodDetails}>
                     <div className='w-full flex justify-between'>
                         <div>
-                        { products.discount > 0 ? 
-                        <>
-                            <p className={styles.lastPrice}>${products.price}</p>
-                            <p className={styles.priceFood}>${discount(products.price, products.discount)}</p>
-                        </>
-                            :
-                            <p className={styles.priceFood}>${products.price}</p>
-                        }
+                            { products.discount > 0 ? 
+                            <>
+                                <p className={styles.lastPrice}>${products.price}</p>
+                                <p className={styles.priceFood}>${discount(products.price, products.discount)}</p>
+                            </>
+                                :
+                                <p className={styles.priceFood}>${products.price}</p>
+                            }
                         </div>
                         <div className='flex items-center flex-col'>
                             { products.available ? <Tag severity='success' shadow='lg' size='lg' value="Disponible"></Tag> : <Tag shadow='lg' severity='danger' size='lg' value="Agotado"></Tag>}

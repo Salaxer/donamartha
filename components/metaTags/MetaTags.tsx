@@ -39,10 +39,9 @@ const MetaTags = ({ title, description, image, keyWorks}:MetaTagsProp) =>{
             <meta property="og:url" content="https://donamartha.com.mx/"/>
             <meta property="og:title" content={title} />
 
-            <link rel="apple-touch-icon" href={image}/>
-
                     {/* News */}
 
+            {/* <link rel="apple-touch-icon" href={image}/> */}
             {/* <link rel="alternate" href={`...${url}`} hrefLang="nl" />
             <link rel="alternate" href={`...${url}`} hrefLang="en" />
             <link rel="manifest" href="/static/manifest/manifest.json" />
