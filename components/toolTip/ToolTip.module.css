@@ -10,13 +10,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    filter: drop-shadow(0rem 0rem 0.2rem rgba(9, 30, 66, 0.25));
 }
-.position::after{
+.position::before{
     content: '';
     width: 14px;
     height: 14px;
-    background-color: var(--background-b);
-    z-index: 0;
+    background-color: #dbeafe;
+    z-index: 1;
     display: block;
     position: absolute;
     transform: rotate(45deg);
@@ -25,18 +26,17 @@
     position: absolute;
     text-align: center;
     font-size: medium;
-    background-color: #dbeafe;
     border-radius: 0.5rem;
-    border: 0.001rem solid var(--background-b);
-    z-index: 1;
+    z-index: 2;
     min-width: 50px;
     max-width: 400px;
     width: max-content;
+    overflow: hidden;
+    background-color: #dbeafe;
+    color: var(--background-b);
     font-size: medium;
     padding: 1rem;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
-
 .position-top{
     left: 50%;
     top: -10px;

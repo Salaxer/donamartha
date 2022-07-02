@@ -2,13 +2,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     height: 100%;
     width: 100%;
-    position: relative;
 }
 .imageBlur{
     filter: blur(3px);
     -webkit-filter: blur(3px);
+}
+.Greting__img{
+    width: 100%;
+    height: 100%;
+}
+.Greting__img span{
+    position: static !important;
 }
 .textContainer{
     display: flex;
@@ -16,6 +23,7 @@
     align-items: center;
     flex-direction: column;
     position: absolute;
+    top: 0;
     height: 100%;
     width: 100%;
 }
@@ -37,10 +45,9 @@
 }
 @media screen and (min-width: 769px) {
     .Greeting{
-      grid-area: 1 / 1 / 2 / 3;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       .text h1{
         font-size: 5em;

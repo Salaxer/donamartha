@@ -2,12 +2,13 @@
 import type { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 // Styles
 import styles from 'styles/Menu.module.css';
 
 //Personals Components 
-import { Loader, ProductCard, DropDown, Slide } from '@Components';
+import { Loader, ProductCard, DropDown, Slide, MetaTags } from '@Components';
 // API to getStaticProps and render the page before giving it to the client side using Firebase.
 import { getMenu } from '@ServerAPI/menu';
 import { getSlide } from '@ServerAPI/slide';
@@ -18,7 +19,7 @@ import { TypeSlide } from '@MyTypes/Slide';
 import { Category, ByType, PropsMenu, Product } from '@MyTypes/menu'
 
 const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
-
+  const router = useRouter();
   const [orderProducts, setOrderProducts] = useState<Product[]>([]);
   const [sortByCategory, setSortByCategory] = useState<Category>("Todo");
   const [sortByType, setSortByType] = useState<ByType>("Recomendados");
@@ -76,11 +77,11 @@ const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
 
   return (
     <>
-      <Head>
-        <title> Menu | Doña Martha </title>
-        <meta name="description" content="Menu del restaurante doña martha, aqui podras encontrar todos nuestros productos" />
-        <link rel="icon" href="/favicon .ico" />
-      </Head>
+      <MetaTags 
+        description='Menu del restaurante doña martha, aqui podras encontrar todos nuestros productos'
+        image=''
+        keyWorks={['Mariscos', "Relajante", "Carta de doña martha", "Restaurante", "Comida", "Bebidas", "Micheladas", "mojitos"]}
+        title='Menu del restaurante'></MetaTags>
       <main className={styles.MenuFoodMain}>
         <div className={styles.Slide}>
           <Slide value={dataCarousel}></Slide>

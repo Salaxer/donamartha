@@ -31,7 +31,7 @@ const MenuItem = ({ product, err }:ProductProps) => {
         keyWorks={["Restaurante","Mojarra","Comida","Cerveza","Micheladas","Mariscos"]}
       />
       <main className='bg-blue-100'>
-        <AllScreen className='relative' minHeight={isMobile}>
+        <AllScreen className='relative overflow-hidden' minHeight={isMobile}>
           <section className={styles.screenShowMenu}>
             <motion.div initial={{x: -400, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{delay: 0.5}} className='relative'>
               <div className={styles.containerIMG}>
@@ -42,10 +42,10 @@ const MenuItem = ({ product, err }:ProductProps) => {
             </motion.div>
             <motion.div initial={{x: 400, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{delay: 1}} className={styles.descriptionShowMenu}>
               <span className={styles.availability}>
-                { product.available ? <Tag severity='success' shadow='lg' size={ isMobile ? 'lg' :'3xl' } value="Disponible"></Tag> : <Tag shadow='lg' severity='danger' size='4xl' value="Agotado"></Tag>}
+                { product.available ? <Tag severity='success' shadow='lg' size={ isMobile ? 'lg' :'3xl' } value="Disponible"></Tag> : <Tag shadow='lg' severity='danger' size={ isMobile ? 'lg' :'3xl' } value="Agotado"></Tag>}
                 { product.discount > 0 && <Tag shadow='lg' severity='warning' size={ isMobile ? 'lg' :'3xl' } value={`-${product.discount}% OFF`}></Tag>}
               </span>
-              <h1 className='text-center'>{product.title}</h1>
+              <h1 className='text-center'>{product.title.toUpperCase()}</h1>
               <div className='flex gap-5'>
                 { product.discount > 0 ? 
                   <>
