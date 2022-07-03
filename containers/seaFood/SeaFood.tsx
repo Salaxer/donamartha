@@ -1,5 +1,4 @@
 import styles from './SeaFood.module.css';
-import Image from 'next/image';
 import mojarra from 'public/images/tilapia.jpg'
 import { BubbleImg } from '@Components';
 

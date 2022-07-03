@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { useState } from 'react';
 
 import { AllScreen, AutoScroll, Emerge } from '@Components';
-import { Greeting, Presentation, SeaFood, Drinks, Place } from '@Containers';
+import { Greeting, Presentation, SeaFood, Drinks, Place, FindUs } from '@Containers';
 
 import styles from '../styles/Home.module.css';
 
@@ -31,8 +31,11 @@ const Home: NextPage = () => {
             <SeaFood/>
           </AllScreen>
           <AllScreen className='bg-blue-100 overflow-hidden'>
-            <Drinks></Drinks>
+            <FindUs/>
           </AllScreen>
+          {/* <AllScreen className='bg-blue-100 overflow-hidden'>
+            <Drinks></Drinks>
+          </AllScreen> */}
           <AllScreen className='bg-blue-100 overflow-hidden'>
             <Place></Place>
           </AllScreen>

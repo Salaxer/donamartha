@@ -28,30 +28,27 @@ interface AutoScrollProps{
  * AutoScroll: here you can show diferents screens in all viewport to animate when the user scroll
  * @children AllScreen, with this component you can be sure the component AutoScroll will work
  * although you can use your personal components but those compoente don't sure to work. 
- * @note No supported for touch screen, or mobile screens
+ * @throws  this component is very slow in devices with low capacity
  */
 const AutoScroll:React.FunctionComponent<AutoScrollProps> = ({autoScroll, className ,children, onChangeScreen}) =>{
     const elementChildrens = React.Children.toArray((children));
     const itemsRef = useRef([]) as MutableRefObject<HTMLDivElement[] | null[]>;
     const [currentScreen, setCurrentScreen] = useState(0);
     const nextTop = useRef(0);
-    const isMobile = useIsMobile();
     
     // temportar until i solve this error
+    // Solved, With framer and drag, I solve this error :)
     useEffect(()=>{
         window.scroll({top: 0, left: 0, behavior: "smooth"});
         nextTop.current = 0;
-        document.body.style.overflow = "overlay";
-        if (!isMobile) {
-            document.body.style.overflow = "hidden";
-        }
+        document.body.style.overflow = "hidden";
         return ()=> {
             document.body.style.overflow = "overlay";
             if ( document.body.style.overflow == "hidden") { // suport for Firefox and others
                 document.body.style.overflow = "auto";
             }
         };
-    },[isMobile])
+    },[])
 
     useEffect(() => {
         itemsRef.current = itemsRef.current.slice(0, elementChildrens.length);
@@ -106,8 +103,23 @@ const AutoScroll:React.FunctionComponent<AutoScrollProps> = ({autoScroll, classN
         };
     }, [currentScreen, onChangeScreen]);
 
+    const swipeConfidenceThreshold = 100;
+    const swipePower = (offset: number, velocity: number):number => {
+        return Math.abs(offset) * velocity;
+    };
+
     return(
-        <div className={styles.autoScroll}>
+        <motion.div className={styles.autoScroll} drag="y" dragConstraints={{bottom: 0, top: 0}} dragElastic 
+        onDragEnd={(e, { offset, velocity }) => {
+            const swipe = swipePower(offset.y, velocity.y);
+
+            if (swipe < -swipeConfidenceThreshold) {
+                nextTop.current = moveToElement(true, itemsRef, currentScreen, setCurrentScreen);
+            } else if (swipe > swipeConfidenceThreshold) {
+                nextTop.current = moveToElement(false, itemsRef, currentScreen, setCurrentScreen);
+            }
+          }}
+          >
             {elementChildrens.map((element, index) =>{
                 return(
                     <div ref={el => itemsRef.current[index] = el} className={className}  key={index} id={`screen ${index}`}>
@@ -115,7 +127,7 @@ const AutoScroll:React.FunctionComponent<AutoScrollProps> = ({autoScroll, classN
                     </div>
                 )
             })}
-        </div>
+        </motion.div>
     )
 }
 

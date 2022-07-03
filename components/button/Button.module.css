@@ -80,7 +80,7 @@
 }
 .success{
     background-color: var(--maincolorgreen);
-    color: var(--background-w-300);
+    color: var(--background-w);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .success:focus{

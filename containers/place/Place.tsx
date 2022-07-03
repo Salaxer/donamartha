@@ -6,14 +6,17 @@ import { Autoplay } from "swiper";
 import styles from './Place.module.css';
 
 import { PreviewImage } from "@Components";
+import { useIsMobile, useIsTablet } from "utils/hooks/mediaQuery";
 
 const Place = () =>{
+    const isMobile = useIsMobile();
+    const isTablet = useIsTablet();
     return (
         <div className={styles.container}>
             <div className={styles.title}>
                 <h2>Conoce el lugar</h2>
             </div>
-            <Swiper modules={[Autoplay]} className={styles.swiper} loop slidesPerView={4} autoplay={{delay: 3000}}>
+            <Swiper modules={[Autoplay]} className={styles.swiper} loop slidesPerView={isTablet ? (isMobile ? 1 : 2) : 4} autoplay={{delay: 3000}}>
                 <SwiperSlide className={styles.swiperItem}>
                     <PreviewImage id="sasd" style={{borderRadius: '3rem'}}>
                         <Image layout='fill' objectFit='cover' alt='My tree' src="https://firebasestorage.googleapis.com/v0/b/dona-martha.appspot.com/o/adminStorage%2Fplaces%2FIMG_20211121_170458-min.jpg?alt=media&token=83511713-6b77-48c5-9d1a-9a6b41d4bf08" />
