@@ -136,6 +136,18 @@ const Header: NextPage = () =>{
                             </Link>
                         </motion.li>
                     )})}
+                    <motion.li
+                        whileHover="navHover"
+                        initial="navInitial"
+                        animate={control}>
+                            <Link href="/signup">
+                                <a aria-label={`enter para ir a iniciar sesion`} style={{borderBottom: isRoute('signup')}}>
+                                    <i className="pi pi-sign-in"></i>
+                                    <motion.span variants={variants} className={styles.information}>Unete</motion.span>
+                                    <Ripple color='blue'></Ripple>
+                                </a>
+                            </Link>
+                    </motion.li>
                     {/* {user === null ?
                     <li><Link href="/signup" aria-label="Unete a nosotros"><i className="fas fa-sign-in-alt"></i><span className="information">Unete</span></Link></li>:
                     user.photoURL === undefined ? <li> <LoaderCircle color="#0096C1" background="transparent" position="static" size="30"/> </li>:

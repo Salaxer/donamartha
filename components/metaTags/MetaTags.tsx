@@ -23,6 +23,7 @@ const MetaTags = ({ title, description, image, keyWorks}:MetaTagsProp) =>{
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
             <meta name="keywords" content={keyWorks.toString()}/>
             <meta name="author" content="Salaxer" />
+            <meta httpEquiv="Content-Language" content="es"/>
             {/* Twitter */}
             <meta name="twitter:image:src" content={image}/>
             <meta name="twitter:site" content="@salaxer1"/>
