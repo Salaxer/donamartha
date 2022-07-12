@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 import styles from './ToolTip.module.css';
-import { useAnimation, motion, useCycle, Variants } from 'framer-motion'
+import { useAnimation, motion, Variants } from 'framer-motion'
 
 interface ToolTipProps{
     value: string;
@@ -27,7 +27,7 @@ const variantsToolTip: Variants = {
 /**
  * Tooltip i
  * 
- * @borrows it need the principal parent be position: relative;
+ * @note it need the principal parent be position: relative;
  * @returns 
  */
 const ToolTip:FC<ToolTipProps> = ({ value, className, position}) =>{

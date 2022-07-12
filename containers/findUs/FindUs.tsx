@@ -11,7 +11,7 @@ const FindUs = () =>{
     return (
         <div className="w-full h-ful flex justify-between items-center flex-col md:flex-row">
             <div className="m-5 text-center w-full">
-               <h1 className="text-6xl font-bold m-10">Encuentranos</h1>
+               <h1 className="text-6xl font-bold-1 m-10">Encuentranos</h1>
                 <p className="text-2xl">Nos ubicamos en Atlacholoaya Xochitepec Morelos</p>
             </div>
             <div className="flex w-full p-5 flex-col items-center gap-10">

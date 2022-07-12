@@ -1,7 +1,10 @@
 import styles from './Button.module.css';
 import { Ripple } from '@Components'
-import { CSSProperties } from 'react';
-interface PropsButton{
+import { forwardRef, LegacyRef } from 'react';
+
+import { ButtomElement } from '../native/types'
+
+interface PropsButton extends ButtomElement {
     /**
      * value in the middle of the button
      */
@@ -9,23 +12,23 @@ interface PropsButton{
     styleButton?: 'basic' | 'blue' | 'success' | 'clasic' | 'danger' | 'warning',
     className?: string,
     size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl',
-    style?: CSSProperties;
     iconR?: string,
     iconL?: string,
     ripple?: boolean,
-    disabled?: boolean,
-    onClick: () => void,
+    type?: "submit";
+    name?: string;
 }
 
-const Button = ({className, value, styleButton = 'basic', size = 'md', iconR, iconL, onClick, disabled, ripple, style}:PropsButton) =>{
+const Button = forwardRef(({  value, iconL, iconR, className, size = "md", ripple, styleButton = "basic", ...props }: PropsButton, ref: LegacyRef<HTMLButtonElement>) =>{
     return(
-        <button disabled={disabled} style={style} type='button' onClick={() => onClick()} className={`${className} ${styles.button} ${styles[styleButton]} ${styles[size]}`}>
+        <button {...props} ref={ref} className={`${className} ${styles.button} ${styles[styleButton]} ${styles[size]}`}>
             {iconL && <i className={iconL}></i>}
             {value}
             {iconR && <i className={iconR}></i>}
             {ripple && <Ripple color={styleButton}/>}
         </button>
     )
-}
+});
+Button.displayName = "InputSalaxer";
 
 export default Button;

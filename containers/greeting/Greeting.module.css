@@ -31,7 +31,7 @@
     color: rgb(240, 240, 240);
     position: relative;
     top: -10%;
-    font-weight: bold;
+    font-weight: 900;
     text-align: center;
 }
 .text h1{
@@ -41,6 +41,7 @@
 .text p{
     text-shadow: 1px 1px 5px rgba(22, 22, 22, 0.96);
     padding-top: 10px;
+    font-weight: 700;
     font-size: medium;
 }
 @media screen and (min-width: 769px) {

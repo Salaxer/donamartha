@@ -2,43 +2,45 @@ import styles from './Card.module.css';
 import { FC } from 'react'
 
 type HeaderProps = string  | {
-    align: "left" | "center" | "right",
+    align: "start" | "center" | "end",
     value: string,
 }
 
 type CardProps = {
-    children: any,
+    children: any | CardHeaderProps,
     header?: HeaderProps,
     footer?: string,
-    selectionable?: boolean,
 
 }
 
-const Card:FC<CardProps> = ({ header, footer, selectionable, children }) =>{
+const Card:FC<CardProps> = ({ header, footer, children }) =>{
     return (
-        <>
-        { !selectionable ? 
         <section className={styles.container}>
-            {header && <Header header={header}/>}
-            {children}
+            {header && <CardHeader header={header}/>}
+            <div className={styles.container__body}>
+                {children}
+            </div>
             {footer && <footer>{footer}</footer>}
-        </section> :
-        <button className={styles.container}>
-            {header && <Header header={header}/>}
-            {children}
-            {footer && <footer>{footer}</footer>}
-        </button> }
-        </>
+        </section>
     )
 }
 
-const Header:FC<{ header: HeaderProps}> = ({ header }) =>{
+type CardHeaderProps = {
+    children: any;
+    header?: undefined
+} | {
+    children?: never;
+    header: HeaderProps
+};
+
+export const CardHeader:FC<CardHeaderProps> = ( { children, header } ) =>{
     return (
         <>
             { typeof header == "string" ? 
-            <header className={`${styles.container__header} mb-5`}><h1>{header}</h1></header>:
-            <header className={`${styles.container__header} mb-5 text-${header.align}`}><h1>{header.value}</h1></header>
+            <header className={styles.container__header}><h1>{header}</h1></header>:
+            header && <header className={styles.container__header} style={{textAlign: header.align}}><h1>{header.value}</h1></header>
             }
+            {children && children}
         </>
     )
 }
