@@ -1,0 +1,15 @@
+/* Custom Styles */
+
+/* Borders */
+.border-none{
+    border-radius: 0;
+}
+.border-normal{
+    border-radius: 0.7rem;
+}
+.border-full{
+    border-radius: 9999rem;
+}
+.rounded{
+    border-radius: 50%;
+}

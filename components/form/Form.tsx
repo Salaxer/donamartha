@@ -2,21 +2,7 @@ import { FC, ReactElement, FunctionComponent,
     cloneElement, useEffect, useState,
     Children, isValidElement, FormEventHandler, ChangeEventHandler, useRef } from "react";
 import { HTMLNativeProps } from '../native/types'
-import { CustomObject, FormValues, Validations } from "./types";
-
-
-interface FormProps{
-    children: ReactElement<any, FunctionComponent>[],
-    onSubmit: (data: CustomObject) => void;
-    /**
-     * to create a validation, the key object need to be named as the name of the input field
-     */
-    validations?: Validations;
-    /**
-     * delay to set new validation
-     */
-    delay?: number;
-}
+import { FormValues, FormProps } from "./types";
 
 /**
  * 
@@ -45,7 +31,7 @@ interface FormProps{
  * export default Example
  *  
  */
-const Form:FC<HTMLNativeProps<"form",FormProps>> = ({ children, onSubmit, validations, delay, ...props }) =>{
+const Form:FC<HTMLNativeProps<"form",FormProps>> = ({ children, onSubmit, validations, delay, stopFirstError = true, ...props }) =>{
 
     const [childrenWithProps, setChildrenWithProps] = useState<ReactElement<any, FunctionComponent>[]>([]);
     const formValues = useRef<FormValues>({error: { }, value: {}});
@@ -55,18 +41,15 @@ const Form:FC<HTMLNativeProps<"form",FormProps>> = ({ children, onSubmit, valida
     const validField = (name:string, value:string, submit: boolean) =>{
         if (!validations) return;
         if (!validations[name]) return;
-        validations[name].forEach((CE)=>{
-            if (!CE.onWriting && !submit) return;
+        validations[name].forEach((CurrentError)=>{
+            if (!CurrentError.onWriting && !submit) return;
             clearTimeout(newTimeOut!);
             setNewValidation(true);
-            if (!CE.regex.test(value)){
-                formValues.current.error[name] = CE;
-            }else{
-                formValues.current.error[name] = undefined;
-            }
             setNewTimeOut(setTimeout(() => {
                 setNewValidation(false)
             }, delay || 1000))
+            if (!CurrentError.regex.test(value)) return formValues.current.error[name] = CurrentError;
+            formValues.current.error[name] = undefined;
         });
     }
 
@@ -75,7 +58,7 @@ const Form:FC<HTMLNativeProps<"form",FormProps>> = ({ children, onSubmit, valida
         let isError = false;
         for( const props in formValues.current.value){
             validField(props,formValues.current.value[props], true);
-            if (formValues.current.error[props]) return isError = true;
+            if (formValues.current.error[props]) { isError = true; break};
         }
         if(isError) return;
         onSubmit(formValues.current.value);
@@ -94,14 +77,18 @@ const Form:FC<HTMLNativeProps<"form",FormProps>> = ({ children, onSubmit, valida
             Children.map(children, child => {
                 // Checking isValidElement is the safe way and avoids a typescript error too.
                 if (!isValidElement(child)) return null;
+                // Checking if the input type is form Salaxer's components and have a name 
                 if (child.type.displayName !== "InputSalaxer" || !child.props.name) return null;
+                // Only the submit button pass directly
                 if (child.props.type === "submit") return child;
+                // all others Input children will add a resolver to catch any change
                 return (
-                    <>
-                        {cloneElement<HTMLNativeProps<"input",FormProps>>(child, { onChange: resolver })}
-                        {formValues.current.error[child.props.name] &&
-                        <span className="text-sm m-0 p-0 text-red-600">{`${formValues.current.error[child.props.name]?.type}: ${formValues.current.error[child.props.name]?.message}`}</span>}
-                    </>
+                    <>{
+                        cloneElement<HTMLNativeProps<"input",{ errorForm: string}>>(child, { onChange: resolver, errorForm: 
+                            formValues.current.error[child.props.name] && formValues.current.error[child.props.name]?.message
+                            }
+                        )
+                    }</>
                 )
             })
         );

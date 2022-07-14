@@ -43,17 +43,15 @@ const SignUp:NextPage = () =>{
                 <AllScreen>
                     <Card header={ { align: "center", value: "Unete"}}>
                         <h1>Registrate con correo y contraseña</h1>
-                        <Form className={styles.form} validations={validations} onSubmit={(data) =>alert(data.name)}>
-                            <InputText required name="name" type="text" placeholder="Name" ></InputText>
-                            <InputText required name="email" type="email" placeholder="Email"></InputText>
-                            <Button 
-                                type="submit" 
-                                styleButton="blue" 
-                                name="AMAMA" 
-                                ripple
-                                size="lg"
-                                value="Send">
-                            </Button>
+                        <Form stopFirstError className={styles.form} validations={validations} onSubmit={(data) =>console.log(data)}>
+                            <InputText border="none" displayName="Nombre" required name="name" type="text" 
+                                placeholder="Hector Salazar" size={12} inputMode="text"></InputText>
+                            <InputText border="normal" displayName="Correo Electronico" required name="email" type="email"
+                                placeholder="example@gmail.com" inputMode="email"></InputText>
+                            <InputText border="full" displayName="Contraseña" required name="Phone" type="password"
+                                placeholder="7002273212" inputMode="text"></InputText>
+                            <Button type="submit" styleButton="blue" name="AMAMA" ripple
+                                size="lg" value="Confirmar"></Button>
                         </Form>
                     </Card>
                 </AllScreen>
