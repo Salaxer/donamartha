@@ -24,7 +24,7 @@ import { FormValues, FormProps } from "./types";
  *      return (
  *          <Form validations={validations} onSubmit={(data) =>console.log(data)}>
  *              <InputText required name="name" type="text" placeholder="Name" ></InputText>
- *              <Button type="submit" styleButton="blue" name="AMAMA" value="Send"></Button>
+ *              <Button type="submit" styleButton="blue" name="Submit" value="Submit"></Button>
  *          </Form>
  *      )
  * }

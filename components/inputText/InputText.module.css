@@ -1,7 +1,7 @@
 .container{
     padding: 0;
     margin: 0.6rem 0;
-    border: 0.1px solid white;
+    border: 0.1px solid transparent;
     width: 100%;
     position: relative;
     min-height: 1.5rem;
@@ -12,16 +12,16 @@
 
 .container__name{
     padding: 0.2rem;
-    border-radius: 0.1rem;
+    border-radius: 0.4rem;
     position: absolute;
     left: 1rem;
+    transform-origin: left;
 }
 .container__error{
     position: absolute;
     left: 0;
     bottom: -2rem;
     font-size: small;
-    color: rgb(255, 87, 87)
 }
 
 .container__input{
@@ -31,5 +31,4 @@
     height: 100%;
     border: 0;
     background-color: transparent;
-    caret-color: hsla(228, 68%, 56%, 0.8);
 }

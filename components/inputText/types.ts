@@ -1,10 +1,21 @@
-import { HTMLInputTypeAttribute } from 'react';
+import { CSSProperties, HTMLInputTypeAttribute } from 'react';
 import { HTMLNativeProps } from '../native/types'
 
 export type ColorStyles = {
-    errorColor?: string,
-    normalColor?: string,
-    focusColor?: string,
+    error?: CSSProperties["color"],
+    normal?: CSSProperties["color"],
+    focus?: CSSProperties["color"],
+}
+
+export interface shadowAndBorder {
+    border: string,
+    shadow: string
+}
+
+export type Colors = {
+    errorColor: shadowAndBorder,
+    normalColor: shadowAndBorder,
+    focusColor: shadowAndBorder, 
 }
 
 export type ShadowStyle = {
@@ -13,7 +24,7 @@ export type ShadowStyle = {
     focusShadow: string,
 }
 
-export interface PropsInput extends Exclude<HTMLNativeProps<'input', {}>, 'onAnimationStart'>{
+export interface PropsInput extends HTMLNativeProps<'input', {}>{
     type: HTMLInputTypeAttribute;
     name: string;
     /**

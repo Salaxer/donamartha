@@ -7,7 +7,7 @@ import { Product } from '@MyTypes/menu'
 
 import { Tag } from '@Components'
 import { motion, Variants } from 'framer-motion';
-import { discount } from 'utils/dicount';
+import { discount } from 'utils/number';
 
 interface PropsProductCard{
     products: Product,

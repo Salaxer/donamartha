@@ -8,7 +8,7 @@ import { Product } from '@MyTypes/menu'
 import { getAllItemsIds, getItemMenu } from '@ServerAPI/menu'
 
 import { useIsMobile } from 'utils/hooks/mediaQuery';
-import { discount } from 'utils/dicount';
+import { discount } from 'utils/number';
 import { deleteTypeValues } from 'utils/object';
 
 import styles from '../../styles/Menu[id].module.css';
