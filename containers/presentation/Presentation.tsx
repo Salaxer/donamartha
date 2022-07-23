@@ -1,50 +1,36 @@
 import styles from './Presentation.module.css';
-import Image from 'next/image';
 import DishRounded from 'public/images/dish-rounded.jpg';
 import { Button, BubbleImg } from '@Components';
 import { useRouter } from 'next/router'
 
-import { motion, useAnimation, Variants } from 'framer-motion';
-import React, { useEffect } from 'react';
-import { useInView } from "react-intersection-observer";
+import { motion } from 'framer-motion';
+import React from 'react';
 
 
 interface PresentationProps{
     animate: boolean;
-}
-const Variants: Variants = {
-    greetAnimation: {
-        opacity: 1,
-        scale: 1,
-        rotate: "0deg",
-        x: 0,
-    },
-    greetHidden:{
-        opacity: 0,
-        x: -100,
-        scale: 0,
-        rotate: '-90deg',
-    }
 }
 const Presentation: React.FC<PresentationProps> = ({animate}) =>{
     const router = useRouter();
     const goToMenu = () =>{
       router.push('/menu');
     }
-    const animation = useAnimation();
-    const [ref, inView, entry] = useInView({ threshold: 0.1 });
-    useEffect(() => {
-        if (inView) {
-          animation.start("greetAnimation");
-        } else {
-          animation.start("greetHidden");
-        }
-      }, [animation, inView]);
     return (
         <div className={styles.screenShowMenu}>
             <div>
-                <motion.div ref={ref}
-                     animate={animation} transition={{delay: 0.2}} initial="greetHidden" variants={Variants}>
+                <motion.div
+                    whileInView={{
+                        opacity: 1,
+                        scale: 1,
+                        rotate: "0deg",
+                        x: 0,
+                    }} 
+                    transition={{delay: 0.2}} initial={{
+                        opacity: 0,
+                        x: -100,
+                        scale: 0,
+                        rotate: '-90deg',
+                    }}>
                     <BubbleImg preview={false} image={DishRounded} alt='restaurant' priority={false} className={styles.containerIMG}></BubbleImg>
                 </motion.div>
             </div>

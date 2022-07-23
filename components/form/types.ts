@@ -1,11 +1,11 @@
 import { FunctionComponent, ReactElement } from "react";
 
-type CustomObject<T = any> = {
+export type CustomObject = {
     [key: string]: any;
 }
 
-export type FormValues = {
-    value: CustomObject,
+export type FormValues<T = CustomObject> = {
+    value: T,
     error: FormError,
 }
 
@@ -52,16 +52,24 @@ export interface FormProps {
      * 
      */
     children: ReactElement<any, FunctionComponent>[],
+
     /**
      * to create a validation, the key object need to be named as the name of the input field
      */
     validations?: Validations;
+
     /**
      * 
      */
-    onSubmit: (data: CustomObject) => void;
+    onSubmit: (data: any) => void;
+
     /**
      * delay to set new validation
      */
     delay?: number;
+
+    /**
+     * 
+     */
+    loader?: boolean;
 }

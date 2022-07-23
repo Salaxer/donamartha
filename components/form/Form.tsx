@@ -1,14 +1,15 @@
 import { FC, ReactElement, FunctionComponent,
     cloneElement, useEffect, useState,
-    Children, isValidElement, FormEventHandler, ChangeEventHandler, useRef } from "react";
+    Children, isValidElement, FormEventHandler, ChangeEventHandler, useRef, PropsWithChildren } from "react";
 import { HTMLNativeProps } from '../native/types'
-import { FormValues, FormProps } from "./types";
+import { FormValues, FormProps, CustomObject } from "./types";
 
 /**
  * 
  * @note all children must be salaxer's input components and other children will be ignored
  * @note all children must have name and type props
  * @note must be a submit buttom
+ * @note if you want to set some loader, you need to pass to props loader to animate for example: a button
  * @returns a object with the values and the names of the inputs inside children
  * @example 
  * import Form, { Validations } from "components/form"
@@ -31,7 +32,7 @@ import { FormValues, FormProps } from "./types";
  * export default Example
  *  
  */
-const Form:FC<HTMLNativeProps<"form",FormProps>> = ({ children, onSubmit, validations, delay, stopFirstError = true, ...props }) =>{
+const Form:FC<HTMLNativeProps<"form",FormProps>> = ({ children, loader, onSubmit, validations, delay, stopFirstError = true, ...props }) =>{
 
     const [childrenWithProps, setChildrenWithProps] = useState<ReactElement<any, FunctionComponent>[]>([]);
     const formValues = useRef<FormValues>({error: { }, value: {}});
@@ -93,7 +94,7 @@ const Form:FC<HTMLNativeProps<"form",FormProps>> = ({ children, onSubmit, valida
             })
         );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[newValidation])
+    },[newValidation, loader])
     
     return (
         <form {...props} onSubmit={onSubmitForm} >
@@ -103,3 +104,16 @@ const Form:FC<HTMLNativeProps<"form",FormProps>> = ({ children, onSubmit, valida
 }
 
 export default Form
+
+
+// Examples 
+
+// const Table1 = <ObjectType extends { id: number }>({ id }: PropsWithChildren<ObjectType>) =>{
+// }
+
+// function Table<ObjectType extends { id: number }>({ id }: PropsWithChildren<ObjectType>) {
+//     return (
+//       <table>
+//       </table>
+//     );
+//   }

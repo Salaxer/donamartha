@@ -24,7 +24,7 @@ export const getMenu:RequestFirebase["getMenu"] = async () =>{
         const querySnapshot = await getDocs(menuRef);
         response =  querySnapshot.docs;
     } catch (e) {
-        e instanceof FirebaseError ? error = e : error = {code: "Error desconocido"};
+        e instanceof FirebaseError ? error = e : error = {code: "Error desconocido", message: "Por favor comuniquese con el dueño de la app"};
     }
     return {
         response,
@@ -40,7 +40,7 @@ export const getItemMenu:RequestFirebase["getItemMenu"] = async (id) =>{
         const docSnap = await getDoc(docRef);
         response =  docSnap;
     } catch (e) {
-        e instanceof FirebaseError ? error = e : error = {code: "Error desconocido"};
+        e instanceof FirebaseError ? error = e : error ={code: "Error desconocido", message: "Por favor comuniquese con el dueño de la app"};
     }
     return {
         response,

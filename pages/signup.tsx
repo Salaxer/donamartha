@@ -1,10 +1,14 @@
 import { NextPage } from "next"
+
 import { AllScreen, Button, MetaTags } from "@Components"
 import Card from "components/card"
 import Form, { Validations } from "components/form"
 import InputText from "components/inputText/InputText"
 
 import styles from 'styles/SignUp.module.css';
+
+import { newUser } from '@ServerAPI/client/auth';
+import { useState } from "react"
 
 const validations: Validations = {
     name: [
@@ -39,27 +43,49 @@ const validations: Validations = {
     ],
 }
 
+interface FormValues {
+    name: string;
+    email: string;
+    password: string;
+}
 const SignUp:NextPage = () =>{
+
+    const [loader, setLoader] = useState<boolean>(false);
+    
+    const registerUser = async (data: FormValues) => {
+        setLoader(true);
+        const user = await newUser(data);
+        if (user.response) {
+            console.log(user.response);
+            setLoader(false);
+        }else{
+            console.log(user.error);
+            setLoader(false)
+        }
+    }
+    
     return (
         <>
             <MetaTags 
             description='Unete a nosotros, crea una cuenta y aprobecha los descuentos exclusivos que doña martha tiene para ti.'
-            image={'/preview_page_menuasf12e4wfdasd.png'}
+            image="https://donamartha.com.mx/preview_page_menuasf12e4wfdasd.png"
             keyWorks={['Mariscos', "Relajante", "Restaurante", "Comida", "Bebidas", "Micheladas", "mojitos"]}
             title='Unete a nosotros'></MetaTags>
             <main>
                 <AllScreen>
                     <Card header={ { align: "center", value: "Unete"}}>
-                        <h1>Registrate con correo y contraseña</h1>
-                        <Form autoComplete="on" stopFirstError className={styles.form} validations={validations} onSubmit={(data) =>console.log(data)}>
+                        <h2>Registrate con correo y contraseña</h2>
+                        <Form autoComplete="on" stopFirstError loader={loader}
+                            className={styles.form} validations={validations} 
+                            onSubmit={registerUser}>
                             <InputText border="normal" displayName="Nombre" required name="name" type="text" 
                                 placeholder="Hector Salazar" inputMode="text"></InputText>
                             <InputText border="normal" displayName="Correo Electronico" required name="email" type="email"
                                 placeholder="example@gmail.com" inputMode="email"></InputText>
                             <InputText border="normal" displayName="Contraseña" required name="password" type="password"
                                 inputMode="text"></InputText>
-                            <Button type="submit" styleButton="blue" name="AMAMA" ripple
-                                size="lg" value="Confirmar"></Button>
+                            <Button type="submit" styleButton="blue" name="s"
+                                size="lg" value="Confirmar" loader={loader}></Button>
                         </Form>
                     </Card>
                 </AllScreen>

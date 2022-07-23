@@ -4,7 +4,7 @@
     gap: 1rem;
     align-items: center;
     border-radius: 0.3rem;
-    transition: all 0.1s ease-out;
+    transition: width 0.1s ease-out;
     position: relative;
     outline-offset: 0.2rem;
 }
@@ -59,10 +59,10 @@
     outline: 2px solid var(--fillingcolor);
 }
 .blue:hover{
-    background-color: var(--fillingcolor-400);
+    background-color: var(--fillingcolor-300);
 }
 .blue:disabled{
-    background-color: var(--fillingcolor-200);
+    background-color: var(--fillingcolor-100);
 }
 .clasic{
     background-color: var(--background-0);

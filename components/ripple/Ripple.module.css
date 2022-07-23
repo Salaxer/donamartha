@@ -14,10 +14,11 @@
     animation: rippleAnimation 600ms linear;
 }
 .basic{
-    background-color: var(--maincolorblue-300);
+    background-color: var(--maincolorblue-100);
 }
 .blue{
-    background-color: var(--fillingcolor-300);
+    background-color: var(--background-w-400);
+    opacity: 0.5;
 }
 .clasic{
     background-color: var(--background-b-300);

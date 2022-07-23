@@ -2,9 +2,10 @@ import { FirebaseError } from "firebase/app";
 import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 type MyError = {
     code: string;
+    message: string;
 }
 
-export interface GlobalFirebaseResponse<T = any>{
+export interface GlobalFirebaseResponse<T>{
     response: T | undefined,
     error: FirebaseError | MyError | undefined,
 }
