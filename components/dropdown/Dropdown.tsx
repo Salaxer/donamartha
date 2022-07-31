@@ -1,8 +1,7 @@
-import type { NextComponentType, NextPage } from 'next'
 
 /* This DropDown requires Tailwind CSS v2.0+ */
 
-import { FC, Fragment, PropsWithChildren, useState } from 'react';
+import { FC, Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { Ripple } from '@Components'

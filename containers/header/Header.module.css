@@ -39,6 +39,7 @@ img.header__picture__img{
     color: var(--maincolorblue);
     font-size: 2.8rem;
     width: 100%;
+    cursor: pointer;
     height: 100%;
     position: relative;
     transition: all ease-in 1s;

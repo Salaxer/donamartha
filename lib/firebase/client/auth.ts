@@ -6,6 +6,7 @@ import SHA256 from 'crypto-js/sha256'
 
 import { GlobalFirebaseResponse } from "@MyTypes/firebase";
 import { RequestFirebaseClient } from "@MyTypes/firebase-client";
+import { FirebaseError } from "firebase/app";
 
 export const newUser:RequestFirebaseClient["newUser"] = async ({email, password, name}) =>{
     let response: GlobalFirebaseResponse<UserCredential> = { error: undefined, response: undefined }
@@ -16,18 +17,8 @@ export const newUser:RequestFirebaseClient["newUser"] = async ({email, password,
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, passwordHash);
         response.response = userCredential;
-        console.log(userCredential);
     } catch (error) {
-        console.log(error);
+        response.error = error as FirebaseError;
     }
-    // createUserWithEmailAndPassword(auth, email, passwordHash)
-    // .then((user) =>{
-    //     response.response = user;
-    //     console.log(user);
-    // })
-    // .catch((error)=>{
-    //     response.error = error;
-    //     console.error(error);
-    // })
     return response
 }

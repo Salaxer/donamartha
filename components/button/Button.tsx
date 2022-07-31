@@ -1,6 +1,6 @@
 import styles from './Button.module.css';
 import { Loader, Ripple } from '@Components'
-import { forwardRef, LegacyRef } from 'react';
+import { forwardRef, LegacyRef, ReactElement } from 'react';
 
 import { ButtomElement } from '../native/types'
 
@@ -13,8 +13,8 @@ interface PropsButton extends ButtomElement {
     styleButton?: 'basic' | 'blue' | 'success' | 'clasic' | 'danger' | 'warning',
     className?: string,
     size?: 'sm' | 'md' | 'lg' | 'xl' | 'xxl',
-    iconR?: string,
-    iconL?: string,
+    iconR?: ReactElement<any, any>,
+    iconL?: ReactElement<any, any>,
     ripple?: boolean,
     type?: "submit" | "button";
     name?: string;
@@ -24,9 +24,9 @@ const Button = forwardRef(({  value, iconL, iconR, className, size = "md", rippl
     return(
         <button {...props} ref={ref} disabled={loader} className={`${className} ${styles.button} ${styles[styleButton]} ${styles[size]}`}>
             {loader && <Loader background='inherit' position='absolute'></Loader>}
-            {iconL && <i className={iconL}></i>}
+            {iconL && <span style={{width: "20px"}}>{iconL}</span>}
             {value}
-            {iconR && <i className={iconR}></i>}
+            {iconR && <span style={{width: "20px"}}>{iconR}</span>}
             {ripple && <Ripple color={styleButton}/>}
         </button>
     )

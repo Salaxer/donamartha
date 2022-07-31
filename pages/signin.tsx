@@ -5,11 +5,10 @@ import Card from "components/card"
 import Form, { Validations } from "components/form"
 import InputText from "components/inputText/InputText"
 
-import styles from 'styles/SignUp.module.css';
+import styles from 'styles/Signup.module.css';
 
 import { newUser } from '@ServerAPI/client/auth';
 import { useState } from "react"
-import { useNotification } from "components/notification"
 
 const validations: Validations = {
     name: [
@@ -50,29 +49,19 @@ interface FormValues {
     password: string;
 }
 
-const SignUp:NextPage = () =>{
+const Signin:NextPage = () =>{
 
     const [loader, setLoader] = useState<boolean>(false);
-    const { addNotification } = useNotification();
     
     const registerUser = async (data: FormValues) => {
         setLoader(true);
         const user = await newUser(data);
-        console.log(user);
         if (user.response) {
+            console.log(user.response);
             setLoader(false);
-            addNotification({
-                title: "Email invalido",
-                message: "Hola Como Estas",
-                type: "success",
-            });
-        }else if(user.error){
-            setLoader(false);
-            addNotification({
-                message: user.error.message,
-                type: "error",
-                title: user.error.code
-            });
+        }else{
+            console.log(user.error);
+            setLoader(false)
         }
     }
     
@@ -85,7 +74,7 @@ const SignUp:NextPage = () =>{
             title='Unete a nosotros'></MetaTags>
             <main>
                 <AllScreen>
-                    <Card header={ { align: "center", value: "Unete"}} footer="Hola como estas">
+                    <Card header={ { align: "center", value: "Unete"}}>
                         <h2>Registrate con correo y contraseña</h2>
                         <Form autoComplete="on" stopFirstError loader={loader}
                             className={styles.form} validations={validations} 
@@ -96,15 +85,14 @@ const SignUp:NextPage = () =>{
                                 placeholder="example@gmail.com" inputMode="email"></InputText>
                             <InputText border="normal" displayName="Contraseña" required name="password" type="password"
                                 inputMode="text"></InputText>
-                            <Button type="submit" styleButton="blue" name="sss"
+                            <Button type="submit" styleButton="blue" name="s"
                                 size="lg" value="Confirmar" loader={loader}></Button>
                         </Form>
                     </Card>
                 </AllScreen>
-
             </main>
         </>
     )
 }
 
-export default SignUp
+export default Signin

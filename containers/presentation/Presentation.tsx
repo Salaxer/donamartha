@@ -1,16 +1,19 @@
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/router'
+import React from 'react';
+import { ArrowRightIcon } from '@heroicons/react/outline';
+
 import styles from './Presentation.module.css';
 import DishRounded from 'public/images/dish-rounded.jpg';
 import { Button, BubbleImg } from '@Components';
-import { useRouter } from 'next/router'
 
-import { motion } from 'framer-motion';
-import React from 'react';
 
 
 interface PresentationProps{
     animate: boolean;
 }
 const Presentation: React.FC<PresentationProps> = ({animate}) =>{
+    
     const router = useRouter();
     const goToMenu = () =>{
       router.push('/menu');
@@ -37,7 +40,7 @@ const Presentation: React.FC<PresentationProps> = ({animate}) =>{
             <div className={styles.descriptionShowMenu}>
                 <h3 className='text-5xl text-center'>Restaurante Doña Martha</h3>
                 <h5 className='text-3xl text-center'>Antes Micheladas Doña Martha y con 10 años de experiencia de ofrecer servicios al cliente se presenta con una nueva imagen</h5>
-                <Button iconR='pi pi-angle-right' ripple onClick={()=>goToMenu()} value='Ir a la carta' size='xl' styleButton='blue'/>
+                <Button iconR={<ArrowRightIcon/>} ripple onClick={()=>goToMenu()} value='Ir a la carta' size='xl' styleButton='blue'/>
             </div>
         </div>
     )
