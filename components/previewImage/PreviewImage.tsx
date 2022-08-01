@@ -63,9 +63,9 @@ const PreviewImage: React.FC<PreviewImageProp> = ({ children, className, classTo
                         exit={{ opacity: 0 }}
                         className={styles.containterModal}>
                         <div className={styles.buttons}>
-                            <Button ripple value='' styleButton='success' size='lg' iconR='pi pi-plus' onClick={zoomPlus}></Button>
-                            <Button ripple value='' styleButton='clasic' size='lg' iconR='pi pi-minus' onClick={zoomMinus}></Button>
-                            <Button value='' styleButton='danger' size='lg' iconR='pi pi-times' onClick={handleModal}></Button>
+                            <Button ripple value='' styleButton='success' size='lg' onClick={zoomPlus}></Button>
+                            <Button ripple value='' styleButton='clasic' size='lg' onClick={zoomMinus}></Button>
+                            <Button value='' styleButton='danger' size='lg' onClick={handleModal}></Button>
                         </div>
                         <div ref={refIMG} className={styles.modalImg}>
                             <motion.span 

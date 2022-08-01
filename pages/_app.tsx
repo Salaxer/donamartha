@@ -8,7 +8,7 @@ import { useIsMobile } from 'utils/hooks/mediaQuery';
 import Footer from '../containers/footer/Footer'
 import Header from '../containers/header/Header'
 
-import { NotificationProvider } from 'components/notification';
+import NotificationProvider from 'components/notification';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const isMobile = useIsMobile();

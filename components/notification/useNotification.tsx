@@ -5,8 +5,7 @@ import { arrayAddItem, arrayUpdateItem, arrayDeleteItem } from "utils/arrays";
 
 const useNotification = () =>{
     
-    const data = useContext(NotificationContext);
-    const { notifications , setNotifications } = data;
+    const { notifications , setNotifications } = useContext(NotificationContext);
 
     const addNotification = (item: NotificationType) => {
         item.id = `NotificationN°${Math.random()}`

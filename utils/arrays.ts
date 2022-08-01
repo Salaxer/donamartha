@@ -1,18 +1,17 @@
 export const arrayAddItem = <T extends unknown>(item: T, array: T[]): T[] =>{
-    const newArray =  array.copyWithin(0,0);
+    const newArray =  [...array];
     newArray.push(item);
     return newArray;
 }
 
 export const arrayUpdateItem = <T extends unknown>(item: T, array: T[]):T[] =>
-array
-.copyWithin(0,0)
+[...array]
 .map((value) =>{
     return value === item ? item : value
 })
 
 export const arrayDeleteItem = <T extends unknown>(item: T, array: T[]):T[] => {
-    const newArray = array.copyWithin(0,0);
+    const newArray = [...array];
     const index = newArray.findIndex((value)=>{
         return value === item;
     })

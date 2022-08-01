@@ -10,6 +10,7 @@ import styles from 'styles/SignUp.module.css';
 import { newUser } from '@ServerAPI/client/auth';
 import { useState } from "react"
 import { useNotification } from "components/notification"
+import { CogIcon } from "@heroicons/react/solid"
 
 const validations: Validations = {
     name: [
@@ -56,24 +57,34 @@ const SignUp:NextPage = () =>{
     const { addNotification } = useNotification();
     
     const registerUser = async (data: FormValues) => {
-        setLoader(true);
-        const user = await newUser(data);
-        console.log(user);
-        if (user.response) {
-            setLoader(false);
-            addNotification({
-                title: "Email invalido",
-                message: "Hola Como Estas",
-                type: "success",
-            });
-        }else if(user.error){
-            setLoader(false);
-            addNotification({
-                message: user.error.message,
-                type: "error",
-                title: user.error.code
-            });
-        }
+        addNotification({
+            title: "Email invalido",
+            message: "Hola Como Estas",
+            type: {
+                backgroundColor: "fff",
+                beforeTitle: "Error",
+                borderColor: "black",
+                icon: <CogIcon/>
+            },
+        });
+        // setLoader(true);
+        // const user = await newUser(data);
+        // console.log(user);
+        // if (user.response) {
+        //     setLoader(false);
+        //     addNotification({
+        //         title: "Email invalido",
+        //         message: "Hola Como Estas",
+        //         type: "success",
+        //     });
+        // }else if(user.error){
+        //     setLoader(false);
+        //     addNotification({
+        //         message: user.error.message,
+        //         type: "error",
+        //         title: user.error.code
+        //     });
+        // }
     }
     
     return (

@@ -1,5 +1,4 @@
 import { AllScreen } from "@Components";
-import { FirebaseError } from "firebase/app";
 import { FC } from "react";
 
 const NotFound:FC<{error?: any}> = ({error}) => {
