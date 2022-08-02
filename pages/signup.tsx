@@ -60,12 +60,7 @@ const SignUp:NextPage = () =>{
         addNotification({
             title: "Email invalido",
             message: "Hola Como Estas",
-            type: {
-                backgroundColor: "fff",
-                beforeTitle: "Error",
-                borderColor: "black",
-                icon: <CogIcon/>
-            },
+            type: "error",
         });
         // setLoader(true);
         // const user = await newUser(data);

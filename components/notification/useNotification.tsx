@@ -1,15 +1,18 @@
 import { useContext } from "react"
-import { NotificationType } from "./types";
+import { NotificationType, UseNotificationReturn } from "./types";
 import NotificationContext from "./NotificationContext";
 import { arrayAddItem, arrayUpdateItem, arrayDeleteItem } from "utils/arrays";
 
-const useNotification = () =>{
+/**
+ * 
+ * @returns object
+ */
+const useNotification = (): UseNotificationReturn =>{
     
     const { notifications , setNotifications } = useContext(NotificationContext);
 
     const addNotification = (item: NotificationType) => {
         item.id = `NotificationN°${Math.random()}`
-        item.life = item.life ? item.life  : 4000;
         setNotifications(arrayAddItem(item, notifications));
     }
 

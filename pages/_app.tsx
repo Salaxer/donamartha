@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import '../styles/custom.css'
+import '../styles/variables.css'
 
 import type { AppProps } from 'next/app'
 import NextNProgress from "nextjs-progressbar";

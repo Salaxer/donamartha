@@ -1,11 +1,14 @@
 import { ReactElement } from "react";
 
 interface OptionsLife{
+    /**
+     * in `ms` you can set the time of the notification
+     */
     time: number;
     /**
-     * when the user hover the notification the life time stop and reset the value
+     * when the user hover the notification the life time pause the life time
      */
-    onHoverReset: boolean;
+     onHoverPause: boolean;
     /**
      * to show the button close
      */
@@ -16,8 +19,6 @@ interface OptionsType{
      * `beforeTitle` string to set before title
      */
     beforeTitle: string;
-    borderColor: string;
-    backgroundColor: string;
     icon: ReactElement<any, any>,
 }
 
@@ -36,9 +37,60 @@ export interface NotificationType{
     title: string;
     message: string;
     /**
-     * `life` in ms you can set the time of the notification, also you can set infite life if you want the notification dont deleted
-     * not required and default 4000,
+     * `life` in `ms` you can set the time of the notification, also you can set infite life if you want the notification dont deleted
+     * not required and default 4000ms,
      * if you want custom life you can set with optionsLife
      */
     life?: number | "infinite" | OptionsLife;
+}
+
+interface OptionsDestLife{
+    /**
+     * in `ms` you can set the time of the notification
+     */
+    time: "infinite" | number;
+    /**
+     * when the user hover the notification the life time pause the life time
+     */
+     onHoverPause: boolean;
+    /**
+     * to show the button close
+     */
+    showClose: boolean;
+}
+
+export interface NotificationDestructured{
+    /**
+     * `type` four type to set default colors in the notification;
+     * `Option` to set custom option type
+     * 
+     */
+    type: OptionsType;
+    title: string;
+    message: string;
+    /**
+     * `life` in `ms` you can set the time of the notification, also you can set infite life if you want the notification dont deleted
+     * not required and default 4000ms,
+     * if you want custom life you can set with OptionsDestLife
+     */
+    life: OptionsDestLife;
+}
+
+// UseNotifications
+
+export interface UseNotificationReturn {
+    /**
+     * `notifications` array of updated values of notifications
+     */
+    notifications: NotificationType[];
+    /**
+     * `addNotification` funtion to add a new notification and ensure the notifications will update,
+     */
+    addNotification: (item: NotificationType) => void;
+    /**
+     * `updateNotification` funtion to update the value of a new notification and ensure the notifications will update,
+     */
+    updateNotification: (item: NotificationType) => void;
+    deleteNotification: (item: NotificationType) => void;
+    clearAll: () => void;
 }

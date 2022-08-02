@@ -1,0 +1,17 @@
+.notification{
+    border-radius: 1rem;
+    width: 20rem;
+    background-color: bisque;
+    height: 7rem;
+    padding: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+.bar{
+    position: absolute;
+    height: 5px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--danger-color-200);
+    transition: all 5ms ease;
+}

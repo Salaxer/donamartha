@@ -7,11 +7,3 @@
     flex-direction: column;
     gap: 1rem;
 }
-
-.notification{
-    border-radius: 1rem;
-    width: 20rem;
-    background-color: bisque;
-    height: 7rem;
-    padding: 1rem;
-}

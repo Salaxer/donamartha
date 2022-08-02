@@ -2,7 +2,7 @@ import { FC, useMemo, useState } from "react";
 
 import NotificationContext from "./NotificationContext";
 import { NotificationType } from "./types";
-import Notification from "./Notification";
+import NotificationWrapper from "./NotificationWrapper";
 
 export const NotificationProvider:FC<{children: any}> = ({ children }) => {
 
@@ -17,7 +17,7 @@ export const NotificationProvider:FC<{children: any}> = ({ children }) => {
         <>
             <NotificationContext.Provider value={value}>
                 {children}
-                <Notification/>
+                <NotificationWrapper/>
             </NotificationContext.Provider>
         </>
     )
