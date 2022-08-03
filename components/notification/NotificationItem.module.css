@@ -1,17 +1,57 @@
-.notification{
-    border-radius: 1rem;
-    width: 20rem;
-    background-color: bisque;
-    height: 7rem;
+.container {
+    width: 100%;
+    height: 10rem;
     padding: 1rem;
+    margin-bottom: 0.5rem;
     overflow: hidden;
+    background-color: var(--background-w-op-90);
     position: relative;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--shadow-50);
+    border-radius: 1rem;
+    border: 0.2rem solid var(--background-w-300);
 }
-.bar{
+
+.buttonClose {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.icon {
+    min-width: 30px;
+    height: 30px;
+    width: 30px;
+    color: var(--background-b-300);
+}
+
+.timeBar {
     position: absolute;
     height: 5px;
     bottom: 0;
     left: 0;
-    background-color: var(--danger-color-200);
-    transition: all 5ms ease;
+    background: rgb(11,50,71);
+    background: -moz-linear-gradient(20deg, rgba(11,50,71,1) 0%, rgba(64,174,231,1) 48%, rgba(0,152,76,1) 100%);
+    background: -webkit-linear-gradient(20deg, rgba(11,50,71,1) 0%, rgba(64,174,231,1) 48%, rgba(0,152,76,1) 100%);
+    background: linear-gradient(20deg, rgba(11,50,71,1) 0%, rgba(64,174,231,1) 48%, rgba(0,152,76,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0b3247",endColorstr="#00984c",GradientType=1);
 }
+
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: 1rem;
+}
+
+.title {
+    font-size: medium;
+    font-weight: 600;
+}
+
+.message {
+    font-size: small;
+    font-weight: 300;
+}
+

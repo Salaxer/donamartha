@@ -1,4 +1,4 @@
-import { LegacyRef, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './Ripple.module.css';
 
 interface PropsRipple{

@@ -8,7 +8,7 @@ import { FormValues, FormProps, CustomObject } from "./types";
  * 
  * @note all children must be salaxer's input components and other children will be ignored
  * @note all children must have name and type props
- * @note must be a submit buttom
+ * @note must have a submit buttom
  * @note if you want to set some loader, you need to pass to props loader to animate for example: a button
  * @returns a object with the values and the names of the inputs inside children
  * @example 
@@ -17,7 +17,7 @@ import { FormValues, FormProps, CustomObject } from "./types";
  * 
  * const validations: Validations = { name: 
  *  [
- *      { message: "This is required", regex: /^(?!\s*$).+/, type: "Error", onWriting: true }
+ *      { message: "This is required", validator: /^(?!\s*$).+/, type: "Error", onWriting: true }
  *  ]
  * }
  * 
@@ -48,8 +48,12 @@ const Form:FC<HTMLNativeProps<"form",FormProps>> = ({ children, loader, onSubmit
             setNewValidation(true);
             setNewTimeOut(setTimeout(() => {
                 setNewValidation(false)
-            }, delay || 1000))
-            if (!CurrentError.regex.test(value)) return formValues.current.error[name] = CurrentError;
+            }, delay || 1000));
+            if (typeof CurrentError.validator === "function"){
+                if (!CurrentError.validator(value)) return formValues.current.error[name] = CurrentError;
+            }else{
+                if (!CurrentError.validator.test(value)) return formValues.current.error[name] = CurrentError;
+            }
             formValues.current.error[name] = undefined;
         });
     }

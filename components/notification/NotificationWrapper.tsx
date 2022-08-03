@@ -4,34 +4,41 @@ import { AnimatePresence } from "framer-motion";
 import styles from './NotificationWrapper.module.css';
 import useNotification from "./useNotification";
 import NotificationItem from "./NotificationItem";
-import { NotificationDestructured, NotificationType } from "./types";
-import { EyeIcon } from "@heroicons/react/solid";
+import { NotificationDestructured, NotificationType, AutomaticValues } from "./types";
+import { ExclamationIcon,
+    InformationCircleIcon,
+    CheckIcon,
+    XCircleIcon } from "@heroicons/react/outline";
 
 
 enum VARIABLES {
     DEFAULT_TIME = 4000, 
 };
-const Type = {
+const Type: AutomaticValues = {
     success: {
-        beforeTitle: "",
-        icon: <EyeIcon/>,
+        beforeTitle: "Realizado",
+        icon: <CheckIcon/>,
+        customClassName: "success"
     },
     warning: {
-        beforeTitle: "",
-        icon: <EyeIcon/>,
+        beforeTitle: "Advertencia",
+        icon: <ExclamationIcon/>,
+        customClassName: "warning"
     },
     info: {
-        beforeTitle: "",
-        icon: <EyeIcon/>,
+        beforeTitle: "Info",
+        icon: <InformationCircleIcon/>,
+        customClassName: "info"
     },
     error: {
-        beforeTitle: "",
-        icon: <EyeIcon/>,
+        beforeTitle: "Error",
+        icon: <XCircleIcon/>,
+        customClassName: "error"
     },
 };
 const getValues = (item: NotificationType): NotificationDestructured =>{
-
-    const time: number | "infinite" = item.life ? (typeof item.life === "object" ? item.life.time : item.life) : VARIABLES.DEFAULT_TIME;
+    const before = item.life ? (typeof item.life === "object" ? item.life.time : item.life) : VARIABLES.DEFAULT_TIME;
+    const time: number | "infinite" = typeof before === "number" ? before/100 : before;
     const onHoverPause:boolean = (typeof item.life === "object") ? item.life.onHoverPause : true;
     const showClose:boolean = (typeof item.life === "object") ? item.life.showClose : true;
     const type = (typeof item.type === "string") ? Type[item.type] : item.type;
@@ -56,7 +63,6 @@ const NotificationWrapper: FC<{position?: string}> = ({ position }) =>{
         <ul className={styles.container}>
             <AnimatePresence>
                 { notifications.map((item)=>{
-                    console.log('Renders on Wrapper');
                     const newItems = getValues(item);
                     return(
                         <NotificationItem deleteNotification={deleteNotification} destructuratedItem={newItems} item={item} key={item.id}/>
@@ -66,5 +72,4 @@ const NotificationWrapper: FC<{position?: string}> = ({ position }) =>{
         </ul>
     ) 
 }
-
 export default NotificationWrapper;

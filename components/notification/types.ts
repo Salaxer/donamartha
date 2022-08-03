@@ -14,14 +14,24 @@ interface OptionsLife{
      */
     showClose: boolean;
 }
-interface OptionsType{
+interface CustomType{
     /**
      * `beforeTitle` string to set before title
      */
     beforeTitle: string;
     icon: ReactElement<any, any>,
+    customClassName: ElementsNotifications | string;
 }
 
+interface ElementsNotifications {
+    container?: string;
+    buttonClose?: string;
+    icon?: string;
+    timeBar?: string;
+    body?: string;
+    title?: string;
+    message?: string;
+}
 
 export interface NotificationType{
     /**
@@ -30,10 +40,10 @@ export interface NotificationType{
     id?: string;
     /**
      * `type` four type to set default colors in the notification;
-     * `Option` to set custom option type
+     * `CustomType` to set custom option type
      * 
      */
-    type: "success" | "warning" | "info" | "error" | OptionsType;
+    type: "success" | "warning" | "info" | "error" | CustomType;
     title: string;
     message: string;
     /**
@@ -62,10 +72,10 @@ interface OptionsDestLife{
 export interface NotificationDestructured{
     /**
      * `type` four type to set default colors in the notification;
-     * `Option` to set custom option type
+     * `CustomType` to set custom option type
      * 
      */
-    type: OptionsType;
+    type: CustomType;
     title: string;
     message: string;
     /**
@@ -93,4 +103,8 @@ export interface UseNotificationReturn {
     updateNotification: (item: NotificationType) => void;
     deleteNotification: (item: NotificationType) => void;
     clearAll: () => void;
+}
+
+export interface AutomaticValues{
+    [key: string]: CustomType;
 }

@@ -5,36 +5,49 @@
     --maincolorblue-300: #2d94b1;
     --maincolorblue-400: #179abe;
     --maincolorblue:#0096c1;
-    --fillingcolor-100: #546670;
-    --fillingcolor-200: #314652;
-    --fillingcolor-300: #284657;
-    --fillingcolor-400: #163a4d;
+
+    --fillingcolor-100: #a8d1e7;
+    --fillingcolor-200: #6ba6c9;
+    --fillingcolor-300: #367599;
+    --fillingcolor-400: #1c526e;
     --fillingcolor: #0B3247;
-    --maincolorgreen-100: #509673;
-    --maincolorgreen-200: #2c9460;
-    --maincolorgreen-300: #21965b;
-    --maincolorgreen-400: #109955;
+    
+    --maincolorgreen-100: #A0D995;
+    --maincolorgreen-200: #7dc26f;
+    --maincolorgreen-300: #219644;
+    --maincolorgreen-400: #109939;
     --maincolorgreen: #00984C;
-    --background-0: #e8eaed;
-    --background-w-100: #767777;
+    
+    --background-w-100: #9c9c9c;
     --background-w-200: #a3a4a5;
     --background-w-300: #b8b8b9;
     --background-w-400: #d8d9da;
     --background-w: #e8eaed;
+    --background-w-op-90: #e8eaedf5;
+    
     --background-b-100: #707070;
     --background-b-200: #505050;
     --background-b-300: #424242;
     --background-b-400: #292929;
     --background-b: #161616;
+
     --danger-color-100: #f58f88;
     --danger-color-200: #fc695f;
     --danger-color-300: #f75044;
     --danger-color-400: #f83123;
     --danger-color: #f71504;
+
     --fire-spinner-margin : #1a73e8;
     --text-color-w: #e8eaed;
 }
 /* Shadows */
 :root{
-    --shadow-sm: 
+    --shadow-10: rgba(17, 17, 26, 0.1) 0px 1px 0px;
+    --shadow-20: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+    --shadow-30: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+    --shadow-40: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    --shadow-50: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;;
+    --shadow-60: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    --shadow-70: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    --shadow-80: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }

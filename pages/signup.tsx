@@ -10,13 +10,12 @@ import styles from 'styles/SignUp.module.css';
 import { newUser } from '@ServerAPI/client/auth';
 import { useState } from "react"
 import { useNotification } from "components/notification"
-import { CogIcon } from "@heroicons/react/solid"
 
 const validations: Validations = {
     name: [
         {
             message: "Este campo es requerido",
-            regex: /^(?!\s*$).+/,
+            validator: /^(?!\s*$).+/,
             type: "Error",
             onWriting: true,
         },
@@ -24,13 +23,13 @@ const validations: Validations = {
     email:[
         {
             message: "Este campo es requerido",
-            regex: /^(?!\s*$).+/,
+            validator: /^(?!\s*$).+/,
             type: "Error",
             onWriting: true,
         },
         {
             message: "El email no es valido",
-            regex: /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+/,
+            validator: /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+/,
             type: "Error",
             onWriting: false,
         }
@@ -38,7 +37,7 @@ const validations: Validations = {
     password: [
         {
             message: "Este campo es requerido",
-            regex: /^(?!\s*$).+/,
+            validator: /^(?!\s*$).+/,
             type: "Error",
             onWriting: true,
         },
@@ -57,29 +56,26 @@ const SignUp:NextPage = () =>{
     const { addNotification } = useNotification();
     
     const registerUser = async (data: FormValues) => {
-        addNotification({
-            title: "Email invalido",
-            message: "Hola Como Estas",
-            type: "error",
-        });
-        // setLoader(true);
-        // const user = await newUser(data);
-        // console.log(user);
-        // if (user.response) {
-        //     setLoader(false);
-        //     addNotification({
-        //         title: "Email invalido",
-        //         message: "Hola Como Estas",
-        //         type: "success",
-        //     });
-        // }else if(user.error){
-        //     setLoader(false);
-        //     addNotification({
-        //         message: user.error.message,
-        //         type: "error",
-        //         title: user.error.code
-        //     });
-        // }
+        setLoader(true);
+        const user = await newUser(data);
+        console.log(user);
+        if (user.response) {
+            setLoader(false);
+            addNotification({
+                title: "Bienvenido",
+                message: `Hola ${user.response.user.displayName}`,
+                type: "success",
+                life: "infinite"
+            });
+        }else if(user.error){
+            setLoader(false);
+            addNotification({
+                message: user.error.message,
+                title: user.error.code,
+                type: "error",
+                life: "infinite"
+            });
+        }
     }
     
     return (

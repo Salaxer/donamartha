@@ -32,9 +32,10 @@ type structureError = {
      */
     type: string;
     /**
-     * Funtion regex that used to validate the value of the input
+     * `regex` that used to validate the value of the input.
+     * `Callback` pass the current value of the input as string and the Funtion must return a boolean to validate the field
      */
-    regex: RegExp;
+    validator: RegExp | ((value: string) => boolean);
     /**
      * True If you want to validate the regex funtion while the user writing and false if 
      * only when the submit buttom click
