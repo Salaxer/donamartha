@@ -10,7 +10,7 @@ import { Button, BubbleImg } from '@Components';
 
 
 interface PresentationProps{
-    animate: boolean;
+    animate?: boolean;
 }
 const Presentation: React.FC<PresentationProps> = ({animate}) =>{
     

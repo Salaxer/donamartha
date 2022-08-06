@@ -78,7 +78,6 @@ const InputText = forwardRef(({errorForm, displayName, border = "normal", placeh
     }
 
 	return( 
-		<>
         <motion.label
 			transition={{duration: 0.4}}
 			animate={ errorForm ? "error" : ( upName ? "focus" :"normal")}
@@ -105,7 +104,6 @@ const InputText = forwardRef(({errorForm, displayName, border = "normal", placeh
 			<input {...props} ref={ref} placeholder={upName ? placeholder : "" }
 				className={`${styles.container__input} border-${border}`}/>
 		</motion.label>
-        </>
 	)
 });
 InputText.displayName = "InputSalaxer";

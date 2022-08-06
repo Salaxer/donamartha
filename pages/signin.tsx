@@ -14,7 +14,7 @@ const validations: Validations = {
     name: [
         {
             message: "Este campo es requerido",
-            regex: /^(?!\s*$).+/,
+            validator: /^(?!\s*$).+/,
             type: "Error",
             onWriting: true,
         },
@@ -22,13 +22,13 @@ const validations: Validations = {
     email:[
         {
             message: "Este campo es requerido",
-            regex: /^(?!\s*$).+/,
+            validator: /^(?!\s*$).+/,
             type: "Error",
             onWriting: true,
         },
         {
             message: "El email no es valido",
-            regex: /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+/,
+            validator: /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+/,
             type: "Error",
             onWriting: false,
         }
@@ -36,7 +36,7 @@ const validations: Validations = {
     password: [
         {
             message: "Este campo es requerido",
-            regex: /^(?!\s*$).+/,
+            validator: /^(?!\s*$).+/,
             type: "Error",
             onWriting: true,
         },

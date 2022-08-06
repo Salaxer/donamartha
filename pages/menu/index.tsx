@@ -18,7 +18,6 @@ import { TypeSlide } from '@MyTypes/Slide';
 import { Category, ByType, PropsMenu, Product } from '@MyTypes/menu'
 
 const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
-  const router = useRouter();
   const [orderProducts, setOrderProducts] = useState<Product[]>([]);
   const [sortByCategory, setSortByCategory] = useState<Category>("Todo");
   const [sortByType, setSortByType] = useState<ByType>("Recomendados");
@@ -26,19 +25,13 @@ const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
 
   const orderBy = () =>{
     if (sortByType == "Menor a Mayor Precio") {
-      setOrderProducts([...orderProducts.sort((a, b) => {
-        return a.price - b.price
-      })])
+      setOrderProducts([...orderProducts.sort((a, b) => a.price - b.price )])
     }
     if (sortByType == "Mayor a Menor Precio") {
-      setOrderProducts([...orderProducts.sort((a, b) => {
-        return b.price - a.price
-      })])
+      setOrderProducts([...orderProducts.sort((a, b) => b.price - a.price )])
     }
     if (sortByType == "Mejor Valorado") {
-      setOrderProducts([...orderProducts.sort((a, b) => {
-        return b.rating.rate - a.rating.rate
-      })])
+      setOrderProducts([...orderProducts.sort((a, b) => b.rating.rate - a.rating.rate )])
     }
     setLoader(false)
   }
@@ -91,7 +84,7 @@ const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
             <div className={`${styles.formFood} text-2xl p-3`}>
               <div className={styles.sortFood}>
                 <p className='p-1 m-1'>Seleccionar categoria</p>
-                <DropDown onChangeSelected={(e)=>{setSortByCategory(e)}} selected={sortByCategory} options={['Todo','Favoritos' , 'Comida', 'Bebidas', 'Botanas']}></DropDown>
+                <DropDown onChange={(e)=>{setSortByCategory(e)}} selected={sortByCategory} options={['Todo','Favoritos' , 'Comida', 'Bebidas', 'Botanas']}></DropDown>
               </div>
               <div className={styles.searchSection}>
                 <p className='p-1 m-1'>Busca aqui</p>
@@ -99,7 +92,7 @@ const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
               </div>
               <div className={styles.selectFood}>
                 <p className='p-1 m-1'>Ordenar por</p>
-                <DropDown onChangeSelected={(e)=>{setSortByType(e)}} selected={sortByType} options={['Recomendados', 'Mejor Valorado', 'Menor a Mayor Precio', 'Mayor a Menor Precio']}></DropDown>
+                <DropDown onChange={(e)=>{setSortByType(e)}} selected={sortByType} options={['Recomendados', 'Mejor Valorado', 'Menor a Mayor Precio', 'Mayor a Menor Precio']}></DropDown>
               </div>
             </div>
           </div>

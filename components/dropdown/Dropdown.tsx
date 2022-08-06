@@ -1,67 +1,108 @@
 
-/* This DropDown requires Tailwind CSS v2.0+ */
-
-import { FC, Fragment } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/solid';
+import { FC, ReactNode, useEffect, useRef, useState } from 'react';
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon, XIcon } from '@heroicons/react/solid';
 import { Ripple } from '@Components'
+import styles from "./Dropdown.module.css";
+import { motion, useAnimation, Variants } from 'framer-motion';
 
-function classNames(...classes:any) {
-  return classes.filter(Boolean).join(' ')
+const variants:Variants = {
+  init: {
+    opacity: 0,
+    scale: 0,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+  }
 }
 
 interface PropsA {
-  options: String[],
-  selected: String,
+  options: string[],
+  selected: string,
   /**
    * Retorna el valor seleccionado
    */
-  onChangeSelected: (e: any) => void;
+  onChange: (e: any) => void;
 }
 
-const DropDown:FC<PropsA> = ({selected, onChangeSelected, options }) => {
+const DropDown:FC<PropsA> = ({selected, onChange, options }) => {
+
+  const [open, setOpen] = useState<boolean>(false);
+  const [focus, setFocus] = useState(0)
+  const animationControl = useAnimation();
+  const refMenu = useRef<HTMLLabelElement>(null);
+
+  useEffect(()=>{
+    const keydown = (event:KeyboardEvent)=>{
+      if (event.code == "ArrowUp") {
+        event.preventDefault()
+        setFocus((current) =>{
+          return current == 0 ? options.length - 1 : current - 1;
+        })
+      }else if (event.code == "ArrowDown") {
+        event.preventDefault()
+        setFocus((current) =>{
+          return current == options.length - 1 ? 0 : current + 1;
+        })
+      } else if (event.code == "Escape") {
+        handleOpen();
+      } else if (event.code == "Tab") {
+        handleOpen();
+      } else if (event.code == "Enter") {
+        handleChange(options[focus]);
+        handleOpen();
+      }
+    }
+
+    const outsideClick = (e:MouseEvent) =>{
+      function assertIsNode(e: EventTarget | null): asserts e is Node {
+        if (!e || !("nodeType" in e)) {
+            throw new Error(`Node expected`);
+          }
+      }
+      assertIsNode(e.target);
+      // Do nothing if clicking ref's element or descendent elements
+      if (!refMenu.current || refMenu.current.contains(e.target)) {
+        return;
+      }
+      handleOpen();
+    }
+
+    if (open) {
+      animationControl.start("animate");
+      document.addEventListener("keydown", keydown, { passive: false });
+      document.addEventListener("click", outsideClick)
+    }else{
+      animationControl.start("init");
+      document.removeEventListener("keydown", keydown, false);
+      document.removeEventListener("click", outsideClick)
+    }
+    return () =>{
+      document.removeEventListener("keydown", keydown, false);
+      document.removeEventListener("click", outsideClick)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[open])
+
+  const handleChange = (e:string) => selected != e ? onChange(e) : null;
+  const handleOpen = () => setOpen( currentOpen =>{
+    return !currentOpen;
+  });
+
   return (
-    <Menu as="div" className="relative inline-block w-full">
-      <div>
-        <Menu.Button className="inline-flex justify-center w-full rounded-lg border border-gray-300 shadow-sm px-4 py-2 bg-white text-lg font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500">
-          {selected}
-          <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
-          <Ripple color='basic'/>
-        </Menu.Button>
-      </div>
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="origin-top-right z-10 absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
-            {options.map((item, index) =>{
-              return(
-                <Menu.Item key={index}>
-                  {({ active }) => (
-                    <button
-                      onClick={()=> onChangeSelected(item)}
-                      className={classNames(
-                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                        'block px-4 py-2 text-lg w-full'
-                      )}
-                    >
-                      {item}
-                    </button>
-                  )}
-                </Menu.Item>
-              )
-            })}
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-  )
+    <label ref={refMenu} className={styles.container}>
+      <button onClick={handleOpen} className={styles.dropdown}>
+        <Ripple color={'basic'}/> 
+        <p className='flex justify-between mt-1 mb-1 mr-4 ml-4 '>{selected} {open ? <ChevronUpIcon width={"20px"} /> : <ChevronDownIcon width={"20px"} /> }</p>
+      </button>
+      <motion.ul animate={animationControl} variants={variants} initial="init" className={styles.menu}>
+        {options.map((item, index)=>{
+          return <li onMouseEnter={()=>setFocus(index)} key={index} 
+          className={`${styles.option} ${focus === index && styles.optionHover}`} onClick={()=>handleChange(item)}>{item}</li>
+        })}
+      </motion.ul>
+    </label>
+  ) 
 }
 
 export default DropDown;

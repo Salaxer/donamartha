@@ -103,7 +103,6 @@ const SignUp:NextPage = () =>{
                         </Form>
                     </Card>
                 </AllScreen>
-
             </main>
         </>
     )
