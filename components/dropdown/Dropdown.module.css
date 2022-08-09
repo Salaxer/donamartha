@@ -1,5 +1,7 @@
 .container {
     position: relative;
+    width: 100%;
+    height: min-content;
 }
 .dropdown {
     position: relative;
@@ -39,4 +41,17 @@
 .optionHover{
     background-color: var(--fillingcolor);
     color: var(--background-w-400);
+}
+
+.falseSelect{
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.falseOption{
+    height: 200px;
+    opacity: 0;
 }

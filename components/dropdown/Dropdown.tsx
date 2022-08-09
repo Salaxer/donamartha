@@ -1,9 +1,10 @@
 
-import { FC, ReactNode, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon, XIcon } from '@heroicons/react/solid';
 import { Ripple } from '@Components'
 import styles from "./Dropdown.module.css";
 import { motion, useAnimation, Variants } from 'framer-motion';
+import { HTMLNativeProps } from 'components/native/types';
 
 const variants:Variants = {
   init: {
@@ -22,36 +23,42 @@ interface PropsA {
   /**
    * Retorna el valor seleccionado
    */
-  onChange: (e: any) => void;
+  onChange: (event: { target: { value: string} }) => void;
 }
 
-const DropDown:FC<PropsA> = ({selected, onChange, options }) => {
+interface CodeOptions {
+  [key: string]: (e:KeyboardEvent) => void;
+}
 
+const DropDown:FC<HTMLNativeProps<'select', PropsA>> = ({selected, onChange, options, ...props }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [focus, setFocus] = useState(0)
   const animationControl = useAnimation();
   const refMenu = useRef<HTMLLabelElement>(null);
 
   useEffect(()=>{
-    const keydown = (event:KeyboardEvent)=>{
-      if (event.code == "ArrowUp") {
-        event.preventDefault()
+    const codeOptions: CodeOptions = {
+      ArrowUp: (e) =>{ 
+        e.preventDefault()
         setFocus((current) =>{
           return current == 0 ? options.length - 1 : current - 1;
         })
-      }else if (event.code == "ArrowDown") {
-        event.preventDefault()
+      },
+      ArrowDown: (e) =>{ 
+        e.preventDefault()
         setFocus((current) =>{
           return current == options.length - 1 ? 0 : current + 1;
         })
-      } else if (event.code == "Escape") {
+      },
+      Enter: (e) =>{ 
+        e.preventDefault()
+        handleChange(options[focus + 1]);
         handleOpen();
-      } else if (event.code == "Tab") {
-        handleOpen();
-      } else if (event.code == "Enter") {
-        handleChange(options[focus]);
-        handleOpen();
-      }
+      },
+    }
+    const keydown = (event:KeyboardEvent)=>{
+      const funcEvent = codeOptions[event.code] || handleOpen;
+      funcEvent(event);
     }
 
     const outsideClick = (e:MouseEvent) =>{
@@ -84,7 +91,9 @@ const DropDown:FC<PropsA> = ({selected, onChange, options }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[open])
 
-  const handleChange = (e:string) => selected != e ? onChange(e) : null;
+  const handleChange = (value:string) => {
+    selected != value ? onChange({ target: { value }}) : null
+  };
   const handleOpen = () => setOpen( currentOpen =>{
     return !currentOpen;
   });
@@ -97,12 +106,13 @@ const DropDown:FC<PropsA> = ({selected, onChange, options }) => {
       </button>
       <motion.ul animate={animationControl} variants={variants} initial="init" className={styles.menu}>
         {options.map((item, index)=>{
-          return <li onMouseEnter={()=>setFocus(index)} key={index} 
-          className={`${styles.option} ${focus === index && styles.optionHover}`} onClick={()=>handleChange(item)}>{item}</li>
+          return <li onMouseEnter={()=>setFocus(index)} key={index}
+          className={`${styles.option} ${focus === index && styles.optionHover}`}
+          onClick={()=>handleChange(item)}>{item}</li>
         })}
       </motion.ul>
     </label>
-  ) 
+  )
 }
 
 export default DropDown;

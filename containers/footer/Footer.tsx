@@ -6,7 +6,7 @@ const Footer: NextPage = () =>{
     return (
         <footer className={styles.footer}>
             <div className={styles.footerContactus}>
-                <p>Contactanos al <a aria-label="Numero de celular para contactarnos" href="tel:+52777g5073272"> 7775073272</a></p>
+                <p>Contactanos al <a aria-label="Numero de celular para contactarnos" href="tel:+527775133642"> 7775133642 </a></p>
                 <p>O bien envianos un mensaje por whatsapp: **Logo Whatsapp**</p>
                 <p>
                     Siguenos en nuestras redes sociales:

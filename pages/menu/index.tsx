@@ -16,6 +16,7 @@ import { getOrderMenu } from '@ClientAPI/menu';
 // All types used
 import { TypeSlide } from '@MyTypes/Slide';
 import { Category, ByType, PropsMenu, Product } from '@MyTypes/menu'
+import InputText from 'components/inputText/InputText';
 
 const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
   const [orderProducts, setOrderProducts] = useState<Product[]>([]);
@@ -47,6 +48,7 @@ const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
   },[sortByType])
   
   useEffect(()=>{
+    console.log(sortByCategory);
     const reorderMenu = async () =>{
       const res = await getOrderMenu<Product[]>({
         category: sortByCategory, 
@@ -84,15 +86,14 @@ const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
             <div className={`${styles.formFood} text-2xl p-3`}>
               <div className={styles.sortFood}>
                 <p className='p-1 m-1'>Seleccionar categoria</p>
-                <DropDown onChange={(e)=>{setSortByCategory(e)}} selected={sortByCategory} options={['Todo','Favoritos' , 'Comida', 'Bebidas', 'Botanas']}></DropDown>
+                <DropDown onChange={(e)=>{setSortByCategory(e.target.value as any)}} selected={sortByCategory} options={['Todo','Favoritos' , 'Comida', 'Bebidas', 'Botanas']}></DropDown>
               </div>
               <div className={styles.searchSection}>
-                <p className='p-1 m-1'>Busca aqui</p>
-                <input type="search" name="inputfoodSearch" placeholder="Buscar" className={`${styles.inputfoodSearch} border border-gray-300 shadow-sm`} id="" />
+                <InputText displayName='Buscar' placeholder='Mojarras, Mezcal, Cocos...' type="search" name='Search'></InputText>
               </div>
               <div className={styles.selectFood}>
                 <p className='p-1 m-1'>Ordenar por</p>
-                <DropDown onChange={(e)=>{setSortByType(e)}} selected={sortByType} options={['Recomendados', 'Mejor Valorado', 'Menor a Mayor Precio', 'Mayor a Menor Precio']}></DropDown>
+                <DropDown onChange={(e)=>{setSortByType(e.target.value as any)}} selected={sortByType} options={['Recomendados', 'Mejor Valorado', 'Menor a Mayor Precio', 'Mayor a Menor Precio']}></DropDown>
               </div>
             </div>
           </div>

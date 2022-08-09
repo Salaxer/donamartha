@@ -9,11 +9,14 @@
     max-height: 38rem;
     height: 100%;
     border-radius: 5px;
-    box-shadow: 0 7px 16px 0 rgb(0, 0, 0, 20%), 0 1px 3px 0 rgb(0, 0, 0, 10%);
+    box-shadow: var(--shadow-30);
     display: flex;
     flex-direction: column;
     position: relative;
-    transition: all ease-in 0.2s;
+    transition: box-shadow ease-in 0.1s;
+}
+.cardFood:focus{
+    outline: 2px solid var(--maincolorblue-200-op-80);
 }
 .discount{
     position: absolute;
@@ -27,7 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow:0 7px 16px 0 rgb(0, 0, 0, 20%), 0 1px 3px 0 rgb(0, 0, 0, 10%);
+    box-shadow:0var(--shadow-30);
 }
 .discount span{
     position: relative;
@@ -42,7 +45,7 @@
     width: 100%;
     border-radius: 2px;
 }
-.cardFood__a{
+.cardFood__a {
     max-height: 28rem;
     width: 100%;
     overflow: hidden;
@@ -77,10 +80,10 @@
 
 @media screen and (min-width:538px) and (  max-width: 768px ) {
     .cardFood{
-        box-shadow: 0 1px 2px 0 rgb(60, 64, 67, 30%), 0 2px 6px 2px rgb(60, 64, 67, 15%);
+        box-shadow: var(--shadow-30);
     }
     .cardFood:hover{
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        box-shadow: var(--shadow-50);
     }
     .containcard{
         padding: 10px 5px;
@@ -88,10 +91,10 @@
 }
 @media screen and (min-width: 769px) {
     .cardFood{
-        box-shadow: 0 1px 2px 0 rgb(60, 64, 67, 30%), 0 2px 6px 2px rgb(60, 64, 67, 15%);
+        box-shadow: var(--shadow-30);
     }
     .cardFood:hover{
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        box-shadow: var(--shadow-50);
     }
     .containcard{
         padding: 10px 5px;

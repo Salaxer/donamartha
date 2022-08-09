@@ -1,15 +1,12 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import { useState } from 'react';
-
 import { AllScreen, AutoScroll } from '@Components';
-import { Greeting, Presentation, SeaFood, Drinks, Place, FindUs } from '@Containers';
+import { Greeting, Presentation, SeaFood, Place, FindUs } from '@Containers';
 
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
-
   return (
     <div>
       <Head>
@@ -23,24 +20,23 @@ const Home: NextPage = () => {
           <AllScreen> {/* index: 0*/}
             <Greeting/>
           </AllScreen>
-          <AllScreen className='bg-blue-100 overflow-hidden'>
+          <AllScreen>
             <Presentation/>
           </AllScreen>
-          <AllScreen className='bg-blue-100 overflow-hidden'>
+          <AllScreen>
             <SeaFood/>
           </AllScreen>
-          <AllScreen className='bg-blue-100 overflow-hidden'>
+          <AllScreen>
             <FindUs/>
           </AllScreen>
-          {/* <AllScreen className='bg-blue-100 overflow-hidden'>
+          {/* <AllScreen>
             <Drinks></Drinks>
           </AllScreen> */}
-          <AllScreen className='bg-blue-100 overflow-hidden'>
+          <AllScreen>
             <Place></Place>
           </AllScreen>
         </AutoScroll>
       </main>
-
     </div>
   )
 }
