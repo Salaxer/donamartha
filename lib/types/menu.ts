@@ -1,11 +1,13 @@
-import { NextApiRequest } from "next";
+import { makeTupleType } from "utils/customTypes";
 import { TypeSlide } from "./Slide";
 
 
 // Page Menu
+export const getCategory = makeTupleType('Todo','Favoritos','Comida','Bebidas','Botanas');
+export const getByType = makeTupleType('Recomendados','Mejor Valorado','Menor a Mayor Precio','Mayor a Menor Precio');
 
-export type Category = 'Todo' | 'Favoritos' | 'Comida' | 'Bebidas' | 'Botanas' | 'Botanas';
-export type ByType = 'Recomendados' | 'Mejor Valorado' | 'Menor a Mayor Precio' | 'Mayor a Menor Precio';
+export type Category = typeof getCategory[number];
+export type ByType = typeof getByType[number];
 
 export interface Order{
     category: Category,

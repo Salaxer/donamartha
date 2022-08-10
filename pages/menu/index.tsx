@@ -15,7 +15,7 @@ import { getSlide } from '@ServerAPI/slide';
 import { getOrderMenu } from '@ClientAPI/menu';
 // All types used
 import { TypeSlide } from '@MyTypes/Slide';
-import { Category, ByType, PropsMenu, Product } from '@MyTypes/menu'
+import { Category, getCategory, ByType, getByType, PropsMenu, Product } from '@MyTypes/menu'
 import InputText from 'components/inputText/InputText';
 
 const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
@@ -86,14 +86,14 @@ const Menu = ({dataCarousel, MenuProducts}:PropsMenu) => {
             <div className={`${styles.formFood} text-2xl p-3`}>
               <div className={styles.sortFood}>
                 <p className='p-1 m-1'>Seleccionar categoria</p>
-                <DropDown onChange={(e)=>{setSortByCategory(e.target.value as any)}} selected={sortByCategory} options={['Todo','Favoritos' , 'Comida', 'Bebidas', 'Botanas']}></DropDown>
+                <DropDown onChange={(e)=>{setSortByCategory(e.target.value)}} selected={sortByCategory} options={getCategory}></DropDown>
               </div>
               <div className={styles.searchSection}>
                 <InputText displayName='Buscar' placeholder='Mojarras, Mezcal, Cocos...' type="search" name='Search'></InputText>
               </div>
               <div className={styles.selectFood}>
                 <p className='p-1 m-1'>Ordenar por</p>
-                <DropDown onChange={(e)=>{setSortByType(e.target.value as any)}} selected={sortByType} options={['Recomendados', 'Mejor Valorado', 'Menor a Mayor Precio', 'Mayor a Menor Precio']}></DropDown>
+                <DropDown onChange={(e)=>{setSortByType(e.target.value)}} selected={sortByType} options={getByType}></DropDown>
               </div>
             </div>
           </div>

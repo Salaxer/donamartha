@@ -1,6 +1,6 @@
 
-import { ChangeEvent, FC, useEffect, useRef, useState } from 'react';
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon, XIcon } from '@heroicons/react/solid';
+import { useEffect, useRef, useState } from 'react';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
 import { Ripple } from '@Components'
 import styles from "./Dropdown.module.css";
 import { motion, useAnimation, Variants } from 'framer-motion';
@@ -17,20 +17,21 @@ const variants:Variants = {
   }
 }
 
-interface PropsA {
-  options: string[],
-  selected: string,
+interface PropsA<R> {
+  options: R[],
+  selected: R,
   /**
    * Retorna el valor seleccionado
    */
-  onChange: (event: { target: { value: string} }) => void;
+  onChange: (event: { target: { value: R} }) => void;
 }
 
 interface CodeOptions {
   [key: string]: (e:KeyboardEvent) => void;
 }
 
-const DropDown:FC<HTMLNativeProps<'select', PropsA>> = ({selected, onChange, options, ...props }) => {
+const DropDown = <T extends string>({selected, onChange, options, ...props }:HTMLNativeProps<'select', PropsA<T>>) => {
+
   const [open, setOpen] = useState<boolean>(false);
   const [focus, setFocus] = useState(0)
   const animationControl = useAnimation();
@@ -64,14 +65,12 @@ const DropDown:FC<HTMLNativeProps<'select', PropsA>> = ({selected, onChange, opt
     const outsideClick = (e:MouseEvent) =>{
       function assertIsNode(e: EventTarget | null): asserts e is Node {
         if (!e || !("nodeType" in e)) {
-            throw new Error(`Node expected`);
-          }
+					throw new Error(`Node expected`);
+				}
       }
       assertIsNode(e.target);
       // Do nothing if clicking ref's element or descendent elements
-      if (!refMenu.current || refMenu.current.contains(e.target)) {
-        return;
-      }
+      if (!refMenu.current || refMenu.current.contains(e.target)) return;
       handleOpen();
     }
 
@@ -91,18 +90,17 @@ const DropDown:FC<HTMLNativeProps<'select', PropsA>> = ({selected, onChange, opt
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[open])
 
-  const handleChange = (value:string) => {
+  const handleChange = (value:any) => {
     selected != value ? onChange({ target: { value }}) : null
   };
-  const handleOpen = () => setOpen( currentOpen =>{
-    return !currentOpen;
-  });
+  const handleOpen = () => setOpen( currentOpen => !currentOpen);
 
   return (
     <label ref={refMenu} className={styles.container}>
       <button onClick={handleOpen} className={styles.dropdown}>
         <Ripple color={'basic'}/> 
-        <p className='flex justify-between mt-1 mb-1 mr-4 ml-4 '>{selected} {open ? <ChevronUpIcon width={"20px"} /> : <ChevronDownIcon width={"20px"} /> }</p>
+				<p className='flex justify-between mt-1 mb-1 mr-4 ml-4 '>{selected} 
+				{open ? <ChevronUpIcon width={"20px"} /> : <ChevronDownIcon width={"20px"} /> }</p>
       </button>
       <motion.ul animate={animationControl} variants={variants} initial="init" className={styles.menu}>
         {options.map((item, index)=>{

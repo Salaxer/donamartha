@@ -17,22 +17,22 @@ const Home: NextPage = () => {
 
       <main id="main" className={styles.main}>
         <AutoScroll className='' autoScroll={true} onChangeScreen={()=>{}}>
-          <AllScreen> {/* index: 0*/}
+          <AllScreen className='overflow-hidden'>
             <Greeting/>
           </AllScreen>
-          <AllScreen>
+          <AllScreen className='overflow-hidden'>
             <Presentation/>
           </AllScreen>
-          <AllScreen>
+          <AllScreen className='overflow-hidden'>
             <SeaFood/>
           </AllScreen>
-          <AllScreen>
+          <AllScreen className='overflow-hidden'>
             <FindUs/>
           </AllScreen>
-          {/* <AllScreen>
+          {/* <AllScreen className='overflow-hidden'>
             <Drinks></Drinks>
           </AllScreen> */}
-          <AllScreen>
+          <AllScreen className='overflow-hidden'>
             <Place></Place>
           </AllScreen>
         </AutoScroll>
