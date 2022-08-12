@@ -15,8 +15,8 @@ import { FormValues, FormProps } from "./types";
  * import Form, { Validations } from "components/form"
  * import Button from "components/button"
  * 
- * const validations: Validations = { name: 
- *  [
+ * const validations: Validations = { 
+ * name:[
  *      { message: "This is required", validator: /^(?!\s*$).+/, type: "Error", onWriting: true }
  *  ]
  * }
@@ -50,7 +50,7 @@ const Form:FC<HTMLNativeProps<"form",FormProps>> = ({ children, loader, onSubmit
 				setNewValidation(false)
 			}, delay || 1000));
 			if (typeof CurrentError.validator === "function"){
-				if (!CurrentError.validator(value)) return formValues.current.error[name] = CurrentError;
+				if (CurrentError.validator(value)) return formValues.current.error[name] = CurrentError;
 			}else{
 				if (!CurrentError.validator.test(value)) return formValues.current.error[name] = CurrentError;
 			}

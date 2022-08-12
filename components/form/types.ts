@@ -15,8 +15,7 @@ type FormError = {
 
 /**
  * `key` must match with the name of the input to validate
- * @note You can add ilimitated 
- * @note you can sue ``` /^(?!\s*$).+/``` => regex to validate emty fields 
+ * @note you can use ``` /^(?!\s*$).+/``` => regex to validate emty fields 
  */
 export type Validations = {
     [key: string]: structureError[]
@@ -32,8 +31,9 @@ type structureError = {
      */
     type: string;
     /**
-     * `regex` that used to validate the value of the input.
+     * `regex` that used to validate the value of the input;
      * `Callback` pass the current value of the input as string and the Funtion must return a boolean to validate the field
+		 * must return true if there is an error 
      */
     validator: RegExp | ((value: string) => boolean);
     /**

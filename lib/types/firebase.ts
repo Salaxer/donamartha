@@ -1,5 +1,5 @@
 import { FirebaseError } from "firebase/app";
-import { DocumentData, DocumentSnapshot } from "firebase/firestore";
+import { DocumentData, DocumentSnapshot } from "firebase/firestore/lite";
 type MyError = {
     code: string;
     message: string;
