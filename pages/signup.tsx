@@ -8,7 +8,7 @@ import InputText from "components/inputText/InputText"
 
 import styles from 'styles/SignUp.module.css';
 import { useNotification } from "components/notification"
-import { newUser, updateUser } from '@ServerAPI/client/auth';
+import { addUserWithEmailAndPassword } from "@ServerAPI/client/signup"
 
 
 const validations: Validations = {
@@ -58,33 +58,21 @@ const SignUp:NextPage = () =>{
 
 	const registerUser = async (data: FormValues) =>{
 		setLoader(true);
-		const user = await newUser(data);
-		if (user.response) {
-			// setThe name here
-			const doneUpdated = await updateUser({displayName: data.name})
-			if (doneUpdated.error){
-				setLoader(false);
-				addNotification({
-					message: doneUpdated.error.message,
-					title: doneUpdated.error.code,
-					type: "error",
-					life: "infinite"
-				});
-			}else{
-				setLoader(false);
-				addNotification({
-					title: `Bienvenido ${data.name}`,
-					message: `se ha enviado un correo de verificacion a ${user.response.user.email}`,
-					type: "success",
-					life: "infinite"
-				});
-			}
-		}else if(user.error){
+		const { response, error } = await addUserWithEmailAndPassword(data);
+		if (error) {
 			setLoader(false);
 			addNotification({
-				message: user.error.message,
-				title: user.error.code,
+				message: error.message,
+				title: error.code,
 				type: "error",
+				life: "infinite"
+			});
+		}else if(response){
+			setLoader(false);
+			addNotification({
+				title: `Bienvenido ${data.name}`,
+				message: `se ha enviado un correo de verificacion a ${response.user.email}`,
+				type: "success",
 				life: "infinite"
 			});
 		}
@@ -109,7 +97,7 @@ const SignUp:NextPage = () =>{
 							<InputText border="normal" displayName="Correo Electronico" required name="email" type="email"
 								placeholder="example@gmail.com" inputMode="email"></InputText>
 							<InputText border="normal" displayName="Contraseña" required name="password" type="password"
-								inputMode="text"></InputText>
+								inputMode="text" autoComplete="current-password"></InputText>
 							<Button type="submit" styleButton="blue" name="sss"
 								size="lg" value="Confirmar" loader={loader}></Button>
 						</Form>

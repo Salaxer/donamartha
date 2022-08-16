@@ -1,9 +1,10 @@
-import { UserCredential } from "firebase/auth";
+import { User, UserCredential } from "firebase/auth";
 import { GlobalFirebaseResponse } from "./firebase";
 
 export interface RequestFirebaseClient{
-	newUser(data: newUSer): Promise<GlobalFirebaseResponse<UserCredential>>;
+	createUser(data: newUSer): Promise<GlobalFirebaseResponse<UserCredential>>;
 	updateUser(data: updateCurrentUser): Promise<GlobalFirebaseResponse<boolean>>;
+	sendVerification(user: User): Promise<GlobalFirebaseResponse<boolean>>;
 }
 
 interface updateCurrentUser {
@@ -14,5 +15,4 @@ interface updateCurrentUser {
 interface newUSer {
 	email: string;
 	password: string;
-	name: string;
 }

@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, UserCredential, updateProfile, sendEmailVerification } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, UserCredential, updateProfile, sendEmailVerification, User } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import initFirebase from "../firebase.init";
 
@@ -9,7 +9,7 @@ import { RequestFirebaseClient } from "@MyTypes/firebase-client";
 
 import { authErrosEn } from "utils/firebaseErrors";
 
-export const newUser:RequestFirebaseClient["newUser"] = async ({email, password, name}) =>{
+export const createUser:RequestFirebaseClient["createUser"] = async ({ email, password }) =>{
 	let response: GlobalFirebaseResponse<UserCredential> = { error: undefined, response: undefined }
 	initFirebase();
 	const auth = getAuth();
@@ -17,7 +17,6 @@ export const newUser:RequestFirebaseClient["newUser"] = async ({email, password,
 	const passwordHash = arraySha.toString()
 	try {
 		const userCredential = await createUserWithEmailAndPassword(auth, email, passwordHash);
-		await sendEmailVerification(userCredential.user);
 		response.response = userCredential;
 	} catch (error) {
 		const e = authErrosEn[(error as FirebaseError).code];
@@ -30,20 +29,35 @@ export const newUser:RequestFirebaseClient["newUser"] = async ({email, password,
 }
 
 export const updateUser:RequestFirebaseClient["updateUser"] = async ({ displayName, photoURL }) =>{
-	let response: GlobalFirebaseResponse<boolean> = { error: undefined, response: undefined };
 	initFirebase();
 	const auth = getAuth();
-	if (!auth.currentUser) return response;
+	if (!auth.currentUser) return {
+		error: {
+			code: "No autenticado",
+			message: "No estas autenticado, necesitas iniciar sesion para realizar esta accion"
+		}, 
+		response: false
+	};
 	try {
-		updateProfile(auth.currentUser, { displayName, photoURL }).then(()=>{
-			response.response = true;
-		});
-	} catch (error) {
-		const e = authErrosEn[(error as FirebaseError).code];
-		response.error = e || {
-			code: "error desconocido",
-			message: `porfavor reporta este error con el dueño de la pagina, code: ${(error as FirebaseError).code}`
+		await updateProfile(auth.currentUser, { displayName, photoURL });
+		return { response: true, error: undefined }
+	} catch (err) {
+		const e = err as FirebaseError;
+		return {
+			response: false,
+			error: authErrosEn[e.code] || {
+				code: "error desconocido",
+				message: `porfavor reporta este error con el dueño de la pagina, code: ${e.code || 0o0000}`
+			}
 		}
 	}
-	return response;
+}
+
+export const sendVerification:RequestFirebaseClient["sendVerification"] = async ( user ) =>{
+	try {
+		await sendEmailVerification(user, { url: "https://donamartha.com.mx/signin" });
+		return ({ response: true, error: undefined });
+	} catch {
+		return ({ response: false, error: { code: "asd", message: "" } });
+	}
 }

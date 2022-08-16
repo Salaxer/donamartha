@@ -4,7 +4,6 @@ import {
     getDocs,
     doc,
     DocumentData,
-    DocumentSnapshot,
     getDoc, getFirestore, 
     QueryDocumentSnapshot 
 } from "firebase/firestore";
@@ -18,34 +17,34 @@ const db = getFirestore(getApp());
 const menuRef = collection(db, "Menu");
 
 export const getMenu:RequestFirebase["getMenu"] = async () =>{
-    let response: QueryDocumentSnapshot<DocumentData>[] = [];
-    let error;
-    try {
-        const querySnapshot = await getDocs(menuRef);
-        response =  querySnapshot.docs;
-    } catch (e) {
-        e instanceof FirebaseError ? error = e : error = {code: "Error desconocido", message: "Por favor comuniquese con el dueño de la app"};
-    }
-    return {
-        response,
-        error,
-    };
+	let response: QueryDocumentSnapshot<DocumentData>[] = [];
+	let error;
+	try {
+		const querySnapshot = await getDocs(menuRef);
+		response =  querySnapshot.docs;
+	} catch (e) {
+		e instanceof FirebaseError ? error = e : error = {code: "Error desconocido", message: "Por favor comuniquese con el dueño de la app"};
+	}
+	return {
+		response,
+		error,
+	};
 }
 
 export const getItemMenu:RequestFirebase["getItemMenu"] = async (id) =>{
-    let response;
-    let error; 
-    const docRef = doc(db, "Menu", id);
-    try {
-        const docSnap = await getDoc(docRef);
-        response =  docSnap;
-    } catch (e) {
-        e instanceof FirebaseError ? error = e : error ={code: "Error desconocido", message: "Por favor comuniquese con el dueño de la app"};
-    }
-    return {
-        response,
-        error,
-    };
+	let response;
+	let error; 
+	const docRef = doc(db, "Menu", id);
+	try {
+		const docSnap = await getDoc(docRef);
+		response =  docSnap;
+	} catch (e) {
+		e instanceof FirebaseError ? error = e : error ={code: "Error desconocido", message: "Por favor comuniquese con el dueño de la app"};
+	}
+	return {
+		response,
+		error,
+	};
 }
 
 export async function getAllItemsIds() {
