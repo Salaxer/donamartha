@@ -68,88 +68,88 @@ const InputText = forwardRef(
 		}: PropsInput,
 		ref: LegacyRef<HTMLInputElement>
 	) => {
-		const [{ errorColor, focusColor, normalColor }, setColor] = useState<Colors>(defaultColors);
-		useEffect(() => {
-			if (colorStyles) {
-				setColor({
-					...defaultColors,
-					...getColor(colorStyles),
-				});
-			}
-			// eslint-disable-next-line react-hooks/exhaustive-deps
-		}, []);
+	const [{ errorColor, focusColor, normalColor }, setColor] = useState<Colors>(defaultColors);
+	useEffect(() => {
+		if (colorStyles) {
+			setColor({
+				...defaultColors,
+				...getColor(colorStyles),
+			});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
-		const [upName, setUpName] = useState<boolean>(false);
+	const [upName, setUpName] = useState<boolean>(false);
 
-		const handleName = (e: any) => {
-			if (e.type == "focus") return setUpName(true);
-			if (e.type == "blur" && e.target.value.length === 0)
-				return setUpName(false);
-			if (e.type == "change" && e.target.value.length > 0)
-				return setUpName(true);
-		};
+	const handleName = (e: any) => {
+		if (e.type == "focus") return setUpName(true);
+		if (e.type == "blur" && e.target.value.length === 0)
+			return setUpName(false);
+		if (e.type == "change" && e.target.value.length > 0)
+			return setUpName(true);
+	};
 
-		return (
-			<motion.label
-				transition={{ duration: 0.4 }}
-				animate={errorForm ? "error" : upName ? "focus" : "normal"}
-				variants={varLabel}
-				onChange={handleName}
-				onFocus={handleName}
-				onBlur={handleName}
+	return (
+		<motion.label
+			transition={{ duration: 0.4 }}
+			animate={errorForm ? "error" : upName ? "focus" : "normal"}
+			variants={varLabel}
+			onChange={handleName}
+			onFocus={handleName}
+			onBlur={handleName}
+			style={{
+				border: `1px solid ${
+					errorForm
+						? errorColor.border
+						: upName
+						? focusColor.border
+						: normalColor.border
+				}`,
+				boxShadow: `${
+					errorForm
+						? errorColor.shadow
+						: upName
+						? focusColor.shadow
+						: normalColor.shadow
+				} 0px 0px 3px 3px`,
+			}}
+			className={`${styles.container} border-${border}`}
+		>
+			<motion.span
+				animate={upName ? "up" : "center"}
 				style={{
-					border: `1px solid ${
-						errorForm
-							? errorColor.border
-							: upName
-							? focusColor.border
-							: normalColor.border
-					}`,
-					boxShadow: `${
-						errorForm
-							? errorColor.shadow
-							: upName
-							? focusColor.shadow
-							: normalColor.shadow
-					} 0px 0px 3px 3px`,
+					border: upName
+						? `1px solid ${errorForm ? errorColor.border : focusColor.border}`
+						: "none",
+					boxShadow: upName
+						? `${
+								errorForm ? errorColor.shadow : focusColor.shadow
+							} 0px 0px 2px 1px`
+						: "none",
+					backgroundColor: upName ? "white" : "none",
 				}}
-				className={`${styles.container} border-${border}`}
+				variants={varSpanName}
+				className={`${styles.container__name}`}
 			>
-				<motion.span
-					animate={upName ? "up" : "center"}
-					style={{
-						border: upName
-							? `1px solid ${errorForm ? errorColor.border : focusColor.border}`
-							: "none",
-						boxShadow: upName
-							? `${
-									errorForm ? errorColor.shadow : focusColor.shadow
-							  } 0px 0px 2px 1px`
-							: "none",
-						backgroundColor: upName ? "white" : "none",
-					}}
-					variants={varSpanName}
-					className={`${styles.container__name}`}
-				>
-					{displayName}
-				</motion.span>
-				<motion.span
-					animate={errorForm ? "error" : "normal"}
-					transition={{ delay: 0.4, duration: 0.3 }}
-					variants={varSpanError}
-					className={styles.container__error}
-					style={{ color: errorColor.border }}
-				>
-					{errorForm}
-				</motion.span>
-				<input
-					{...props}
-					ref={ref}
-					placeholder={upName ? placeholder : ""}
-					className={`${styles.container__input} border-${border}`}
-				/>
-			</motion.label>
-		);
+				{displayName}
+			</motion.span>
+			<motion.span
+				animate={errorForm ? "error" : "normal"}
+				transition={{ delay: 0.4, duration: 0.3 }}
+				variants={varSpanError}
+				className={styles.container__error}
+				style={{ color: errorColor.border }}
+			>
+				{errorForm}
+			</motion.span>
+			<input
+				{...props}
+				ref={ref}
+				placeholder={upName ? placeholder : ""}
+				className={`${styles.container__input} border-${border}`}
+			/>
+		</motion.label>
+	);
 	}
 );
 InputText.displayName = "InputSalaxer";

@@ -1,5 +1,3 @@
-remove headlessui, doesnt work for me, already done :)
-
 try to create a progressbar as a component and then remove nextJS progressbar
 
 finaly try to create a component like swiper using motion, to remove swiper.
