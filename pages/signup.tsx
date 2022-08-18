@@ -93,11 +93,11 @@ const SignUp:NextPage = () =>{
 							className={styles.form} validations={validations} 
 							onSubmit={registerUser}>
 							<InputText border="normal" displayName="Nombre" required name="name" type="text" 
-								placeholder="Hector Salazar" inputMode="text"></InputText>
+								placeholder="Hector Salazar" autoComplete="" inputMode="text"></InputText>
 							<InputText border="normal" displayName="Correo Electronico" required name="email" type="email"
-								placeholder="example@gmail.com" inputMode="email"></InputText>
+								placeholder="example@gmail.com" autoComplete="username" inputMode="email"></InputText>
 							<InputText border="normal" displayName="Contraseña" required name="password" type="password"
-								inputMode="text" autoComplete="current-password"></InputText>
+								inputMode="text" autoComplete="new-password"></InputText>
 							<Button type="submit" styleButton="blue" name="sss"
 								size="lg" value="Confirmar" loader={loader}></Button>
 						</Form>

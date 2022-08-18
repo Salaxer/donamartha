@@ -12,7 +12,7 @@ import {
 	MenuIcon,
 	XIcon,
 } from "@heroicons/react/solid";
-import { LoginIcon } from "@heroicons/react/outline";
+import { LoginIcon, UserIcon } from "@heroicons/react/outline";
 
 import { motion, useAnimation, Variants } from "framer-motion";
 
@@ -20,6 +20,7 @@ import styles from "./Header.module.css";
 import { Ripple } from "@Components";
 import { useIsMobile } from "utils/hooks/mediaQuery";
 import { useOnClickOutside } from "utils/hooks/outsideClick";
+import { useAppSelector } from "state/hooks/hooks";
 
 const variants: Variants = {
 	navInitial: {
@@ -100,6 +101,8 @@ const Header: NextPage = () => {
 	const control = useAnimation();
 	useOnClickOutside(ref, () => setBar(false));
 	const router = useRouter();
+	
+	const user = useAppSelector((state)=> state.user)
 
 	useEffect(() => {
 		isMobile ? control.set("navMobile") : control.set("navInitial");
@@ -162,32 +165,51 @@ const Header: NextPage = () => {
 								</motion.li>
 							);
 						})}
+						{user === null ?
 						<motion.li
+						initial="navInitial"
+						whileHover={isMobile ? "" : "navHover"}
+						animate={control}
+						className={`${isRoute("/signup")}`}
+					>
+						<Link href="/signup" >
+							<a
+								aria-label={`enter para ir a iniciar sesion`}
+							>
+								<LoginIcon width="25px" />
+								<motion.span
+									variants={variants}
+									className={styles.information}
+								>
+									Unete
+								</motion.span>
+								<Ripple color="blue"></Ripple>
+							</a>
+						</Link>
+					</motion.li>
+						 : 
+						 <motion.li
 							initial="navInitial"
 							whileHover={isMobile ? "" : "navHover"}
 							animate={control}
-							className={`${isRoute("/signup")}`}
+							className={`${isRoute("/profile")}`}
 						>
 							<Link href="/signup" >
 								<a
 									aria-label={`enter para ir a iniciar sesion`}
 								>
-									<LoginIcon width="25px" />
+									<UserIcon width="25px" />
 									<motion.span
 										variants={variants}
 										className={styles.information}
 									>
-										Unete
+										Perfil
 									</motion.span>
 									<Ripple color="blue"></Ripple>
 								</a>
 							</Link>
 						</motion.li>
-						{/* {user === null ?
-                    <li><Link href="/signup" aria-label="Unete a nosotros"><i className="fas fa-sign-in-alt"></i><span className="information">Unete</span></Link></li>:
-                    user.photoURL === undefined ? <li> <LoaderCircle color="#0096C1" background="transparent" position="static" size="30"/> </li>:
-                    <li><Link href="/profile" aria-label="Perfil de usuario"><Image src={user.photoURL} alt={`foto de ${user.displayName}`} /><span className="information">Perfil</span></Link></li>
-                    } */}
+						}
 					</ul>
 				</motion.nav>
 			</header>

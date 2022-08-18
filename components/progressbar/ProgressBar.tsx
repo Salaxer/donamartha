@@ -20,7 +20,7 @@ const animationsV: Variants = {
 interface ProgressBarType {
 	automatic?: boolean,
 	animate: boolean;
-	options: {
+	options?: {
 		readonly asd: string
 	}
 }
@@ -47,7 +47,6 @@ const ProgressBar: FC<ProgressBarType> = ({ automatic, animate }) =>{
 		let multiply = 30;
 		let currentWidth = 0;
 		refInteval.current = setInterval(()=>{
-			console.log(currentWidth);
 			if (currentWidth >= 100) {
 				stopAnimation();
 				return 0;

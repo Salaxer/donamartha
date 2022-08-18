@@ -9,40 +9,26 @@ import Header from '../containers/header/Header'
 
 import NotificationProvider from 'components/notification';
 import ProgressBar from 'components/progressbar';
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+
+import store from '../state/store'
+import { Provider } from 'react-redux'
+import useRouterChange from 'utils/hooks/routerChange'
+import ObserverUser from 'components/observerUser'
 
 function MyApp({ Component, pageProps }: AppProps) {
-	const router = useRouter();
-	const [ loading, setLoading ] = useState(false);
-	useEffect(()=>{
-		const handleStart = () => {
-			setLoading(true)
-		};
-		const handleComplete = () => {
-			setTimeout(()=> {
-				setLoading(false)
-			}, 1000)
-		};
-		router.events.on("routeChangeStart", handleStart);
-		router.events.on("routeChangeComplete", handleComplete);
-		router.events.on("routeChangeError", handleComplete);
-		return ()=>{
-			router.events.off("routeChangeStart", handleStart);
-			router.events.off("routeChangeComplete", handleComplete);
-			router.events.off("routeChangeError", handleComplete);	
-		}
-	}, [router.asPath, router.events])
 	
+	const loading = useRouterChange();
+
   return (
-    <>
-			<ProgressBar animate={loading} options={{ asd: ""}}></ProgressBar>
+		<Provider store={store}>
+			<ObserverUser></ObserverUser>
+			<ProgressBar animate={loading}></ProgressBar>
       <NotificationProvider>
         <Header></Header>
         <Component {...pageProps} />
         <Footer></Footer>
       </NotificationProvider>
-    </>
+		</Provider>
   )
 }
 
