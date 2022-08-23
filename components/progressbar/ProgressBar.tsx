@@ -40,9 +40,9 @@ const ProgressBar: FC<ProgressBarType> = ({ automatic, animate }) =>{
 				}, 250)
 			}
 		}
-		setDisplay(true);
 		if (!animate) return stopAnimation();
-
+		
+		setDisplay(true);
 		controlAnimation.start("initial");
 		let multiply = 30;
 		let currentWidth = 0;

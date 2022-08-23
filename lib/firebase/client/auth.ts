@@ -1,4 +1,11 @@
-import { getAuth, createUserWithEmailAndPassword, UserCredential, updateProfile, sendEmailVerification, User } from "firebase/auth";
+import { getAuth, 
+	createUserWithEmailAndPassword,
+	UserCredential,
+	updateProfile,
+	sendEmailVerification,
+	signOut,
+	signInWithEmailAndPassword
+} from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import initFirebase from "../firebase.init";
 
@@ -59,5 +66,29 @@ export const sendVerification:RequestFirebaseClient["sendVerification"] = async 
 		return ({ response: true, error: undefined });
 	} catch {
 		return ({ response: false, error: { code: "asd", message: "" } });
+	}
+}
+
+export const signOutUser = ()=>{
+	initFirebase();
+	const auth = getAuth();
+	signOut(auth);
+}
+
+export const signInUser: RequestFirebaseClient["signInUser"] = async ({ email, password}) =>{
+	initFirebase();
+	const auth = getAuth();
+	try {
+		const user = await signInWithEmailAndPassword(auth, email, password)
+		return ({ response: user, error: undefined });
+	} catch (err) {
+		const e = err as FirebaseError;
+		return {
+			response: undefined,
+			error: authErrosEn[e.code] || {
+				code: "error desconocido",
+				message: `porfavor reporta este error con el dueño de la pagina, code: ${e.code || 0o0000}`
+			}
+		}
 	}
 }

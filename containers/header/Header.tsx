@@ -9,57 +9,31 @@ import {
 	TemplateIcon,
 	BookmarkIcon,
 	TruckIcon,
-	MenuIcon,
-	XIcon,
+	UserIcon
 } from "@heroicons/react/solid";
-import { LoginIcon, UserIcon } from "@heroicons/react/outline";
+import { LoginIcon } from "@heroicons/react/outline";
 
-import { motion, useAnimation, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 import styles from "./Header.module.css";
 import { Ripple } from "@Components";
 import { useIsMobile } from "utils/hooks/mediaQuery";
-import { useOnClickOutside } from "utils/hooks/outsideClick";
 import { useAppSelector } from "state/hooks/hooks";
 
-const variants: Variants = {
-	navInitial: {
-		scale: 0.7,
-		opacity: 0,
-		y: 40,
-		transition: {
-			duration: 0.3,
-		},
-	},
-	navHover: {
-		scale: 1,
-		opacity: 1,
-		y: 50,
-		transition: {
-			delay: 0.4,
-			duration: 0.8,
-			type: "spring",
-			bounce: 0.5,
-		},
-	},
-	navMobile: {
-		scale: 1,
-		opacity: 1,
-		y: 0,
-	},
-};
 
-const NavVariants: Variants = {
-	initial: {
-		left: "-75%",
+const focusLinkVariant: Variants = {
+	focus: {
+		width: "70%",
+		opacity: 1,
+		display: "block"
 	},
-	open: {
-		left: "-5%",
-	},
-	close: {
-		left: "-75%",
-	},
-};
+	noFocus: {
+		opacity: 0,
+		width: "0%",
+		display: "none"
+	}
+}
+
 interface NavBar {
 	id: number;
 	icon: ReactElement<any, any>;
@@ -85,133 +59,72 @@ const navbar: NavBar[] = [
 		id: 3,
 		title: "Pedidos",
 	},
-	{
-		href: "/reservation",
-		icon: <BookmarkIcon width="25px" />,
-		id: 4,
-		title: "Reservaciones",
-	},
+	// {
+	// 	href: "/reservation",
+	// 	icon: <BookmarkIcon width="25px" />,
+	// 	id: 4,
+	// 	title: "Reservaciones",
+	// },
 ];
 
 const Header: NextPage = () => {
-	// Create a ref that we add to the element for which we want to detect outside clicks
-	const ref = useRef<HTMLInputElement>(null);
-	const [bar, setBar] = useState<boolean>(false);
+
 	const isMobile = useIsMobile();
-	const control = useAnimation();
-	useOnClickOutside(ref, () => setBar(false));
 	const router = useRouter();
-	
 	const user = useAppSelector((state)=> state.user)
 
-	useEffect(() => {
-		isMobile ? control.set("navMobile") : control.set("navInitial");
-	}, [control, isMobile]);
-
-	const isRoute = (path: string): string => {
-		return router.pathname === path ? styles.focusPage : "";
-	};
+	const isRoute = (path: string) =>  router.pathname === path ? styles.focusPage : "";
+	const isFocus = (path: string) =>  router.pathname === path ? "focus" : "noFocus";
 
 	return (
 		<>
-			<header ref={ref} id="header" className={styles.header}>
-				<Image
-			 		className={styles.header__picture__img} src="/Blogo.png" alt="Logo del restaurante" height={50} width={155}
-				/>
-				<div className={styles.header__mobile}>
-					{!bar ? (
-						<div
-							onClick={() => setBar(true)}
-							className={styles.header__mobile__open}
-						>
-							<MenuIcon width="30px" />
-						</div>
-					) : (
-						<div
-							onClick={() => setBar(false)}
-							className={styles.header__mobile__close}
-						>
-							<XIcon width="30px" />
-						</div>
-					)}
-				</div>
-				<motion.nav
-					className={styles.header__nav}
-					variants={NavVariants}
-					initial="initial"
-					animate={bar ? "open" : "close"}
-				>
-					<ul onClick={() => setBar(false)}>
-						{navbar.map((item, index) => {
-							return (
-								<motion.li
-									key={`navbar_item${index}`}
-									whileHover={isMobile ? "" : "navHover"}
-									initial="navInitial"
-									animate={control}
-									className={`${isRoute(item.href)}`}
-								>
+			<header id="header" className={styles.header}>
+				<Image className={styles.header__img} src="/Blogo.png" alt="Logo del restaurante" height={50} width={155}/>
+				<nav className={styles.header__nav}>
+					<ul>
+						{
+							navbar.map((item, index) => (
+								<motion.li key={`navbar_item${index}`} whileHover={isMobile ? "" : "navHover"}>
 									<Link href={item.href}>
-										<a
-											aria-label={`enter para ir a ${item.title}`}
-										>
+										<a aria-disabled={(isRoute(item.href).length > 0)} aria-label={`enter para ir a ${item.title}`} className={`${isRoute(item.href)}`}>
 											{item.icon}
-											<motion.span variants={variants} className={styles.information}>
+											<motion.span initial="noFocus" animate={isFocus(item.href)} variants={focusLinkVariant} className={styles.information}>
 												{item.title}
 											</motion.span>
 											<Ripple color="blue"></Ripple>
 										</a>
 									</Link>
 								</motion.li>
-							);
-						})}
-						{user === null ?
-						<motion.li
-						initial="navInitial"
-						whileHover={isMobile ? "" : "navHover"}
-						animate={control}
-						className={`${isRoute("/signup")}`}
-					>
-						<Link href="/signup" >
-							<a
-								aria-label={`enter para ir a iniciar sesion`}
-							>
-								<LoginIcon width="25px" />
-								<motion.span
-									variants={variants}
-									className={styles.information}
-								>
-									Unete
-								</motion.span>
-								<Ripple color="blue"></Ripple>
-							</a>
-						</Link>
-					</motion.li>
-						 : 
-						 <motion.li
-							initial="navInitial"
-							whileHover={isMobile ? "" : "navHover"}
-							animate={control}
-							className={`${isRoute("/profile")}`}
-						>
-							<Link href="/signup" >
-								<a
-									aria-label={`enter para ir a iniciar sesion`}
-								>
-									<UserIcon width="25px" />
-									<motion.span
-										variants={variants}
-										className={styles.information}
-									>
-										Perfil
-									</motion.span>
-									<Ripple color="blue"></Ripple>
-								</a>
-							</Link>
-						</motion.li>
+							))
+						}
+						{
+							user === null ?
+							<motion.li whileHover={isMobile ? "" : "navHover"}>
+								<Link href="/signin" >
+									<a aria-disabled={(isRoute("/signin").length > 0)} aria-label={`enter para ir a iniciar sesion`} className={`${isRoute("/signin")}`}>
+										<LoginIcon width="25px" />
+										<motion.span initial="noFocus" animate={isFocus("/signin")} variants={focusLinkVariant} className={styles.information}>
+											Inicia Sesion
+										</motion.span>
+										<Ripple color="blue"></Ripple>
+									</a>
+								</Link>
+							</motion.li>
+							: 
+							<motion.li whileHover={isMobile ? "" : "navHover"}>
+								<Link href="/profile" >
+									<a aria-disabled={(isRoute("/profile").length > 0)} aria-label={`enter para ir a iniciar sesion`} className={`${isRoute("/signup")}`}>
+										<UserIcon width="25px" />
+										<motion.span initial="noFocus" animate={isFocus("/profile")} variants={focusLinkVariant} className={styles.information}>
+											Perfil
+										</motion.span>
+										<Ripple color="blue"></Ripple>
+									</a>
+								</Link>
+							</motion.li>
 						}
 					</ul>
-				</motion.nav>
+				</nav>
 			</header>
 			<div className={styles.falseHeader}>Aqui no hay nada</div>
 		</>

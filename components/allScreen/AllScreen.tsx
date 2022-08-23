@@ -17,7 +17,7 @@ interface AllScreenProps{
  */
 const allScreen:FC<AllScreenProps> = ({className, children, resHeight, minHeight }) =>{
     return(
-        <div className={`${className && className} w-full flex justify-center items-center`} style={{ ...(minHeight ? {minHeight: `calc(100vh - ${resHeight || 65}px)`} : {height: `calc(100vh - ${resHeight || 65}px)`}) }}>
+        <div className={`${className && className} w-full flex justify-center items-center`} style={{ ...(minHeight ? {minHeight: `calc(100vh - ${resHeight || 130}px)`} : {height: `calc(100vh - ${resHeight || 130}px)`}) }}>
             {children}
         </div>
     )

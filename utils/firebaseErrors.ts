@@ -7,6 +7,10 @@ interface AuthError {
 	[key: string]: CodeError,
 }
 export const authErrosEn: AuthError = {
+	"auth/wrong-password":{
+		code: "Wrong Password",
+		message: "The Password is wrong, please correct the password"
+	},
 	"auth/claims-too-large": {
 		code: "claims too large",
 		message: "The claims payload provided to setCustomUserClaims() exceeds the maximum allowed size of 1000 bytes.",
