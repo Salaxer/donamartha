@@ -78,8 +78,10 @@ export const signOutUser = ()=>{
 export const signInUser: RequestFirebaseClient["signInUser"] = async ({ email, password}) =>{
 	initFirebase();
 	const auth = getAuth();
+	const arraySha = SHA256(password);
+	const passwordHash = arraySha.toString()
 	try {
-		const user = await signInWithEmailAndPassword(auth, email, password)
+		const user = await signInWithEmailAndPassword(auth, email, passwordHash)
 		return ({ response: user, error: undefined });
 	} catch (err) {
 		const e = err as FirebaseError;

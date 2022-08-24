@@ -2,13 +2,15 @@ import { NextPage } from "next"
 import { useState } from "react"
 
 import { AllScreen, Button, MetaTags } from "@Components"
-import Card from "components/card"
+import Card, { CardFooter } from "components/card"
 import Form, { Validations } from "components/form"
 import InputText from "components/inputText/InputText"
 
 import styles from 'styles/SignUp.module.css';
 import { useNotification } from "components/notification"
 import { addUserWithEmailAndPassword } from "@ServerAPI/client/signup"
+import Link from "next/link"
+import { useRouter } from "next/router"
 
 
 const validations: Validations = {
@@ -55,6 +57,7 @@ const SignUp:NextPage = () =>{
 
 	const [loader, setLoader] = useState<boolean>(false);
 	const { addNotification } = useNotification();
+	const router = useRouter();
 
 	const registerUser = async (data: FormValues) =>{
 		setLoader(true);
@@ -69,12 +72,7 @@ const SignUp:NextPage = () =>{
 			});
 		}else if(response){
 			setLoader(false);
-			addNotification({
-				title: `Bienvenido ${data.name}`,
-				message: `se ha enviado un correo de verificacion a ${response.user.email}`,
-				type: "success",
-				life: "infinite"
-			});
+			router.push(`/emailsended?id=${response.user.uid}`);
 		}
 	}
 	
@@ -87,7 +85,14 @@ const SignUp:NextPage = () =>{
 			title='Unete a nosotros'></MetaTags>
 			<main>
 				<AllScreen>
-					<Card header={ { align: "center", value: "Unete"}} footer="Hola como estas">
+					<Card header={ { align: "center", value: "Unete"}}>
+						<CardFooter>
+							<h3> ¿Ya tienes una cuenta?, 
+								<Link href={"/signin"}>
+									<a>Inicia Sesion aqui</a>
+								</Link>
+							</h3>
+						</CardFooter>
 						<h2>Registrate con correo y contraseña</h2>
 						<Form autoComplete="on" stopFirstError loader={loader}
 							className={styles.form} validations={validations} 

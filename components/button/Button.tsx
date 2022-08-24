@@ -22,7 +22,7 @@ interface PropsButton extends ButtomElement {
 
 const Button = forwardRef(({  value, iconL, iconR, className, size = "md", ripple, styleButton = "basic", loader= false, ...props }: PropsButton, ref: LegacyRef<HTMLButtonElement>) =>{
     return(
-        <button {...props} ref={ref} disabled={loader} className={`${className} ${styles.button} ${styles[styleButton]} ${styles[size]}`}>
+        <button {...props} ref={ref} disabled={loader} className={`${styles.button} ${styles[styleButton]} ${styles[size]} ${className && className}`}>
             {loader && <Loader background='inherit' position='absolute'></Loader>}
             {iconL && <span style={{width: "20px"}}>{iconL}</span>}
             {value}

@@ -1,47 +1,86 @@
 import styles from './Card.module.css';
-import { FC } from 'react'
+import { Children, FC, ReactNode, isValidElement, useState, ReactElement, JSXElementConstructor, useEffect } from 'react'
 
-type HeaderProps = string  | {
+type OptionsProps = {
 	align: "start" | "center" | "end",
 	value: string,
 }
 
 type CardProps = {
-	children: any | CardHeaderProps,
-	header?: HeaderProps,
-	footer?: string,
+	children: ReactNode,
+	header?: OptionsProps,
+	footer?: OptionsProps,
+	className?: string;
 }
 
-const Card:FC<CardProps> = ({ header, footer, children }) =>{
+const Card:FC<CardProps> = ({ header, footer, children, className }) =>{
+
+	const [reactHeader, setReactHeader] = useState<ReactElement<any, string | JSXElementConstructor<any>> | null>(null)
+	const [reactFooter, setReactFooter] = useState<ReactElement<any, string | JSXElementConstructor<any>> | null>(null)
+	const [newChild, setNewChild] = useState<ReactNode[] | null | undefined>(null)
+	useEffect(()=>{
+		setNewChild(
+			Children.map(children, (child)=>{
+				if (isValidElement(child)){
+					if(typeof child.type !== "string"){
+						if (child.type.name === "CardHeader") {
+							setReactHeader(child)
+							return null;
+						}
+						if (child.type.name === "CardFooter") {
+							setReactFooter(child)
+							return null;
+						}
+					}
+					return child;
+				}
+				return null;
+			})
+		)
+	},[children])
+
 	return (
-		<section className={styles.container}>
-			{header && <CardHeader header={header}/>}
+		<section className={`${styles.container} ${className && className}`}>
+			<header className={styles.container__header}>
+				{
+					reactHeader ? reactHeader : 
+					(
+						header && <h1 style={{textAlign: header.align }}>{header.value}</h1>
+					)
+				}
+			</header>
 			<div className={styles.container__body}>
-				{children}
+				{newChild}
 			</div>
-			{footer && <footer>{footer}</footer>}
+			<footer>
+			{
+				reactFooter ? reactFooter : (
+					footer && <h3 style={{textAlign: footer.align }}>{footer.value}</h3>
+				)
+			}
+			</footer>
 		</section>
 	)
 }
 
-type CardHeaderProps = {
-	children: any;
-	header?: undefined
-} | {
-	children?: never;
-	header: HeaderProps
-};
 
-export const CardHeader:FC<CardHeaderProps> = ( { children, header } ) =>{
+export const CardHeader:FC<{ children: any}> = ( { children } ) =>{
 	return (
 		<>
-			{ typeof header == "string" ? 
-			<header className={styles.container__header}><h1>{header}</h1></header>:
-			header && <header className={styles.container__header} style={{textAlign: header.align}}><h1>{header.value}</h1></header>
-			}
 			{children && children}
 		</>
 	)
 }
+CardHeader.displayName = "CardHeader";
+
+
+export const CardFooter:FC<{ children: any}> = ( { children } ) =>{
+	return (
+		<>
+			{children && children}
+		</>
+	)
+}
+CardFooter.displayName = "CardFooter";
 
 export default Card;

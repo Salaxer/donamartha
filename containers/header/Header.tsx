@@ -104,7 +104,7 @@ const Header: NextPage = () => {
 									<a aria-disabled={(isRoute("/signin").length > 0)} aria-label={`enter para ir a iniciar sesion`} className={`${isRoute("/signin")}`}>
 										<LoginIcon width="25px" />
 										<motion.span initial="noFocus" animate={isFocus("/signin")} variants={focusLinkVariant} className={styles.information}>
-											Inicia Sesion
+											Acceder
 										</motion.span>
 										<Ripple color="blue"></Ripple>
 									</a>
@@ -113,7 +113,8 @@ const Header: NextPage = () => {
 							: 
 							<motion.li whileHover={isMobile ? "" : "navHover"}>
 								<Link href="/profile" >
-									<a aria-disabled={(isRoute("/profile").length > 0)} aria-label={`enter para ir a iniciar sesion`} className={`${isRoute("/signup")}`}>
+									<a aria-disabled={(isRoute("/profile").length > 0)} aria-label={`enter para ir a iniciar sesion`} 
+									className={`${isRoute("/profile")}`}>
 										<UserIcon width="25px" />
 										<motion.span initial="noFocus" animate={isFocus("/profile")} variants={focusLinkVariant} className={styles.information}>
 											Perfil

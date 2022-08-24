@@ -25,6 +25,7 @@ export const userSlice = createSlice({
     },
 		deleteUser: (state) => {
       state = null;
+			return state;
     },
   },
 })

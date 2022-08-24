@@ -1,4 +1,5 @@
 import { CSSProperties, FC } from "react";
+import { useIsMobile } from "utils/hooks/mediaQuery";
 
 interface AllScreenProps{
     className?: string ,
@@ -11,16 +12,22 @@ interface AllScreenProps{
 }
 
 /**
- * allScreen 
+ * AllScreen 
  * @param className: to use your custom styles
  * @returns a div with a height of all the view content, and width with all view content and the children will show in the middle of the element
  */
-const allScreen:FC<AllScreenProps> = ({className, children, resHeight, minHeight }) =>{
-    return(
-        <div className={`${className && className} w-full flex justify-center items-center`} style={{ ...(minHeight ? {minHeight: `calc(100vh - ${resHeight || 130}px)`} : {height: `calc(100vh - ${resHeight || 130}px)`}) }}>
-            {children}
-        </div>
-    )
+const AllScreen:FC<AllScreenProps> = ({className, children, resHeight, minHeight }) =>{
+	const mobile = useIsMobile();
+	return(
+		<div className={`${className && className} w-full flex justify-center items-center`} 
+		style={
+			{ ...(minHeight ? 
+				{minHeight: `calc(100vh - ${resHeight || (mobile ? 110 : 60)}px)`} : 
+				{height: `calc(100vh - ${resHeight || (mobile ? 110 : 60)}px)`}) 
+			}}>
+			{children}
+		</div>
+	)
 }
 
-export default allScreen;
+export default AllScreen;

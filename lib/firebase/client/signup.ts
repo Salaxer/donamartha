@@ -1,4 +1,4 @@
-import { createUser, sendVerification, updateUser } from "./auth";
+import { createUser, sendVerification, signOutUser, updateUser } from "./auth";
 
 interface FormValues {
 	name: string;
@@ -6,11 +6,11 @@ interface FormValues {
 	password: string;
 }
 
-
 // falta aqui
 export const addUserWithEmailAndPassword = async ({ email, name, password }: FormValues) =>{
 	const { response, error} = await createUser({ email, password });
 	if (response) {
+		signOutUser();
 		await sendVerification(response.user);
 		const nameUpdated = await updateUser({displayName: name})
 		if (nameUpdated.error){

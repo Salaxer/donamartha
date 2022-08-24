@@ -1,105 +1,105 @@
 .button{
-    outline: none;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    border-radius: 0.3rem;
-    transition: width 0.1s ease-out;
-    position: relative;
-    outline-offset: 0.2rem;
+	outline: none;
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	border-radius: 0.5rem;
+	transition: width 0.1s ease-out;
+	position: relative;
+	outline-offset: 0.2rem;
 }
 .sm{
-    padding: 0.2rem;
-    min-height: 0.4rem;
-    min-width: 0.4rem;
-    font-size: smaller;
+	padding: 0.2rem;
+	min-height: 0.4rem;
+	min-width: 0.4rem;
+	font-size: smaller;
 }
 .md{
-    padding: 0.4rem;
-    min-height: 0.8rem;
-    min-width: 0.8rem;
-    font-size: small;
+	padding: 0.4rem;
+	min-height: 0.8rem;
+	min-width: 0.8rem;
+	font-size: small;
 }
 .lg{
-    padding: 0.6rem;
-    min-height: 1.2rem;
-    min-width: 1.2rem;
-    font-size: large;
+	padding: 0.6rem;
+	min-height: 1.2rem;
+	min-width: 1.2rem;
+	font-size: large;
 }
 .xl{
-    padding: 0.8rem;
-    min-height: 1.6rem;
-    min-width: 1.6rem;
-    font-size: x-large;
+	padding: 0.8rem;
+	min-height: 1.6rem;
+	min-width: 1.6rem;
+	font-size: x-large;
 }
 .xxl{
-    min-height: 2rem;
-    min-width: 2rem;
-    padding: 1rem;
-    font-size: xx-large;
+	min-height: 2rem;
+	min-width: 2rem;
+	padding: 1rem;
+	font-size: xx-large;
 }
 .basic{
-    background-color: var(--maincolorblue);
-    color: var(--text-color-b);
+	background-color: var(--maincolorblue);
+	color: var(--text-color-b);
 }
 .basic:focus{
-    outline: 2px solid var(--maincolorblue);
+	outline: 2px solid var(--maincolorblue);
 }
 .basic:hover{
-    background-color: var(--maincolorblue-400);
+	background-color: var(--maincolorblue-400);
 }
 .basic:disabled{
-    background-color: var(--maincolorblue-200);
+	background-color: var(--maincolorblue-200);
 }
 .blue{
-    background-color: var(--fillingcolor);
-    color: var(--text-color-w);
+	background-color: var(--fillingcolor);
+	color: var(--text-color-w);
 }
 .blue:focus{
-    outline: 2px solid var(--fillingcolor);
+	outline: 2px solid var(--fillingcolor);
 }
 .blue:hover{
-    background-color: var(--fillingcolor-300);
+	background-color: var(--fillingcolor-300);
 }
 .blue:disabled{
-    background-color: var(--fillingcolor-100);
+	background-color: var(--fillingcolor-100);
 }
 .clasic{
-    background-color: var(--background-0);
-    color: var(--text-color-b);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	background-color: var(--background-0);
+	color: var(--text-color-b);
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .clasic:focus{
-    outline: 2px solid var(--background-b-200);
+	outline: 2px solid var(--background-b-200);
 }
 .clasic:hover{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .clasic:disabled{
-    background-color: var(--background-0-200);
+	background-color: var(--background-0-200);
 }
 .success{
-    background-color: var(--maincolorgreen);
-    color: var(--background-w);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	background-color: var(--maincolorgreen);
+	color: var(--background-w);
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .success:focus{
-    outline: 2px solid var(--maincolorgreen);
+	outline: 2px solid var(--maincolorgreen);
 }
 .success:hover{
-    background-color: var(--maincolorgreen-400);
+	background-color: var(--maincolorgreen-400);
 }
 .success:disabled{
-    background-color: var(--maincolorgreen-200);
+	background-color: var(--maincolorgreen-200);
 }
 .danger{
-    background-color: var(--danger-color);
-    color: var(--background-w);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	background-color: var(--danger-color);
+	color: var(--background-w);
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .danger:focus{
-    outline: 2px solid var(--danger-color);
+	outline: 2px solid var(--danger-color);
 }
 .danger:hover{
-    background-color: var(--danger-color-300);
+	background-color: var(--danger-color-300);
 }

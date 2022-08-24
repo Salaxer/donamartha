@@ -23,11 +23,10 @@ const ObserverUSer = () =>{
 				}))
 				// ...
 			} else {
-				dispatch(deleteUser())
-				// User is signed out
-				// ...
+				dispatch(deleteUser());
 			}
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[dispatch]);
 	return <></>
 }
