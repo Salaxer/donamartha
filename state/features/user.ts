@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 
 interface User {
-	displayName: string,
-	email: string,
+	displayName: string | null,
+	email: string | null,
 	emailVerified: boolean,
-	phoneNumber: string | undefined,
-	photoURL: string | undefined,
+	phoneNumber: string | null,
+	photoURL: string | null,
 	uid: string,
 }
 

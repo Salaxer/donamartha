@@ -35,7 +35,7 @@ const Profile:NextPage = () =>{
 	return (
 		<section className={styles.container}>
 			<figure className={styles.container__img}>
-				<BubbleImg alt={user.displayName} style={{padding: "1rem"}} image={user.photoURL ? user.photoURL : "https://firebasestorage.googleapis.com/v0/b/dona-martha.appspot.com/o/global%2FV1Artboard%201.png?alt=media&token=903f1125-87d1-4c25-a355-ba129aa75cbe"} priority />
+				<BubbleImg alt={user.displayName || "user"} style={{padding: "1rem"}} image={user.photoURL ? user.photoURL : "https://firebasestorage.googleapis.com/v0/b/dona-martha.appspot.com/o/global%2FV1Artboard%201.png?alt=media&token=903f1125-87d1-4c25-a355-ba129aa75cbe"} priority />
 			</figure>
 			<h1 className={styles.name}>{user.displayName}</h1>
 			{
