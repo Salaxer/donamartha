@@ -1,4 +1,4 @@
-import { AllScreen, BubbleImg, Button, Loader, NotFound } from "@Components";
+import { AllScreen, BubbleImg, Button, Loader, MetaTags, NotFound } from "@Components";
 import { LogoutIcon } from "@heroicons/react/solid";
 import { signOutUser } from "@ServerAPI/client/auth";
 import { useAppSelector } from "state/hooks/hooks";
@@ -33,25 +33,32 @@ const Profile:NextPage = () =>{
 	if(!user) return <NotFound></NotFound>
 	if(!detailUser) return <Loader background="var(--background-w)" size="50px"></Loader>
 	return (
-		<section className={styles.container}>
-			<figure className={styles.container__img}>
-				<BubbleImg alt={user.displayName || "user"} style={{padding: "1rem"}} image={user.photoURL ? user.photoURL : "https://firebasestorage.googleapis.com/v0/b/dona-martha.appspot.com/o/global%2FV1Artboard%201.png?alt=media&token=903f1125-87d1-4c25-a355-ba129aa75cbe"} priority />
-			</figure>
-			<h1 className={styles.name}>{user.displayName}</h1>
-			{
-				detailUser.saveFood.length > 0 && 
-				<section className={styles.section}>
-					<h2 className={styles.title}>Favoritos</h2>
-				</section>
-			}
-			{
-				detailUser.delivery.length > 0 && 
-				<section className={styles.section}>
-					<h2 className={styles.title}>Historial de pedidos</h2>
-				</section> 
-			}
-			<Button styleButton="blue" size="lg" onClick={closeSession} value="Cerrar sesion" iconL={<LogoutIcon height="25px"/>}></Button>
-		</section>
+		<>
+			<MetaTags
+				title="Perfil"
+				description="Perfil del usuario"
+				image=""
+				keyWorks={["perfil", "usuario"]}/>
+			<section className={styles.container}>
+				<figure className={styles.container__img}>
+					<BubbleImg alt={user.displayName || "user"} style={{padding: "1rem"}} image={user.photoURL ? user.photoURL : "https://firebasestorage.googleapis.com/v0/b/dona-martha.appspot.com/o/global%2FV1Artboard%201.png?alt=media&token=903f1125-87d1-4c25-a355-ba129aa75cbe"} priority />
+				</figure>
+				<h1 className={styles.name}>{user.displayName}</h1>
+				{
+					detailUser.saveFood.length > 0 && 
+					<section className={styles.section}>
+						<h2 className={styles.title}>Favoritos</h2>
+					</section>
+				}
+				{
+					detailUser.delivery.length > 0 && 
+					<section className={styles.section}>
+						<h2 className={styles.title}>Historial de pedidos</h2>
+					</section> 
+				}
+				<Button styleButton="blue" size="lg" onClick={closeSession} value="Cerrar sesion" iconL={<LogoutIcon height="25px"/>}></Button>
+			</section>
+		</>
 	)
 }                                                                                                             
 
