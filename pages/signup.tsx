@@ -72,7 +72,7 @@ const SignUp:NextPage = () =>{
 			});
 		}else if(response){
 			setLoader(false);
-			router.push(`/emailsended?id=${response.user.uid}`);
+			router.push(`/emailsended?uid=${response.user.uid}`);
 		}
 	}
 	

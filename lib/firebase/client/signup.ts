@@ -6,13 +6,12 @@ interface FormValues {
 	password: string;
 }
 
-// falta aqui
 export const addUserWithEmailAndPassword = async ({ email, name, password }: FormValues) =>{
 	const { response, error} = await createUser({ email, password });
 	if (response) {
-		signOutUser();
 		await sendVerification(response.user);
 		const nameUpdated = await updateUser({displayName: name})
+		signOutUser();
 		if (nameUpdated.error){
 			return {
 				response,

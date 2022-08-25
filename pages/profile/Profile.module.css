@@ -1,0 +1,26 @@
+.container{
+	width: 100%;
+	background-color: var(--background-w);
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.container__img{
+	height: 150px;
+	width: 150px;
+}
+.name{
+	font-size: x-large;
+	font-weight: 600;
+	padding: 1rem;
+}
+.section{
+	width: 100%;
+	padding: 1rem 0;
+}
+.title{
+	font-size: large;
+	font-weight: 600;
+	padding: 1rem;
+}

@@ -11,7 +11,7 @@ declare type StaticImport = StaticRequire | StaticImageData;
 interface BubbleProp{
     image: string | StaticImport;
     alt: string;
-    priority: boolean;
+    priority?: boolean;
     preview?: boolean;
     style?: CSSProperties;
     className?: string,
@@ -19,7 +19,7 @@ interface BubbleProp{
 
 const BubbleImg:FC<BubbleProp> = ({image, priority = false, alt, className, preview=false, style}) =>{
     return (
-        <div style={style} className={`${styles.containerBubble} ${className && className}`}>
+        <div style={style} className={`${styles.containerBubble} ${className ? className : ""}`}>
             {preview ? 
             <PreviewImage style={{borderRadius: '50%'}}>
                   <Image src={image} priority={priority} alt={alt} layout='fill' objectFit='cover'></Image>
