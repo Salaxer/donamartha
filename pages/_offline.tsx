@@ -9,3 +9,5 @@ const Offline:NextPage = () =>{
 		</AllScreen>
 	)
 }
+
+export default Offline;
