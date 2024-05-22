@@ -3,21 +3,17 @@
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-rows: 300px 1fr;
+    grid-template-rows: 220px 1fr;
 }
 .containerIMG{
   position: absolute;
-  width: 400px;
-  height: 400px;
+  width: 350px;
+  height: 350px;
   top: -120px;
   left: -100px;
 }
-.imageDish{
-    border-radius: 50%;
-    padding: 2rem !important;
-    position: absolute;
-    top: 100px;
-}
+/* because of tailwind */
+
 .descriptionShowMenu{
     width: 100%;
     padding: 3rem;
@@ -40,7 +36,7 @@
       left: -130px;
     }
     .screenShowMenu{
-      grid-template-rows: 350px 1fr;
+      grid-template-rows: 315px 1fr;
       grid-template-columns: 1fr;
     }
 }
@@ -55,4 +51,16 @@
       grid-template-rows: 1fr;
       grid-template-columns: 500px 1fr;
     }
+}
+@media screen and (min-width: 1024px) {
+  .containerIMG{
+    width: 800px;
+    height: 800px;
+    top: -320px;
+    left: -280px;
+  }
+  .screenShowMenu{
+    grid-template-rows: 1fr;
+    grid-template-columns: 500px 1fr;
+  }
 }

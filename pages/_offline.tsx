@@ -3,9 +3,10 @@ import { NextPage } from "next";
 
 
 const Offline:NextPage = () =>{
+	const onject = {}
 	return (
 		<AllScreen>
-			Parece que te encuentras en modo Offline, por favor conectate a una red para continuar
+			Parece que te encuentras en modo Offline, favor de conectarte a una red para continuar
 		</AllScreen>
 	)
 }

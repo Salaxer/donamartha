@@ -84,7 +84,7 @@ const Header: NextPage = () => {
 					<ul>
 						{
 							navbar.map((item, index) => (
-								<motion.li key={`navbar_item${index}`} whileHover={isMobile ? "" : "navHover"}>
+								<motion.li key={`navbar_item${index}`}>
 									<Link href={item.href}>
 										<a aria-disabled={(isRoute(item.href).length > 0)} aria-label={`enter para ir a ${item.title}`} className={`${isRoute(item.href)}`}>
 											{item.icon}
@@ -99,9 +99,9 @@ const Header: NextPage = () => {
 						}
 						{
 							user === null ?
-							<motion.li whileHover={isMobile ? "" : "navHover"}>
+							<motion.li>
 								<Link href="/signin" >
-									<a aria-disabled={(isRoute("/signin").length > 0)} aria-label={`enter para ir a iniciar sesion`} className={`${isRoute("/signin")}`}>
+									<a aria-disabled={(isRoute("/signin").length > 0)} aria-label={`enter para ir a iniciar sesión`} className={`${isRoute("/signin")}`}>
 										<LoginIcon width="25px" />
 										<motion.span initial="noFocus" animate={isFocus("/signin")} variants={focusLinkVariant} className={styles.information}>
 											Acceder
@@ -111,7 +111,7 @@ const Header: NextPage = () => {
 								</Link>
 							</motion.li>
 							: 
-							<motion.li whileHover={isMobile ? "" : "navHover"}>
+							<motion.li>
 								<Link href="/profile" >
 									<a aria-disabled={(isRoute("/profile").length > 0)} aria-label={`enter para ir a iniciar sesion`} 
 									className={`${isRoute("/profile")}`}>

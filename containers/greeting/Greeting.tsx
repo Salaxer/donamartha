@@ -16,7 +16,7 @@ const Greeting = ({animate}:GreetingProps) =>{
             <div className={styles.textContainer}>
                 <div className={styles.text}>
                     <h1 >Bienvenidos</h1>
-                    <p>Soy do&ntilde;a martha y espero que disfruten de la buena comida que preparamos</p>
+                    <p>Me llamo Do&ntilde;a Martha y es un verdadero placer recibirlos aquí. Quiero recordarles que, en este lugar, cada paladar tiene su lugar aquí. Nuestra cocina se enorgullece de ofrecer una variedad de sabores y platillos que satisfacen todos los gustos. Espero que disfruten cada momento y cada bocado, y que sientan el amor y la dedicación que ponemos en cada preparación. ¡Que su experiencia culinaria sea tan única y especial como cada uno de ustedes!</p>
                 </div>
             </div>
         </div>

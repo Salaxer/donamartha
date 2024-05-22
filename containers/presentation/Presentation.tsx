@@ -28,7 +28,7 @@ const Presentation: React.FC<PresentationProps> = ({animate}) =>{
                         rotate: "0deg",
                         x: 0,
                     }} 
-                    transition={{delay: 0.2}} initial={{
+                    transition={{delay: 0.4}} initial={{
                         opacity: 0,
                         x: -100,
                         scale: 0,
@@ -39,7 +39,12 @@ const Presentation: React.FC<PresentationProps> = ({animate}) =>{
             </div>
             <div className={styles.descriptionShowMenu}>
                 <h3 className='text-5xl text-center'>Restaurante Doña Martha</h3>
-                <h5 className='text-3xl text-center'>Antes Micheladas Doña Martha y con 10 años de experiencia de ofrecer servicios al cliente se presenta con una nueva imagen</h5>
+                <h5 className='text-3xl text-center max-w-4xl'>
+                Renovada y con más sabor que nunca, Micheladas Doña Martha se reinventa tras 10 años de dedicación y servicio al cliente. 
+                Con una década de experiencia en alegrar paladares y corazones, nos enorgullece presentar nuestra nueva imagen. 
+                Esta transformación refleja nuestro compromiso con la calidad hacia nuestros clientes. 
+                Ven y descubre una gran experiencia!
+                </h5>
                 <Button iconR={<ArrowRightIcon/>} ripple onClick={()=>goToMenu()} value='Ir a la carta' size='xl' styleButton='blue'/>
             </div>
         </div>
